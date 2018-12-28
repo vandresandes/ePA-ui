@@ -6,7 +6,7 @@ export const epaUiConf = {
     {label: 'Tipo de Processo', route: 'tipoprocesso/pesquisa', iconClasses: 'fa fa-tasks'},
     {label: 'Termo Geral', route: 'termogeral/pesquisa', iconClasses: 'fa fa-tasks'},
     {label: 'Termo Específico', route: 'termoespecifico/pesquisa', iconClasses: 'fa fa-tasks'},
-    {label: 'Documento', route: 'documento/pesquisa', iconClasses: 'fa fa-tasks'},
+    {label: 'Documento', route: 'documento/pesquisa', iconClasses: 'fa fa-file'},
     {label: 'Checklist', route: 'checklist/pesquisa', iconClasses: 'fa fa-tasks'}
     /*
     {label: 'MENU', separator: true},

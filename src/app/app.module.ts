@@ -1,5 +1,3 @@
-import { DocumentoModule } from './admin/documento/documento.module';
-import { ChecklistModule } from './admin/checklist/checklist.module';
 import { LoadingPageModule, MaterialBarModule } from 'angular-loading-page';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -26,6 +24,10 @@ import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
+
+// MÓDULOS
+import { ChecklistModule } from './admin/checklist/checklist.module';
+import { DocumentoModule } from './admin/documento/documento.module';
 import { NucleoModule } from './admin/nucleo/nucleo.module';
 import { TermoEspecificoModule } from './admin/termo-especifico/termo-especifico.module';
 import { TermoGeralModule } from './admin/termo-geral/termo-geral.module';
