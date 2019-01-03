@@ -8,8 +8,7 @@ import { EnumCrud } from 'src/app/enums/enum-crud.enum';
 @Component({
   selector: 'app-documento-cadastro',
   templateUrl: './documento-cadastro.component.html',
-  styleUrls: ['./documento-cadastro.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./documento-cadastro.component.scss']
 })
 export class DocumentoCadastroComponent implements OnInit {
   entity: Documento = new Documento();
@@ -23,21 +22,20 @@ export class DocumentoCadastroComponent implements OnInit {
   constructor(
     private service: DocumentoService,
     private route: ActivatedRoute,
-    private router: Router,
-    private messageService: MessageService
+    private router: Router
     )
   {
     this.route.params.forEach((params: Params) => {
       if (this.route.params['value']['id'] !== undefined) {
         const id = this.route.params['value']['id'];
         this.readonly = this.route['data']['value']['acao'] == EnumCrud.READ;
-        console.log("readonly: "+this.readonly);
 
         this.labelBtnCancelar = "Voltar";
         this.service.findById(id).subscribe(
           data => {
             this.entity.id = data['id'],
-            this.entity.nome = data['nome']
+            this.entity.nome = data['nome'],
+            this.entity.tipo = data['tipo']
           },
           error => console.log(error)
         );
@@ -53,8 +51,7 @@ export class DocumentoCadastroComponent implements OnInit {
     if (this.isValidSalvar()) {
       this.service.save(this.entity).subscribe(
         data => {
-          console.log(data),
-          console.log(data['status'])
+          this.verificarCadastro(data)
         },
         error => console.log(error)
       );
@@ -72,6 +69,21 @@ export class DocumentoCadastroComponent implements OnInit {
     return valid;
   }
 
+  verificarCadastro(data: any) {
+    let status: number = data['status'];
+    if (status === 201) {
+      let id: number = data['body']['id'];
+      this.editar(id);
+    } else {
+      // verificar se ocorreu error(s)
+    }
+  }
+
+  editar(id: number) {
+    const link = ['/documento/editar', id];
+    this.router.navigate(link);
+  }
+
   cancelar() {
     this.router.navigate([`documento/pesquisa`]);
   }
@@ -80,8 +92,4 @@ export class DocumentoCadastroComponent implements OnInit {
    return this.entity.id !== null && this.entity.id !== undefined;
   }
 
-  showError() {
-    console.log("show");
-    this.messageService.add({severity:'error', summary: 'Error Message', detail:'Validation failed'});
-}
 }

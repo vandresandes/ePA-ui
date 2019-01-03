@@ -8,8 +8,7 @@ import { EnumCrud } from 'src/app/enums/enum-crud.enum';
 @Component({
   selector: 'app-termo-especifico-cadastro',
   templateUrl: './termo-especifico-cadastro.component.html',
-  styleUrls: ['./termo-especifico-cadastro.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./termo-especifico-cadastro.component.scss']
 })
 export class TermoEspecificoCadastroComponent implements OnInit {
 
@@ -21,15 +20,13 @@ export class TermoEspecificoCadastroComponent implements OnInit {
   constructor(
     private service: TermoEspecificoService,
     private route: ActivatedRoute,
-    private router: Router,
-    private messageService: MessageService
+    private router: Router
     )
   {
     this.route.params.forEach((params: Params) => {
       if (this.route.params['value']['id'] !== undefined) {
         const id = this.route.params['value']['id'];
         this.readonly = this.route['data']['value']['acao'] == EnumCrud.READ;
-        console.log("readonly: "+this.readonly);
 
         this.labelBtnCancelar = "Voltar";
         this.service.findById(id).subscribe(
@@ -50,8 +47,7 @@ export class TermoEspecificoCadastroComponent implements OnInit {
     if (this.isValidSalvar()) {
       this.service.save(this.entity).subscribe(
         data => {
-          console.log(data),
-          console.log(data['status'])
+          this.verificarCadastro(data)
         },
         error => console.log(error)
       );
@@ -61,10 +57,24 @@ export class TermoEspecificoCadastroComponent implements OnInit {
   isValidSalvar(): boolean {
     let valid: boolean = true;
     if (this.entity.nome === null || this.entity.nome === undefined) {
-      this.showError();
       valid = false;
     }
     return valid;
+  }
+
+  verificarCadastro(data: any) {
+    let status: number = data['status'];
+    if (status === 201) {
+      let id: number = data['body']['id'];
+      this.editar(id);
+    } else {
+      // verificar se ocorreu error(s)
+    }
+  }
+
+  editar(id: number) {
+    const link = ['/termoespecifico/editar', id];
+    this.router.navigate(link);
   }
 
   cancelar() {
@@ -75,8 +85,4 @@ export class TermoEspecificoCadastroComponent implements OnInit {
    return this.entity.id !== null && this.entity.id !== undefined;
   }
 
-  showError() {
-    console.log("show");
-    this.messageService.add({severity:'error', summary: 'Error Message', detail:'Validation failed'});
-}
 }
