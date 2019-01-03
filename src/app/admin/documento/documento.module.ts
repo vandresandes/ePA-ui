@@ -14,6 +14,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessagesModule } from 'primeng/components/messages/messages';
+import { DropdownModule } from 'primeng/dropdown';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [DocumentoListComponent, DocumentoCadastroComponent],
@@ -27,6 +29,8 @@ import { MessagesModule } from 'primeng/components/messages/messages';
     ToastModule,
     ConfirmDialogModule,
     MessagesModule,
+    DropdownModule,
+    RadioButtonModule,
     FormsModule
   ]
 })

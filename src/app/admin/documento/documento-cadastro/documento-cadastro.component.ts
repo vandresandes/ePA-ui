@@ -16,6 +16,9 @@ export class DocumentoCadastroComponent implements OnInit {
   labelBtnCancelar: string = "Cancelar";
   labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
+  selectedValue: string;
+
+
 
   constructor(
     private service: DocumentoService,
@@ -42,10 +45,11 @@ export class DocumentoCadastroComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   salvar() {
+    console.log(this.entity);
+
     if (this.isValidSalvar()) {
       this.service.save(this.entity).subscribe(
         data => {
@@ -60,7 +64,9 @@ export class DocumentoCadastroComponent implements OnInit {
   isValidSalvar(): boolean {
     let valid: boolean = true;
     if (this.entity.nome === null || this.entity.nome === undefined) {
-      this.showError();
+      valid = false;
+    }
+    if (this.entity.tipo === null || this.entity.tipo === undefined) {
       valid = false;
     }
     return valid;

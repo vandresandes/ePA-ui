@@ -2,13 +2,17 @@
     <div class="box box-primary">
       <div class="box-body">
         <div class="p-grid">
-          <div class="p-col">
+          <div class="p-col-12">
             <label for="nomeDocumento">Documento</label>
             <div>
               <input id="nomeDocumento" nucleoForm="entity.nome" type="text" pInputText class="p-col-6" name="nomeDocumento" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
-              <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                  <div *ngIf="f.password.errors.required">O campo Documento é obrigatório</div>
-              </div>
+            </div>
+          </div>
+          <div class="p-col-12">
+            <label for="tipoDocumento">Tipo</label>
+            <div>
+                <div><p-radioButton name="tipoDocumento" value="DOCUMENTO" label="Documento" [(ngModel)]="entity.tipo" inputId="entity.tipo"></p-radioButton></div>
+                <div><p-radioButton name="tipoDocumento" value="INFORMACAO" label="Informação" [(ngModel)]="entity.tipo" inputId="entity.tipo"></p-radioButton></div>
             </div>
           </div>
         </div>
