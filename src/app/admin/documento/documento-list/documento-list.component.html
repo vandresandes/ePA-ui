@@ -33,13 +33,15 @@
         <p-table [value]="listaPesquisa">
           <ng-template pTemplate="header">
             <tr>
-              <th class="p-col-10">Documento</th>
+              <th class="p-col-5">Documento</th>
+              <th class="p-col-5">Tipo</th>
               <th class="p-col-2">Ações</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>
             <tr>
               <td>{{item.nome}}</td>
+              <td>{{item.tipo | tipoDocumento}}</td>
               <td>
                 <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)"></p-button>
                 <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(item.id)"></p-button>

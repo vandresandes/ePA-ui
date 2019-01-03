@@ -11,8 +11,8 @@
           <div class="p-col-12">
             <label for="tipoDocumento">Tipo</label>
             <div>
-                <div><p-radioButton name="tipoDocumento" value="DOCUMENTO" label="Documento" [(ngModel)]="entity.tipo" inputId="entity.tipo"></p-radioButton></div>
-                <div><p-radioButton name="tipoDocumento" value="INFORMACAO" label="Informação" [(ngModel)]="entity.tipo" inputId="entity.tipo"></p-radioButton></div>
+                <div><p-radioButton name="tipoDocumento" value="DOCUMENTO" label="Documento" [(ngModel)]="entity.tipo" inputId="entity.tipo" [disabled]="readonly"></p-radioButton></div>
+                <div><p-radioButton name="tipoDocumento" value="INFORMACAO" label="Informação" [(ngModel)]="entity.tipo" inputId="entity.tipo" [disabled]="readonly"></p-radioButton></div>
             </div>
           </div>
         </div>

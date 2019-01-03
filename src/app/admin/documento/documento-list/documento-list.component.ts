@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentoService } from 'src/app/service/documento.service';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/components/common/confirmationservice';
-import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'app-documento-list',
   templateUrl: './documento-list.component.html',
-  styleUrls: ['./documento-list.component.scss'],
-  providers: [ConfirmationService,MessageService]
+  styleUrls: ['./documento-list.component.scss']
 })
 export class DocumentoListComponent implements OnInit {
   listaPesquisa: any;
   nome: string = null;
   titulo: string = "Documento";
+  testando: string = "INFORMACAO";
 
   constructor(
     private service: DocumentoService,
     private router: Router,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+    ) { }
 
   ngOnInit() {}
 
@@ -50,19 +47,6 @@ export class DocumentoListComponent implements OnInit {
   editar(id: number) {
     const link = ['/documento/editar', id];
     this.router.navigate(link);
-  }
-
-  confirmarExclusao(id: number) {
-    this.confirmationService.confirm({
-      message: 'Tem certeza que deseja excluir?',
-      header: 'Exclusão',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
-      accept: () => {
-        this.excluir(id);
-      }
-    });
   }
 
   excluir(id: number) {
