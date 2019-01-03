@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { NucleoService } from 'src/app/service/nucleo.service';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { log } from 'util';
 
 @Component({
   selector: 'app-nucleo-cadastro',

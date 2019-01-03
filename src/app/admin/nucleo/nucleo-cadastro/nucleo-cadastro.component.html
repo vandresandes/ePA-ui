@@ -7,7 +7,7 @@
             <div>
               <input id="nomeNucleo" nucleoForm="entity.nome" type="text" pInputText class="p-col-6" name="nomeNucleo" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
               <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.required">O campo Núcleo é obrigatório</div>
               </div>
             </div>
           </div>

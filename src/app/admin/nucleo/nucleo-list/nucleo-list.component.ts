@@ -12,8 +12,9 @@ import { ConfirmationService } from 'primeng/components/common/confirmationservi
 })
 export class NucleoListComponent implements OnInit {
 
-  nucleos: any;
-  nucleo: string = null;
+  listaPesquisa: any;
+  nome: string = null;
+  titulo: string = "Núcleo";
 
   constructor(
     private service: NucleoService,
@@ -25,9 +26,9 @@ export class NucleoListComponent implements OnInit {
 
 
   pesquisar() {
-    this.service.pesquisar(this.nucleo).subscribe(
+    this.service.pesquisar(this.nome).subscribe(
 			data => {
-        this.nucleos = data
+        this.listaPesquisa = data
 			},
 			error => console.log(error)
     );
@@ -35,7 +36,7 @@ export class NucleoListComponent implements OnInit {
 
   limpar(form: any) {
     form.reset();
-    this.nucleos = null;
+    this.listaPesquisa = null;
   }
 
   voltar() {

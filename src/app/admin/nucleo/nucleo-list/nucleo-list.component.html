@@ -8,7 +8,7 @@
     <div class="box-body">
       <div class="p-grid">
         <div class="p-col">
-          <label for="nome">Núcleo</label>
+          <label for="nome">{{titulo}}</label>
           <div>
             <input id="nome" type="text" pInputText class="p-col-6" name="nucleo" [(ngModel)]="nucleo" />
           </div>
@@ -30,7 +30,7 @@
       </h3>
     </div>
     <div class="box-body">
-      <p-table [value]="nucleos">
+      <p-table [value]="listaPesquisa">
         <ng-template pTemplate="header">
           <tr>
             <th class="p-col-10">Núcleo</th>
@@ -53,7 +53,7 @@
   <div class="p-grid">
     <div class="p-col">
       <div class="pull-right">
-        <p-button icon="fa fa-file-o" iconPos="left" label="Cadastrar Núcleo" pTooltip="Cadastrar Núcleo" tooltipPosition="top" (click)="novo()"></p-button>
+        <p-button icon="fa fa-file-o" iconPos="left" label="Cadastrar {{titulo}}" pTooltip="Cadastrar {{titulo}}" tooltipPosition="top" (click)="novo()"></p-button>
       </div>
     </div>
   </div>
