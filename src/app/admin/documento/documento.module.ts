@@ -16,9 +16,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessagesModule } from 'primeng/components/messages/messages';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { TipoDocumentoPipe } from './pipe/tipo-documento.pipe';
 
 @NgModule({
-  declarations: [DocumentoListComponent, DocumentoCadastroComponent],
+  declarations: [
+    DocumentoListComponent,
+    DocumentoCadastroComponent,
+    TipoDocumentoPipe
+  ],
   imports: [
     CommonModule,
     DocumentoRoutingModule,
