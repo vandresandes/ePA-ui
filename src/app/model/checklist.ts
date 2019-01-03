@@ -11,4 +11,5 @@ export class Checklist {
   termoGeral: TermoGeral;
   termoEspecifico: TermoEspecifico;
   documento: Documento;
+  status: boolean;
 }
