@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DocumentoRoutingModule } from './documento-routing.module';
-import { DocumentoDetailComponent } from './documento-detail/documento-detail.component';
 import { DocumentoListComponent } from './documento-list/documento-list.component';
+import { DocumentoCadastroComponent } from './documento-cadastro/documento-cadastro.component';
 
 @NgModule({
-  declarations: [DocumentoDetailComponent, DocumentoListComponent],
+  declarations: [DocumentoListComponent, DocumentoCadastroComponent],
   imports: [
     CommonModule,
     DocumentoRoutingModule

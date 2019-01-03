@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TermoGeralRoutingModule } from './termo-geral-routing.module';
-import { TermoGeralDetailComponent } from './termo-geral-detail/termo-geral-detail.component';
 import { TermoGeralListComponent } from './termo-geral-list/termo-geral-list.component';
+import { TermoGeralCadastroComponent } from './termo-geral-cadastro/termo-geral-cadastro.component';
 
 @NgModule({
-  declarations: [TermoGeralDetailComponent, TermoGeralListComponent],
+  declarations: [TermoGeralListComponent, TermoGeralCadastroComponent],
   imports: [
     CommonModule,
     TermoGeralRoutingModule
