@@ -43,12 +43,12 @@ export class TermoEspecificoListComponent implements OnInit {
   }
 
   visualizar(id: number) {
-    const link = ['/termoEspecifico/visualizar', id];
+    const link = ['/termoespecifico/visualizar', id];
     this.router.navigate(link);
   }
 
   editar(id: number) {
-    const link = ['/termoEspecifico/editar', id];
+    const link = ['/termoespecifico/editar', id];
     this.router.navigate(link);
   }
 
