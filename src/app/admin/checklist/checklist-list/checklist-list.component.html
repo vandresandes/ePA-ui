@@ -8,45 +8,45 @@
       <div class="box-body">
         <div class="p-grid">
           <div class="p-col-6">
-            <label for="nucleoChecklist">Núcleo</label>
+            <label>Núcleo</label>
             <div>
-              <p-autoComplete [(ngModel)]="entity.nucleo" [suggestions]="listaNucleo" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Núcleo"
-                name="nucleoChecklist" (completeMethod)="buscarNucleoPorNome($event)"></p-autoComplete>
+              <p-autoComplete [(ngModel)]="entity.nucleo" [suggestions]="listaNucleo" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} name="nucleoChecklist"
+                (completeMethod)="buscarNucleoPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="tipoprocessoChecklist">Tipo de Processo</label>
             <div>
-              <p-autoComplete [(ngModel)]="entity.tipoProcesso" [suggestions]="listaTipoProcesso" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Tipo de Processo"
-                name="tipoprocessoChecklist" (completeMethod)="buscarTipoProcessoPorNome($event)"></p-autoComplete>
+              <p-autoComplete [(ngModel)]="entity.tipoProcesso" [suggestions]="listaTipoProcesso" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} name="tipoprocessoChecklist"
+                (completeMethod)="buscarTipoProcessoPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="termoGeralChecklist">Termo Geral</label>
             <div>
-              <p-autoComplete [(ngModel)]="entity.termoGeral" [suggestions]="listaTermoGeral" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Termo Geral"
-                name="termoGeralChecklist" (completeMethod)="buscarTermoGeralPorNome($event)"></p-autoComplete>
+              <p-autoComplete [(ngModel)]="entity.termoGeral" [suggestions]="listaTermoGeral" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} name="termoGeralChecklist"
+                (completeMethod)="buscarTermoGeralPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="termoespecificoChecklist">Termo Específico</label>
             <div>
-              <p-autoComplete [(ngModel)]="entity.termoEspecifico" [suggestions]="listaTermoEspecifico" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Termo Específico"
-                name="termoespecificoChecklist" (completeMethod)="buscarTermoEspecificoPorNome($event)"></p-autoComplete>
+              <p-autoComplete [(ngModel)]="entity.termoEspecifico" [suggestions]="listaTermoEspecifico" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} name="termoespecificoChecklist"
+                (completeMethod)="buscarTermoEspecificoPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="documentoChecklist">Documento</label>
             <div>
-              <p-autoComplete [(ngModel)]="entity.documento" [suggestions]="listaDocumento" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Documento"
-                name="documentoChecklist" (completeMethod)="buscarDocumentoPorNome($event)"></p-autoComplete>
+              <p-autoComplete [(ngModel)]="entity.documento" [suggestions]="listaDocumento" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} name="documentoChecklist"
+                (completeMethod)="buscarDocumentoPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="statusChecklist">Status</label>
             <div>
-                <div><p-radioButton name="grupoStatus" value="true" label="Obrigatório" [(ngModel)]="entity.status" [disabled]="readonly"></p-radioButton></div>
-                <div><p-radioButton name="grupoStatus" value="false" label="Complementar" [(ngModel)]="entity.status" [disabled]="readonly"></p-radioButton></div>
+                <p-radioButton name="grupoStatus" value="true" label="Obrigatório" [(ngModel)]="entity.status" [disabled]="readonly"></p-radioButton>
+                <p-radioButton name="grupoStatus" value="false" label="Complementar" [(ngModel)]="entity.status" [disabled]="readonly"></p-radioButton>
             </div>
           </div>
         </div>
@@ -87,8 +87,8 @@
               <td>{{item.documento.nome}}</td>
               <td>{{item.status | status}}</td>
               <td>
-                <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)"></p-button>
-                <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(item.id)"></p-button>
+                <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)" type="button"></p-button>
+                <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(item.id)" type="button"></p-button>
                 <p-button icon="fa fa-trash" iconPos="left" pTooltip="Excluir" tooltipPosition="top" (click)="excluir(item.id)"></p-button>
               </td>
             </tr>

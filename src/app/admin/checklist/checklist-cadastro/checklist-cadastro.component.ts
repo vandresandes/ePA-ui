@@ -28,6 +28,10 @@ export class ChecklistCadastroComponent implements OnInit {
   listaDocumento: any;
   msgObrigatorio: string = "Campo obrigatório:";
   msgs: Message[] = [];
+  lbSelecione: string = "Selecione";
+  val2: boolean = true;
+  verdadeiro: number = 1;
+  falso: number = 0;
 
   lbNucleo: string = "Núcleo";
   lbTipoprocesso: string = "Tipo de Processo";
@@ -61,8 +65,7 @@ export class ChecklistCadastroComponent implements OnInit {
             this.entity.termoGeral = data['termoGeral'],
             this.entity.termoEspecifico = data['termoEspecifico'],
             this.entity.documento = data['documento'],
-            this.entity.status = data['status'],
-            console.log(this.entity.status)
+            this.entity.status = data['status']
           },
           error => console.log(error)
         );
