@@ -55,11 +55,10 @@
         <div class="pull-right">
           <p-button icon="fa fa-search" iconPos="left" label="Pesquisar" pTooltip="Pesquisar" tooltipPosition="top" (click)="pesquisar()"></p-button>
           <p-button icon="fa fa-eraser" iconPos="left" label="Limpar" pTooltip="Limpar" tooltipPosition="top" (click)="limpar(pesquisaForm)"></p-button>
-          <p-button icon="fa fa-undo" iconPos="left" label="Voltar" pTooltip="Voltar" tooltipPosition="top" (click)="voltar()"></p-button>
+          <p-button icon="fa fa-undo" iconPos="left" label="Voltar" pTooltip="Voltar" tooltipPosition="top" (click)="voltar()" type="button"></p-button>
         </div>
       </div>
     </div>
-    {{entity | json}}
     <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title">
@@ -100,7 +99,7 @@
     <div class="p-grid">
       <div class="p-col">
         <div class="pull-right">
-          <p-button icon="fa fa-file-o" iconPos="left" label="Cadastrar {{titulo}}" pTooltip="Cadastrar {{titulo}}" tooltipPosition="top" (click)="novo()"></p-button>
+          <p-button icon="fa fa-file-o" iconPos="left" label="Cadastrar {{titulo}}" pTooltip="Cadastrar {{titulo}}" tooltipPosition="top" (click)="novo()" type="button"></p-button>
         </div>
       </div>
     </div>

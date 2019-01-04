@@ -6,31 +6,36 @@
           <div class="p-col-6">
             <label for="nucleoChecklist">{{lbNucleo}} <span class="obrigatorio">*</span></label>
             <div>
-              <p-dropdown [options]="listaNucleo" [(ngModel)]="entity.nucleo" optionLabel="nome" name="nucleoChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+              <p-dropdown [options]="listaNucleo" [(ngModel)]="entity.nucleo" optionLabel="nome" name="nucleoChecklist"
+                [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder="Selecione"></p-dropdown>
             </div>
           </div>
           <div class="p-col-6">
             <label for="tipoprocessoChecklist">{{lbTipoprocesso}} <span class="obrigatorio">*</span></label>
             <div>
-              <p-dropdown [options]="listaTipoProcesso" [(ngModel)]="entity.tipoProcesso" optionLabel="nome" name="tipoprocessoChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+              <p-dropdown [options]="listaTipoProcesso" [(ngModel)]="entity.tipoProcesso" optionLabel="nome" name="tipoprocessoChecklist"
+                [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder="Selecione"></p-dropdown>
             </div>
           </div>
           <div class="p-col-6">
             <label for="termoGeralChecklist">{{lbTermoGeral}} <span class="obrigatorio">*</span></label>
             <div>
-              <p-dropdown [options]="listaTermoGeral" [(ngModel)]="entity.termoGeral" optionLabel="nome" name="termoGeralChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+              <p-dropdown [options]="listaTermoGeral" [(ngModel)]="entity.termoGeral" optionLabel="nome" name="termoGeralChecklist"
+                [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder="Selecione"></p-dropdown>
             </div>
           </div>
           <div class="p-col-6">
             <label for="termoespecificoChecklist">{{lbTermoEspecifico}} <span class="obrigatorio">*</span></label>
             <div>
-              <p-dropdown [options]="listaTermoEspecifico" [(ngModel)]="entity.termoEspecifico" optionLabel="nome" name="termoespecificoChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+              <p-dropdown [options]="listaTermoEspecifico" [(ngModel)]="entity.termoEspecifico" optionLabel="nome" name="termoespecificoChecklist"
+                [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder="Selecione"></p-dropdown>
             </div>
           </div>
           <div class="p-col-6">
             <label for="documentoChecklist">{{lbDocumento}} <span class="obrigatorio">*</span></label>
             <div>
-              <p-dropdown [options]="listaDocumento" [(ngModel)]="entity.documento" optionLabel="nome" name="documentoChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+              <p-dropdown [options]="listaDocumento" [(ngModel)]="entity.documento" optionLabel="nome" name="documentoChecklist"
+                [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder="Selecione"></p-dropdown>
             </div>
           </div>
           <div class="p-col-6">
@@ -45,7 +50,7 @@
       <div class="box-footer clearfix">
         <div class="pull-right">
           <p-button *ngIf="!readonly" icon="fa fa-floppy-o" iconPos="left" label={{labelBtnSalvar}} pTooltip={{labelBtnSalvar}} tooltipPosition="top" class="btn-5"></p-button>
-          <p-button icon="fa fa-undo" iconPos="left" label={{labelBtnCancelar}} pTooltip={{labelBtnCancelar}} tooltipPosition="top" (click)="cancelar()"></p-button>
+          <p-button icon="fa fa-undo" iconPos="left" label={{labelBtnCancelar}} pTooltip={{labelBtnCancelar}} tooltipPosition="top" (click)="cancelar()" type="button"></p-button>
         </div>
       </div>
     </div>

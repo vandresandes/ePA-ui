@@ -19,7 +19,7 @@
         <div class="pull-right">
           <p-button icon="fa fa-search" iconPos="left" label="Pesquisar" pTooltip="Pesquisar" tooltipPosition="top" (click)="pesquisar()"></p-button>
           <p-button icon="fa fa-eraser" iconPos="left" label="Limpar" pTooltip="Limpar" tooltipPosition="top" (click)="limpar(pesquisaForm)"></p-button>
-          <p-button icon="fa fa-undo" iconPos="left" label="Voltar" pTooltip="Voltar" tooltipPosition="top" (click)="voltar()"></p-button>
+          <p-button icon="fa fa-undo" iconPos="left" label="Voltar" pTooltip="Voltar" tooltipPosition="top" (click)="voltar()" type="button"></p-button>
         </div>
       </div>
     </div>
@@ -41,8 +41,8 @@
             <tr>
               <td>{{item.nome}}</td>
               <td>
-                <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)"></p-button>
-                <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(item.id)"></p-button>
+                <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)" type="button"></p-button>
+                <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(item.id)" type="button"></p-button>
                 <p-button icon="fa fa-trash" iconPos="left" pTooltip="Excluir" tooltipPosition="top" (click)="excluir(item.id)"></p-button>
               </td>
             </tr>
@@ -53,7 +53,7 @@
     <div class="p-grid">
       <div class="p-col">
         <div class="pull-right">
-          <p-button icon="fa fa-file-o" iconPos="left" label="Cadastrar {{titulo}}" pTooltip="Cadastrar {{titulo}}" tooltipPosition="top" (click)="novo()"></p-button>
+          <p-button icon="fa fa-file-o" iconPos="left" label="Cadastrar {{titulo}}" pTooltip="Cadastrar {{titulo}}" tooltipPosition="top" (click)="novo()" type="button"></p-button>
         </div>
       </div>
     </div>
