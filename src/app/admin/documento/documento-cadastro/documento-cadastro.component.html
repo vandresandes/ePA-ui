@@ -4,13 +4,13 @@
         <p-messages [(value)]="msgs"></p-messages>
         <div class="p-grid">
           <div class="p-col-12">
-            <label for="nomeDocumento">{{lbDocumento}}</label>
+            <label for="nomeDocumento">{{lbDocumento}} <span class="obrigatorio">*</span></label>
             <div>
               <input id="nomeDocumento" nucleoForm="entity.nome" type="text" pInputText class="p-col-6" name="nomeDocumento" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
             </div>
           </div>
           <div class="p-col-12">
-            <label for="tipoDocumento">Tipo</label>
+            <label for="tipoDocumento">{{lbTipo}} <span class="obrigatorio">*</span></label>
             <div>
                 <div><p-radioButton name="tipoDocumento" value="DOCUMENTO" label="Documento" [(ngModel)]="entity.tipo" inputId="entity.tipo" [disabled]="readonly"></p-radioButton></div>
                 <div><p-radioButton name="tipoDocumento" value="INFORMACAO" label="Informação" [(ngModel)]="entity.tipo" inputId="entity.tipo" [disabled]="readonly"></p-radioButton></div>

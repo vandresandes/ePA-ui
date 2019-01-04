@@ -4,7 +4,7 @@
         <p-messages [(value)]="msgs"></p-messages>
         <div class="p-grid">
           <div class="p-col">
-            <label for="nomeNucleo">{{lbNucleo}}</label>
+            <label for="nomeNucleo">{{lbNucleo}} <span class="obrigatorio">*</span></label>
             <div>
               <input id="nomeNucleo" nucleoForm="entity.nome" type="text" pInputText class="p-col-6" name="nomeNucleo" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
               <div *ngIf="submitted && f.password.errors" class="invalid-feedback">

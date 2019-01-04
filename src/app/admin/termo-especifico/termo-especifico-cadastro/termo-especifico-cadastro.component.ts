@@ -73,6 +73,7 @@ export class TermoEspecificoCadastroComponent implements OnInit {
     if (status === 201) {
       let id: number = data['body']['id'];
       this.editar(id);
+      this.msgs.push({severity:'success', summary:"Cadastrado com sucesso!"});
     } else {
       // verificar se ocorreu error(s)
     }

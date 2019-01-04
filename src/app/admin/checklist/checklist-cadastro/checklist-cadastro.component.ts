@@ -115,7 +115,7 @@ export class ChecklistCadastroComponent implements OnInit {
       valid = false;
     }
     if (this.entity.status === null || this.entity.status === undefined) {
-      this.msgs.push({severity:'error', summary:this.msgObrigatorio, detail:this.lbStatus});
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbStatus});
       valid = false;
     }
     return valid;
