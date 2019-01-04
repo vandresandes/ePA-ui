@@ -14,6 +14,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessagesModule } from 'primeng/components/messages/messages';
+import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TipoDocumentoPipe } from './pipe/tipo-documento.pipe';
@@ -34,6 +35,7 @@ import { TipoDocumentoPipe } from './pipe/tipo-documento.pipe';
     ToastModule,
     ConfirmDialogModule,
     MessagesModule,
+    MessageModule,
     DropdownModule,
     RadioButtonModule,
     FormsModule

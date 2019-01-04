@@ -1,7 +1,7 @@
+import { Message } from 'primeng/components/common/api';
 import { DocumentoService } from './../../../service/documento.service';
 import { Documento } from './../../../model/documento';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
 
@@ -16,7 +16,10 @@ export class DocumentoCadastroComponent implements OnInit {
   labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
   selectedValue: string;
-
+  msgObrigatorio: string = "Campo obrigatório:";
+  msgs: Message[] = [];
+  lbDocumento: string = "Documento";
+  lbTipo: string = "Tipo";
 
 
   constructor(
@@ -60,10 +63,14 @@ export class DocumentoCadastroComponent implements OnInit {
 
   isValidSalvar(): boolean {
     let valid: boolean = true;
+    this.msgs = [];
+
     if (this.entity.nome === null || this.entity.nome === undefined) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbDocumento});
       valid = false;
     }
     if (this.entity.tipo === null || this.entity.tipo === undefined) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbTipo});
       valid = false;
     }
     return valid;

@@ -1,3 +1,4 @@
+import { Message } from 'primeng/components/common/api';
 import { TipoProcesso } from './../../../model/tipoProcesso';
 import { Component, OnInit } from '@angular/core';
 import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
@@ -15,6 +16,9 @@ export class TipoProcessoCadastroComponent implements OnInit {
   labelBtnCancelar: string = "Cancelar";
   labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
+  msgObrigatorio: string = "Campo obrigatório:";
+  msgs: Message[] = [];
+  lbTipoProcesso: string = "Tipo de Processo";
 
   constructor(
     private service: TipoProcessoService,
@@ -55,7 +59,10 @@ export class TipoProcessoCadastroComponent implements OnInit {
 
   isValidSalvar(): boolean {
     let valid: boolean = true;
+    this.msgs = [];
+
     if (this.entity.nome === null || this.entity.nome === undefined) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbTipoProcesso});
       valid = false;
     }
     return valid;

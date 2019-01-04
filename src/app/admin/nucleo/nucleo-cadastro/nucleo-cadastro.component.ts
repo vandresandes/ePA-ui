@@ -1,3 +1,4 @@
+import { Message } from 'primeng/components/common/api';
 import { EnumCrud } from './../../../enums/enum-crud.enum';
 import { Nucleo } from 'src/app/model/nucleo';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +16,9 @@ export class NucleoCadastroComponent implements OnInit {
   labelBtnCancelar: string = "Cancelar";
   labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
+  msgObrigatorio: string = "Campo obrigatório:";
+  msgs: Message[] = [];
+  lbNucleo: string = "Núcleo";
 
   constructor(
     private service: NucleoService,
@@ -56,7 +60,10 @@ export class NucleoCadastroComponent implements OnInit {
 
   isValidSalvar(): boolean {
     let valid: boolean = true;
+    this.msgs = [];
+
     if (this.entity.nome === null || this.entity.nome === undefined) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbNucleo});
       valid = false;
     }
     return valid;

@@ -1,11 +1,43 @@
 <form autocomplete="off" #checklistForm="ngForm" (ngSubmit)="salvar()">
     <div class="box box-primary">
       <div class="box-body">
+        <p-messages [(value)]="msgs"></p-messages>
         <div class="p-grid">
-          <div class="p-col">
-            <label for="nomeNucleo">Checklist</label>
+          <div class="p-col-6">
+            <label for="nucleoChecklist">{{lbNucleo}}</label>
             <div>
-
+              <p-dropdown [options]="listaNucleo" [(ngModel)]="entity.nucleo" optionLabel="nome" name="nucleoChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="tipoprocessoChecklist">{{lbTipoprocesso}}</label>
+            <div>
+              <p-dropdown [options]="listaTipoProcesso" [(ngModel)]="entity.tipoProcesso" optionLabel="nome" name="tipoprocessoChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="termoGeralChecklist">{{lbTermoGeral}}</label>
+            <div>
+              <p-dropdown [options]="listaTermoGeral" [(ngModel)]="entity.termoGeral" optionLabel="nome" name="termoGeralChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="termoespecificoChecklist">{{lbTermoEspecifico}}</label>
+            <div>
+              <p-dropdown [options]="listaTermoEspecifico" [(ngModel)]="entity.termoEspecifico" optionLabel="nome" name="termoespecificoChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="documentoChecklist">{{lbDocumento}}</label>
+            <div>
+              <p-dropdown [options]="listaDocumento" [(ngModel)]="entity.documento" optionLabel="nome" name="documentoChecklist" [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly"></p-dropdown>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="statusChecklist">{{lbStatus}}</label>
+            <div>
+                <div><p-radioButton name="grupoStatus" value="true" label="Obrigatório" [(ngModel)]="entity.status" inputId="entity.status" [disabled]="readonly"></p-radioButton></div>
+                <div><p-radioButton name="grupoStatus" value="false" label="Complementar" [(ngModel)]="entity.status" inputId="entity.status" [disabled]="readonly"></p-radioButton></div>
             </div>
           </div>
         </div>

@@ -14,9 +14,14 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessagesModule } from 'primeng/components/messages/messages';
+import { MessageModule } from 'primeng/message';
+import { DropdownModule } from 'primeng/dropdown';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { RadioButtonModule } from 'primeng/components/radiobutton/radiobutton';
+import { StatusPipe } from './pipe/status.pipe';
 
 @NgModule({
-  declarations: [ChecklistListComponent, ChecklistCadastroComponent],
+  declarations: [ChecklistListComponent, ChecklistCadastroComponent, StatusPipe],
   imports: [
     CommonModule,
     ChecklistRoutingModule,
@@ -27,6 +32,10 @@ import { MessagesModule } from 'primeng/components/messages/messages';
     ToastModule,
     ConfirmDialogModule,
     MessagesModule,
+    MessageModule,
+    DropdownModule,
+    AutoCompleteModule,
+    RadioButtonModule,
     FormsModule
   ]
 })

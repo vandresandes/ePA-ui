@@ -1,9 +1,10 @@
 <form autocomplete="off" #nucleoForm="ngForm" (ngSubmit)="salvar()">
     <div class="box box-primary">
       <div class="box-body">
+        <p-messages [(value)]="msgs"></p-messages>
         <div class="p-grid">
           <div class="p-col-12">
-            <label for="nomeDocumento">Documento</label>
+            <label for="nomeDocumento">{{lbDocumento}}</label>
             <div>
               <input id="nomeDocumento" nucleoForm="entity.nome" type="text" pInputText class="p-col-6" name="nomeDocumento" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
             </div>

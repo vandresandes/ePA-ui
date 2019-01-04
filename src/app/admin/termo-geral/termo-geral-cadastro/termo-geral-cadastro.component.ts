@@ -1,3 +1,4 @@
+import { Message } from 'primeng/components/common/api';
 import { TermoGeral } from './../../../model/termoGeral';
 import { Component, OnInit } from '@angular/core';
 import { TermoGeralService } from 'src/app/service/termo-geral.service';
@@ -15,6 +16,9 @@ export class TermoGeralCadastroComponent implements OnInit {
   labelBtnCancelar: string = "Cancelar";
   labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
+  msgObrigatorio: string = "Campo obrigatório:";
+  msgs: Message[] = [];
+  lbTermoGeral: string = "Termo Geral";
 
   constructor(
     private service: TermoGeralService,
@@ -55,7 +59,10 @@ export class TermoGeralCadastroComponent implements OnInit {
 
   isValidSalvar(): boolean {
     let valid: boolean = true;
+    this.msgs = [];
+
     if (this.entity.nome === null || this.entity.nome === undefined) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbTermoGeral});
       valid = false;
     }
     return valid;

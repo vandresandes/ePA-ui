@@ -7,10 +7,46 @@
       </div>
       <div class="box-body">
         <div class="p-grid">
-          <div class="p-col">
-            <label for="nome">{{titulo}}</label>
+          <div class="p-col-6">
+            <label for="nucleoChecklist">Núcleo</label>
             <div>
-              <input id="nome" type="text" pInputText class="p-col-6" name="nome" [(ngModel)]="nome" />
+              <p-autoComplete [(ngModel)]="nucleoSelecionado" [suggestions]="listaNucleo" [minLength]="3"  field="nome" [size]="100" placeholder="Núcleo"
+                name="nucleoChecklist" (completeMethod)="buscarNucleoPorNome($event)"></p-autoComplete>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="tipoprocessoChecklist">Tipo de Processo</label>
+            <div>
+              <p-autoComplete [(ngModel)]="tipoProcessoSelecionado" [suggestions]="listaTipoProcesso" [minLength]="3"  field="nome" [size]="100" placeholder="Tipo de Processo"
+                name="tipoprocessoChecklist" (completeMethod)="buscarTipoProcessoPorNome($event)"></p-autoComplete>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="termoGeralChecklist">Termo Geral</label>
+            <div>
+              <p-autoComplete [(ngModel)]="termoGeralSelecionado" [suggestions]="listaTermoGeral" [minLength]="3"  field="nome" [size]="100" placeholder="Termo Geral"
+                name="termoGeralChecklist" (completeMethod)="buscarTermoGeralPorNome($event)"></p-autoComplete>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="termoespecificoChecklist">Termo Específico</label>
+            <div>
+              <p-autoComplete [(ngModel)]="termoEspecificoSelecionado" [suggestions]="listaTermoEspecifico" [minLength]="3"  field="nome" [size]="100" placeholder="Termo Específico"
+                name="termoespecificoChecklist" (completeMethod)="buscarTermoEspecificoPorNome($event)"></p-autoComplete>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="documentoChecklist">Documento</label>
+            <div>
+              <p-autoComplete [(ngModel)]="documentoSelecionado" [suggestions]="listaDocumento" [minLength]="3"  field="nome" [size]="100" placeholder="Documento"
+                name="documentoChecklist" (completeMethod)="buscarDocumentoPorNome($event)"></p-autoComplete>
+            </div>
+          </div>
+          <div class="p-col-6">
+            <label for="statusChecklist">Status</label>
+            <div>
+                <div><p-radioButton name="grupoStatus" value="true" label="Obrigatório" [(ngModel)]="status" inputId="status" [disabled]="readonly"></p-radioButton></div>
+                <div><p-radioButton name="grupoStatus" value="false" label="Complementar" [(ngModel)]="status" inputId="status" [disabled]="readonly"></p-radioButton></div>
             </div>
           </div>
         </div>
@@ -33,13 +69,23 @@
         <p-table [value]="listaPesquisa">
           <ng-template pTemplate="header">
             <tr>
-              <th class="p-col-10">Tipo de Processo</th>
-              <th class="p-col-2">Ações</th>
+              <th class="p-col">Núcleo</th>
+              <th class="p-col">Tipo de Processo</th>
+              <th class="p-col">Termo Geral</th>
+              <th class="p-col">Termo Específico</th>
+              <th class="p-col">Documento</th>
+              <th class="p-col">Status</th>
+              <th class="p-col">Ações</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>
             <tr>
-              <td>{{item.nome}}</td>
+              <td>{{item.nucleo.nome}}</td>
+              <td>{{item.tipoProcesso.nome}}</td>
+              <td>{{item.termoGeral.nome}}</td>
+              <td>{{item.termoEspecifico.nome}}</td>
+              <td>{{item.documento.nome}}</td>
+              <td>{{item.status | status}}</td>
               <td>
                 <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)"></p-button>
                 <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(item.id)"></p-button>

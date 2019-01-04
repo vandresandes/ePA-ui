@@ -13,6 +13,7 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/components/messages/messages';
 
 
@@ -30,6 +31,7 @@ import { MessagesModule } from 'primeng/components/messages/messages';
     TooltipModule,
     ToastModule,
     ConfirmDialogModule,
+    MessageModule,
     MessagesModule,
     FormsModule
   ]

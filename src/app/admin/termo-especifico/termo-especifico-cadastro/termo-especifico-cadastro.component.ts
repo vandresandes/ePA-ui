@@ -1,6 +1,6 @@
+import { Message } from 'primeng/components/common/api';
 import { TermoEspecifico } from './../../../model/termoEspecifico';
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { TermoEspecificoService } from 'src/app/service/termo-especifico.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
@@ -16,6 +16,9 @@ export class TermoEspecificoCadastroComponent implements OnInit {
   labelBtnCancelar: string = "Cancelar";
   labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
+  msgObrigatorio: string = "Campo obrigatório:";
+  msgs: Message[] = [];
+  lbTermoEspecifico: string = "Termo Específico";
 
   constructor(
     private service: TermoEspecificoService,
@@ -56,7 +59,10 @@ export class TermoEspecificoCadastroComponent implements OnInit {
 
   isValidSalvar(): boolean {
     let valid: boolean = true;
+    this.msgs = [];
+
     if (this.entity.nome === null || this.entity.nome === undefined) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbTermoEspecifico});
       valid = false;
     }
     return valid;
