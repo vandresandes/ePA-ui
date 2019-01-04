@@ -1,6 +1,7 @@
+import { ChecklistPesquisaDto } from './../dto/checklist-pesquisa-dto';
 import { Checklist } from './../model/checklist';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -33,5 +34,25 @@ export class ChecklistService {
     } else {
       return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/${nome}`).pipe(res=> res);
     }
+  }
+
+  buscar(filtro: ChecklistPesquisaDto) {
+    let body = new HttpParams({
+      fromObject : {
+        'nucleo': filtro.nucleo,
+        'tipoProcesso': filtro.tipoProcesso,
+        'termoGeral': filtro.termoGeral,
+        'termoEspecifico': filtro.termoEspecifico,
+        'documento': filtro.documento,
+        'status': String(filtro.status)
+      }
+    });
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: body
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar`, httpOptions).pipe();
   }
 }

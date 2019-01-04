@@ -34,4 +34,12 @@ export class TipoProcessoService {
       return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/${nome}`).pipe(res=> res);
     }
   }
+
+  pesquisarNomes(nome: string) {
+    if (nome === null) {
+      return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/nomes`).pipe(res=> res);
+    } else {
+      return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/nomes/${nome}`).pipe(res=> res);
+    }
+  }
 }

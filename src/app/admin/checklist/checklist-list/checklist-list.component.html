@@ -10,43 +10,43 @@
           <div class="p-col-6">
             <label for="nucleoChecklist">Núcleo</label>
             <div>
-              <p-autoComplete [(ngModel)]="nucleoSelecionado" [suggestions]="listaNucleo" [minLength]="3"  field="nome" [size]="100" placeholder="Núcleo"
+              <p-autoComplete [(ngModel)]="entity.nucleo" [suggestions]="listaNucleo" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Núcleo"
                 name="nucleoChecklist" (completeMethod)="buscarNucleoPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="tipoprocessoChecklist">Tipo de Processo</label>
             <div>
-              <p-autoComplete [(ngModel)]="tipoProcessoSelecionado" [suggestions]="listaTipoProcesso" [minLength]="3"  field="nome" [size]="100" placeholder="Tipo de Processo"
+              <p-autoComplete [(ngModel)]="entity.tipoProcesso" [suggestions]="listaTipoProcesso" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Tipo de Processo"
                 name="tipoprocessoChecklist" (completeMethod)="buscarTipoProcessoPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="termoGeralChecklist">Termo Geral</label>
             <div>
-              <p-autoComplete [(ngModel)]="termoGeralSelecionado" [suggestions]="listaTermoGeral" [minLength]="3"  field="nome" [size]="100" placeholder="Termo Geral"
+              <p-autoComplete [(ngModel)]="entity.termoGeral" [suggestions]="listaTermoGeral" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Termo Geral"
                 name="termoGeralChecklist" (completeMethod)="buscarTermoGeralPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="termoespecificoChecklist">Termo Específico</label>
             <div>
-              <p-autoComplete [(ngModel)]="termoEspecificoSelecionado" [suggestions]="listaTermoEspecifico" [minLength]="3"  field="nome" [size]="100" placeholder="Termo Específico"
+              <p-autoComplete [(ngModel)]="entity.termoEspecifico" [suggestions]="listaTermoEspecifico" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Termo Específico"
                 name="termoespecificoChecklist" (completeMethod)="buscarTermoEspecificoPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="documentoChecklist">Documento</label>
             <div>
-              <p-autoComplete [(ngModel)]="documentoSelecionado" [suggestions]="listaDocumento" [minLength]="3"  field="nome" [size]="100" placeholder="Documento"
+              <p-autoComplete [(ngModel)]="entity.documento" [suggestions]="listaDocumento" [minLength]="3" [size]="100" emptyMessage={{msgNaoEncontrado}} placeholder="Documento"
                 name="documentoChecklist" (completeMethod)="buscarDocumentoPorNome($event)"></p-autoComplete>
             </div>
           </div>
           <div class="p-col-6">
             <label for="statusChecklist">Status</label>
             <div>
-                <div><p-radioButton name="grupoStatus" value="true" label="Obrigatório" [(ngModel)]="status" inputId="status" [disabled]="readonly"></p-radioButton></div>
-                <div><p-radioButton name="grupoStatus" value="false" label="Complementar" [(ngModel)]="status" inputId="status" [disabled]="readonly"></p-radioButton></div>
+                <div><p-radioButton name="grupoStatus" value="true" label="Obrigatório" [(ngModel)]="entity.status" [disabled]="readonly"></p-radioButton></div>
+                <div><p-radioButton name="grupoStatus" value="false" label="Complementar" [(ngModel)]="entity.status" [disabled]="readonly"></p-radioButton></div>
             </div>
           </div>
         </div>
@@ -59,6 +59,7 @@
         </div>
       </div>
     </div>
+    {{entity | json}}
     <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title">

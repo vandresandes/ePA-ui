@@ -1,3 +1,5 @@
+import { ChecklistPesquisaDto } from './../../../dto/checklist-pesquisa-dto';
+import { Checklist } from './../../../model/checklist';
 import { DocumentoService } from 'src/app/service/documento.service';
 import { TermoEspecificoService } from 'src/app/service/termo-especifico.service';
 import { TermoGeralService } from './../../../service/termo-geral.service';
@@ -14,6 +16,7 @@ import { NucleoService } from 'src/app/service/nucleo.service';
 })
 export class ChecklistListComponent implements OnInit {
 
+  entity: ChecklistPesquisaDto = new ChecklistPesquisaDto();
   listaPesquisa: any;
   nome: string = null;
   titulo: string = "Checklist";
@@ -22,12 +25,7 @@ export class ChecklistListComponent implements OnInit {
   listaTermoGeral: any;
   listaTermoEspecifico: any;
   listaDocumento: any;
-  nucleoSelecionado: any;
-  tipoProcessoSelecionado: any;
-  termoGeralSelecionado: any;
-  termoEspecificoSelecionado: any;
-  documentoSelecionado: any;
-  status: boolean;
+  msgNaoEncontrado: string = "Não encontrado!";
 
   constructor(
     private service: ChecklistService,
@@ -44,7 +42,7 @@ export class ChecklistListComponent implements OnInit {
   }
 
   pesquisar() {
-    this.service.findAll().subscribe(
+    this.service.buscar(this.entity).subscribe(
 			data => {
         this.listaPesquisa = data
 			},
@@ -92,7 +90,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarNucleoPorNome(event: any) {
     let query = event.query;
-    this.nucleoService.pesquisar(query).subscribe(
+    this.nucleoService.pesquisarNomes(query).subscribe(
 			data => {
         this.listaNucleo = data
 			},
@@ -102,7 +100,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarTipoProcessoPorNome(event: any) {
     let query = event.query;
-    this.tipoProcessoService.pesquisar(query).subscribe(
+    this.tipoProcessoService.pesquisarNomes(query).subscribe(
 			data => {
         this.listaTipoProcesso = data
 			},
@@ -112,7 +110,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarTermoGeralPorNome(event: any) {
     let query = event.query;
-    this.termoGeralService.pesquisar(query).subscribe(
+    this.termoGeralService.pesquisarNomes(query).subscribe(
 			data => {
         this.listaTermoGeral = data
 			},
@@ -122,7 +120,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarTermoEspecificoPorNome(event: any) {
     let query = event.query;
-    this.termoEspecificoService.pesquisar(query).subscribe(
+    this.termoEspecificoService.pesquisarNomes(query).subscribe(
 			data => {
         this.listaTermoEspecifico = data
 			},
@@ -132,7 +130,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarDocumentoPorNome(event: any) {
     let query = event.query;
-    this.documentoService.pesquisar(query).subscribe(
+    this.documentoService.pesquisarNomes(query).subscribe(
 			data => {
         this.listaDocumento = data
 			},
