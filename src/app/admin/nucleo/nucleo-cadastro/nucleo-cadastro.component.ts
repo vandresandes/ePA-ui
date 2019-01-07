@@ -4,6 +4,7 @@ import { Nucleo } from 'src/app/model/nucleo';
 import { Component, OnInit } from '@angular/core';
 import { NucleoService } from 'src/app/service/nucleo.service';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-nucleo-cadastro',
@@ -13,12 +14,12 @@ import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 export class NucleoCadastroComponent implements OnInit {
 
   entity: Nucleo = new Nucleo();
-  labelBtnCancelar: string = "Cancelar";
-  labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
-  msgObrigatorio: string = "Campo obrigatório:";
   msgs: Message[] = [];
   lbNucleo: string = "Núcleo";
+  labelBtnSalvar: string = AppConstants.BTN_SALVAR;
+  labelBtnCancelar: string = AppConstants.BTN_CANCELAR;
+  msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
   constructor(
     private service: NucleoService,

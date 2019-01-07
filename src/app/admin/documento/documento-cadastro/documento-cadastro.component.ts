@@ -4,6 +4,7 @@ import { Documento } from './../../../model/documento';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-documento-cadastro',
@@ -11,15 +12,16 @@ import { EnumCrud } from 'src/app/enums/enum-crud.enum';
   styleUrls: ['./documento-cadastro.component.scss']
 })
 export class DocumentoCadastroComponent implements OnInit {
+
   entity: Documento = new Documento();
-  labelBtnCancelar: string = "Cancelar";
-  labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
   selectedValue: string;
-  msgObrigatorio: string = "Campo obrigatório:";
   msgs: Message[] = [];
   lbDocumento: string = "Documento";
   lbTipo: string = "Tipo";
+  labelBtnSalvar: string = AppConstants.BTN_SALVAR;
+  labelBtnCancelar: string = AppConstants.BTN_CANCELAR;
+  msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
 
   constructor(

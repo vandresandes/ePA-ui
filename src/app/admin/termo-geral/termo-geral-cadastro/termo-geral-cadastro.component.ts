@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { TermoGeralService } from 'src/app/service/termo-geral.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-termo-geral-cadastro',
@@ -13,12 +14,12 @@ import { EnumCrud } from 'src/app/enums/enum-crud.enum';
 export class TermoGeralCadastroComponent implements OnInit {
 
   entity: TermoGeral = new TermoGeral();
-  labelBtnCancelar: string = "Cancelar";
-  labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
-  msgObrigatorio: string = "Campo obrigatório:";
   msgs: Message[] = [];
   lbTermoGeral: string = "Termo Geral";
+  labelBtnSalvar: string = AppConstants.BTN_SALVAR;
+  labelBtnCancelar: string = AppConstants.BTN_CANCELAR;
+  msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
   constructor(
     private service: TermoGeralService,

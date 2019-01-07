@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { TermoEspecificoService } from 'src/app/service/termo-especifico.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-termo-especifico-cadastro',
@@ -13,12 +14,12 @@ import { EnumCrud } from 'src/app/enums/enum-crud.enum';
 export class TermoEspecificoCadastroComponent implements OnInit {
 
   entity: TermoEspecifico = new TermoEspecifico();
-  labelBtnCancelar: string = "Cancelar";
-  labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
-  msgObrigatorio: string = "Campo obrigatório:";
   msgs: Message[] = [];
   lbTermoEspecifico: string = "Termo Específico";
+  labelBtnSalvar: string = AppConstants.BTN_SALVAR;
+  labelBtnCancelar: string = AppConstants.BTN_CANCELAR;
+  msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
   constructor(
     private service: TermoEspecificoService,
@@ -31,7 +32,7 @@ export class TermoEspecificoCadastroComponent implements OnInit {
         const id = this.route.params['value']['id'];
         this.readonly = this.route['data']['value']['acao'] == EnumCrud.READ;
 
-        this.labelBtnCancelar = "Voltar";
+        this.labelBtnCancelar = AppConstants.BTN_VOLTAR;
         this.service.findById(id).subscribe(
           data => {
             this.entity.id = data['id'],

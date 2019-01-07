@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-tipo-processo-cadastro',
@@ -13,12 +14,12 @@ import { EnumCrud } from 'src/app/enums/enum-crud.enum';
 export class TipoProcessoCadastroComponent implements OnInit {
 
   entity: TipoProcesso = new TipoProcesso();
-  labelBtnCancelar: string = "Cancelar";
-  labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
-  msgObrigatorio: string = "Campo obrigatório:";
   msgs: Message[] = [];
   lbTipoProcesso: string = "Tipo de Processo";
+  labelBtnSalvar: string = AppConstants.BTN_SALVAR;
+  labelBtnCancelar: string = AppConstants.BTN_CANCELAR;
+  msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
   constructor(
     private service: TipoProcessoService,

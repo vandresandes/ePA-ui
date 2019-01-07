@@ -41,8 +41,8 @@
           <div class="p-col-6">
             <label for="statusChecklist">{{lbStatus}} <span class="obrigatorio">*</span></label>
             <div>
-                <p-radioButton name="grupostatus" value={{verdadeiro}} label="Obrigatório" [(ngModel)]="entity.status" inputId="entity.status" [disabled]="readonly"></p-radioButton>
-                <p-radioButton name="grupostatus" value={{falso}} label="Complementar" [(ngModel)]="entity.status" inputId="entity.status" [disabled]="readonly"></p-radioButton>
+                <p-radioButton name="grupostatus" value="1" label="Obrigatório" [(ngModel)]="entity.status" inputId="entity.status" [disabled]="readonly"></p-radioButton>
+                <p-radioButton name="grupostatus" value="0" label="Complementar" [(ngModel)]="entity.status" inputId="entity.status" [disabled]="readonly"></p-radioButton>
               </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+import { AppConstants } from './../../../app-constants';
 import { ChecklistService } from './../../../service/checklist.service';
 import { Checklist } from './../../../model/checklist';
 import { Component, OnInit } from '@angular/core';
@@ -18,20 +19,18 @@ import { Message } from 'primeng/components/common/api';
 export class ChecklistCadastroComponent implements OnInit {
 
   entity: Checklist = new Checklist();
-  labelBtnCancelar: string = "Cancelar";
-  labelBtnSalvar: string = "Salvar";
   readonly: boolean = false;
   listaNucleo: any;
   listaTipoProcesso: any;
   listaTermoGeral: any;
   listaTermoEspecifico: any;
   listaDocumento: any;
-  msgObrigatorio: string = "Campo obrigatório:";
   msgs: Message[] = [];
-  lbSelecione: string = "Selecione";
   val2: boolean = true;
-  verdadeiro: number = 1;
-  falso: number = 0;
+  lbSelecione: string = AppConstants.SELECIONE;
+  labelBtnSalvar: string = AppConstants.BTN_SALVAR;
+  labelBtnCancelar: string = AppConstants.BTN_CANCELAR;
+  msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
   lbNucleo: string = "Núcleo";
   lbTipoprocesso: string = "Tipo de Processo";
@@ -56,7 +55,7 @@ export class ChecklistCadastroComponent implements OnInit {
         const id = this.route.params['value']['id'];
         this.readonly = this.route['data']['value']['acao'] == EnumCrud.READ;
 
-        this.labelBtnCancelar = "Voltar";
+        this.labelBtnCancelar = AppConstants.BTN_VOLTAR;
         this.service.findById(id).subscribe(
           data => {
             this.entity.id = data['id'],
