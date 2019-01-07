@@ -1,3 +1,4 @@
+import { TermoGeralDto } from './../../../dto/termo-geral-dto';
 import { Component, OnInit } from '@angular/core';
 import { TermoGeralService } from 'src/app/service/termo-geral.service';
 import { Router } from '@angular/router';
@@ -11,8 +12,9 @@ import { MessageService } from 'primeng/components/common/messageservice';
   providers: [ConfirmationService,MessageService]
 })
 export class TermoGeralListComponent implements OnInit {
+
+  entity: TermoGeralDto = new TermoGeralDto();
   listaPesquisa: any;
-  nome: string = null;
   titulo: string = "Termo Geral";
 
   constructor(
@@ -25,7 +27,7 @@ export class TermoGeralListComponent implements OnInit {
 
 
   pesquisar() {
-    this.service.pesquisar(this.nome).subscribe(
+    this.service.buscar(this.entity).subscribe(
 			data => {
         this.listaPesquisa = data
 			},

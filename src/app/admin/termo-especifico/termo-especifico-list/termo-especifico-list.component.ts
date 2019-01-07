@@ -3,6 +3,7 @@ import { TermoEspecificoService } from 'src/app/service/termo-especifico.service
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { TermoEspecificoDto } from 'src/app/dto/termo-especifico-dto';
 
 @Component({
   selector: 'app-termo-especifico-list',
@@ -11,8 +12,9 @@ import { MessageService } from 'primeng/components/common/messageservice';
   providers: [ConfirmationService,MessageService]
 })
 export class TermoEspecificoListComponent implements OnInit {
+
+  entity: TermoEspecificoDto = new TermoEspecificoDto();
   listaPesquisa: any;
-  nome: string = null;
   titulo: string = "Termo Específico";
 
   constructor(
@@ -25,7 +27,7 @@ export class TermoEspecificoListComponent implements OnInit {
 
 
   pesquisar() {
-    this.service.pesquisar(this.nome).subscribe(
+    this.service.buscar(this.entity).subscribe(
 			data => {
         this.listaPesquisa = data
 			},

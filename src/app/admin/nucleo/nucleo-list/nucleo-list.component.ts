@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NucleoService } from 'src/app/service/nucleo.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
+import { NucleoDto } from 'src/app/dto/nucleo-dto';
 
 @Component({
   selector: 'app-nucleo-list',
@@ -12,6 +13,7 @@ import { ConfirmationService } from 'primeng/components/common/confirmationservi
 })
 export class NucleoListComponent implements OnInit {
 
+  entity: NucleoDto = new NucleoDto();
   listaPesquisa: any;
   nome: string = null;
   titulo: string = "Núcleo";
@@ -26,7 +28,7 @@ export class NucleoListComponent implements OnInit {
 
 
   pesquisar() {
-    this.service.pesquisar(this.nome).subscribe(
+    this.service.buscar(this.entity).subscribe(
 			data => {
         this.listaPesquisa = data
 			},

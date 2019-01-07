@@ -1,3 +1,4 @@
+import { TipoProcessoDto } from './../../../dto/tipo-processo-dto';
 import { Component, OnInit } from '@angular/core';
 import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
 import { Router } from '@angular/router';
@@ -11,8 +12,9 @@ import { MessageService } from 'primeng/components/common/messageservice';
   providers: [ConfirmationService,MessageService]
 })
 export class TipoProcessoListComponent implements OnInit {
+
+  entity: TipoProcessoDto = new TipoProcessoDto();
   listaPesquisa: any;
-  nome: string = null;
   titulo: string = "Tipo de Processo";
 
   constructor(
@@ -25,7 +27,7 @@ export class TipoProcessoListComponent implements OnInit {
 
 
   pesquisar() {
-    this.service.pesquisar(this.nome).subscribe(
+    this.service.buscar(this.entity).subscribe(
 			data => {
         this.listaPesquisa = data
 			},

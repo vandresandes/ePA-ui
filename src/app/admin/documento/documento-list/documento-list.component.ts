@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentoService } from 'src/app/service/documento.service';
 import { Router } from '@angular/router';
+import { DocumentoDto } from 'src/app/dto/documento-dto';
 
 @Component({
   selector: 'app-documento-list',
@@ -8,8 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./documento-list.component.scss']
 })
 export class DocumentoListComponent implements OnInit {
+
+  entity: DocumentoDto = new DocumentoDto();
   listaPesquisa: any;
-  nome: string = null;
   titulo: string = "Documento";
   testando: string = "INFORMACAO";
 
@@ -22,7 +24,7 @@ export class DocumentoListComponent implements OnInit {
 
 
   pesquisar() {
-    this.service.pesquisar(this.nome).subscribe(
+    this.service.buscar(this.entity).subscribe(
 			data => {
         this.listaPesquisa = data
 			},

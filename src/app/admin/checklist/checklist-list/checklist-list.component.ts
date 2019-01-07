@@ -1,5 +1,4 @@
 import { ChecklistPesquisaDto } from './../../../dto/checklist-pesquisa-dto';
-import { Checklist } from './../../../model/checklist';
 import { DocumentoService } from 'src/app/service/documento.service';
 import { TermoEspecificoService } from 'src/app/service/termo-especifico.service';
 import { TermoGeralService } from './../../../service/termo-geral.service';
