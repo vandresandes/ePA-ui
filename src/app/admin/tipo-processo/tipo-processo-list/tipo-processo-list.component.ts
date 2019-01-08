@@ -4,6 +4,7 @@ import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
 
 @Component({
   selector: 'app-tipo-processo-list',
@@ -17,6 +18,9 @@ export class TipoProcessoListComponent implements OnInit {
   listaPesquisa: any;
   titulo: string = "Tipo de Processo";
 
+  // p-table
+  paginacao: PaginacaoDto = new PaginacaoDto();
+
   constructor(
     private service: TipoProcessoService,
     private router: Router,
@@ -27,12 +31,23 @@ export class TipoProcessoListComponent implements OnInit {
 
 
   pesquisar() {
-    this.service.buscar(this.entity).subscribe(
-			data => {
-        this.listaPesquisa = data
+    console.log(this.paginacao);
+    this.service.buscarPaginado(this.entity, this.paginacao).subscribe(
+      data => {
+        this.listaPesquisa = data['content'],
+        this.paginacao.totalRecords = data['totalElements'],
+        this.paginacao.totalPages = data['totalPages']
 			},
 			error => console.log(error)
     );
+  }
+
+  paginate(event: any) {
+    this.paginacao.totalRecords = event.totalRecords;
+    this.paginacao.rows = event.rows;
+    this.paginacao.first = event.first;
+    this.paginacao.page = event.page;
+    this.pesquisar();
   }
 
   limpar(form: any) {

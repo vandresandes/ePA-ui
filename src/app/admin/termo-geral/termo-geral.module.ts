@@ -15,6 +15,7 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/components/messages/messages';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [TermoGeralListComponent, TermoGeralCadastroComponent],
@@ -29,6 +30,7 @@ import { MessagesModule } from 'primeng/components/messages/messages';
     ConfirmDialogModule,
     MessageModule,
     MessagesModule,
+    PaginatorModule,
     FormsModule
   ]
 })

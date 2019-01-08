@@ -3,6 +3,7 @@ import { Checklist } from './../model/checklist';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { PaginacaoDto } from '../dto/paginacao-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,27 @@ export class ChecklistService {
     };
 
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar`, httpOptions).pipe();
+  }
+
+  buscarPaginado(filtro: ChecklistPesquisaDto, paginacao: PaginacaoDto) {
+    let body = new HttpParams({
+      fromObject : {
+        'nucleo': filtro.nucleo,
+        'tipoProcesso': filtro.tipoProcesso,
+        'termoGeral': filtro.termoGeral,
+        'termoEspecifico': filtro.termoEspecifico,
+        'documento': filtro.documento,
+        'status': String(filtro.status),
+        'page': String( paginacao.page ),
+        'size': String( paginacao.rows )
+      }
+    });
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: body
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
   }
 }

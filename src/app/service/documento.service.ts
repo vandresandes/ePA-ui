@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Documento } from '../model/documento';
 import { DocumentoDto } from '../dto/documento-dto';
+import { PaginacaoDto } from '../dto/paginacao-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +29,12 @@ export class DocumentoService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/${id}`).pipe(res=> res);
   }
 
-  buscar(filtro: DocumentoDto) {
+  buscarPaginado(filtro: DocumentoDto, paginacao: PaginacaoDto) {
     let body = new HttpParams({
       fromObject : {
-        'nome': filtro.nome
+        'nome': filtro.nome,
+        'page': String( paginacao.page ),
+        'size': String( paginacao.rows )
       }
     });
 
@@ -40,7 +43,7 @@ export class DocumentoService {
       params: body
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar`, httpOptions).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
   }
 
   pesquisarNomes(nome: string) {

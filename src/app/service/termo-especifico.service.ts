@@ -3,6 +3,7 @@ import { TermoEspecifico } from './../model/termoEspecifico';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { PaginacaoDto } from '../dto/paginacao-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,23 @@ export class TermoEspecificoService {
     };
 
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar`, httpOptions).pipe();
+  }
+
+  buscarPaginado(filtro: TermoEspecificoDto, paginacao: PaginacaoDto) {
+    let body = new HttpParams({
+      fromObject : {
+        'nome': filtro.nome,
+        'page': String( paginacao.page ),
+        'size': String( paginacao.rows )
+      }
+    });
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: body
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
   }
 
   pesquisarNomes(nome: string) {

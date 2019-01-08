@@ -3,6 +3,7 @@ import { Nucleo } from './../model/nucleo';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { PaginacaoDto } from '../dto/paginacao-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +30,12 @@ export class NucleoService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/${id}`).pipe(res=> res);
   }
 
-  buscar(filtro: NucleoDto) {
+  buscarPaginado(filtro: NucleoDto, paginacao: PaginacaoDto) {
     let body = new HttpParams({
       fromObject : {
-        'nome': filtro.nome
+        'nome': filtro.nome,
+        'page': String( paginacao.page ),
+        'size': String( paginacao.rows )
       }
     });
 
@@ -41,7 +44,7 @@ export class NucleoService {
       params: body
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar`, httpOptions).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
   }
 
   pesquisarNomes(nome: string) {

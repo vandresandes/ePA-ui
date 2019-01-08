@@ -24,6 +24,7 @@ import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
 
 // MÓDULOS
 import { ChecklistModule } from './admin/checklist/checklist.module';
@@ -32,7 +33,6 @@ import { NucleoModule } from './admin/nucleo/nucleo.module';
 import { TermoEspecificoModule } from './admin/termo-especifico/termo-especifico.module';
 import { TermoGeralModule } from './admin/termo-geral/termo-geral.module';
 import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
-
 
 @NgModule({
   declarations: [
@@ -62,6 +62,7 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     MessagesModule,
     TooltipModule,
     TableModule,
+    PaginatorModule,
     LayoutModule.forRoot(epaUiConf),
     LoadingPageModule, MaterialBarModule
   ],

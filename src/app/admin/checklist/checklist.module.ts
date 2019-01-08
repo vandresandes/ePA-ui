@@ -19,6 +19,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { RadioButtonModule } from 'primeng/components/radiobutton/radiobutton';
 import { StatusPipe } from './pipe/status.pipe';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [ChecklistListComponent, ChecklistCadastroComponent, StatusPipe],
@@ -36,6 +37,7 @@ import { StatusPipe } from './pipe/status.pipe';
     DropdownModule,
     AutoCompleteModule,
     RadioButtonModule,
+    PaginatorModule,
     FormsModule
   ]
 })

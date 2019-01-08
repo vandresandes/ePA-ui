@@ -18,6 +18,7 @@ import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TipoDocumentoPipe } from './pipe/tipo-documento.pipe';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TipoDocumentoPipe } from './pipe/tipo-documento.pipe';
     MessageModule,
     DropdownModule,
     RadioButtonModule,
+    PaginatorModule,
     FormsModule
   ]
 })
