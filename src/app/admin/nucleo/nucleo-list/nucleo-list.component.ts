@@ -54,6 +54,7 @@ export class NucleoListComponent implements OnInit {
   limpar(form: any) {
     form.reset();
     this.listaPesquisa = null;
+    this.paginacao = new PaginacaoDto();
   }
 
   voltar() {

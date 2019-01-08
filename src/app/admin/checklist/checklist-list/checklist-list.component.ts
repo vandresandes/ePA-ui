@@ -71,6 +71,7 @@ export class ChecklistListComponent implements OnInit {
     this.listaTermoGeral = null;
     this.listaTermoEspecifico = null;
     this.listaDocumento = null;
+    this.paginacao = new PaginacaoDto();
   }
 
   voltar() {
