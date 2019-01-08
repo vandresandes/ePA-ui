@@ -7,6 +7,7 @@ import { ChecklistService } from './../../../service/checklist.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NucleoService } from 'src/app/service/nucleo.service';
+import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
 
 @Component({
   selector: 'app-checklist-list',
@@ -26,6 +27,9 @@ export class ChecklistListComponent implements OnInit {
   listaDocumento: any;
   msgNaoEncontrado: string = "Não encontrado!";
 
+  // p-table
+  paginacao: PaginacaoDto = new PaginacaoDto();
+
   constructor(
     private service: ChecklistService,
     private router: Router,
@@ -41,12 +45,22 @@ export class ChecklistListComponent implements OnInit {
   }
 
   pesquisar() {
-    this.service.buscar(this.entity).subscribe(
-			data => {
-        this.listaPesquisa = data
+    this.service.buscarPaginado(this.entity, this.paginacao).subscribe(
+      data => {
+        this.listaPesquisa = data['content'],
+        this.paginacao.totalRecords = data['totalElements'],
+        this.paginacao.totalPages = data['totalPages']
 			},
 			error => console.log(error)
     );
+  }
+
+  paginate(event: any) {
+    this.paginacao.totalRecords = event.totalRecords;
+    this.paginacao.rows = event.rows;
+    this.paginacao.first = event.first;
+    this.paginacao.page = event.page;
+    this.pesquisar();
   }
 
   limpar(form: any) {

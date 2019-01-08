@@ -31,7 +31,6 @@ export class TermoGeralListComponent implements OnInit {
 
 
   pesquisar() {
-    console.log(this.paginacao);
     this.service.buscarPaginado(this.entity, this.paginacao).subscribe(
       data => {
         this.listaPesquisa = data['content'],
