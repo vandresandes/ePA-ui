@@ -3,6 +3,7 @@ import { DocumentoService } from 'src/app/service/documento.service';
 import { Router } from '@angular/router';
 import { DocumentoDto } from 'src/app/dto/documento-dto';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-documento-list',
@@ -18,6 +19,7 @@ export class DocumentoListComponent implements OnInit {
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
+  msgNenhumRegistroEncontrado: string = AppConstants.NENHUM_REGISTRO_ENCONTRADO;
 
   constructor(
     private service: DocumentoService,

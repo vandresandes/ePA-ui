@@ -1,3 +1,4 @@
+import { AppConstants } from 'src/app/app-constants';
 import { TermoGeralDto } from './../../../dto/termo-geral-dto';
 import { Component, OnInit } from '@angular/core';
 import { TermoGeralService } from 'src/app/service/termo-geral.service';
@@ -20,6 +21,7 @@ export class TermoGeralListComponent implements OnInit {
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
+  msgNenhumRegistroEncontrado: string = AppConstants.NENHUM_REGISTRO_ENCONTRADO;
 
   constructor(
     private service: TermoGeralService,

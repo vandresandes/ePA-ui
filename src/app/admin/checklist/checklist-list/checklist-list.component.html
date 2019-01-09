@@ -93,6 +93,13 @@
               </td>
             </tr>
           </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td [attr.colspan]="7">
+                {{msgNenhumRegistroEncontrado}}
+              </td>
+            </tr>
+          </ng-template>
         </p-table>
         <p-paginator [rows]="paginacao.rows" [totalRecords]="paginacao.totalRecords" [rowsPerPageOptions]="paginacao.rowsPerPageOptions"
           (onPageChange)="paginate($event)"></p-paginator>

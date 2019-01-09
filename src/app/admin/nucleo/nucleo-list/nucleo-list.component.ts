@@ -22,6 +22,7 @@ export class NucleoListComponent implements OnInit {
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
+  msgNenhumRegistroEncontrado: string = AppConstants.NENHUM_REGISTRO_ENCONTRADO;
 
   constructor(
     private service: NucleoService,

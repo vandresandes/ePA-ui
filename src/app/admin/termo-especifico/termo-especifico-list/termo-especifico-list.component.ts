@@ -5,6 +5,7 @@ import { ConfirmationService } from 'primeng/components/common/confirmationservi
 import { MessageService } from 'primeng/components/common/messageservice';
 import { TermoEspecificoDto } from 'src/app/dto/termo-especifico-dto';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-termo-especifico-list',
@@ -20,6 +21,7 @@ export class TermoEspecificoListComponent implements OnInit {
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
+  msgNenhumRegistroEncontrado: string = AppConstants.NENHUM_REGISTRO_ENCONTRADO;
 
   constructor(
     private service: TermoEspecificoService,

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-tipo-processo-list',
@@ -20,6 +21,7 @@ export class TipoProcessoListComponent implements OnInit {
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
+  msgNenhumRegistroEncontrado: string = AppConstants.NENHUM_REGISTRO_ENCONTRADO;
 
   constructor(
     private service: TipoProcessoService,

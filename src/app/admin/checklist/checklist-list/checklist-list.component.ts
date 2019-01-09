@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NucleoService } from 'src/app/service/nucleo.service';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
+import { AppConstants } from 'src/app/app-constants';
 
 @Component({
   selector: 'app-checklist-list',
@@ -29,6 +30,7 @@ export class ChecklistListComponent implements OnInit {
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
+  msgNenhumRegistroEncontrado: string = AppConstants.NENHUM_REGISTRO_ENCONTRADO;
 
   constructor(
     private service: ChecklistService,
