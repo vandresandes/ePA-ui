@@ -12,11 +12,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent,
     data: { title: 'Login' }
   },
-  { path: 'dashboard', component: HomeComponent,
-    data: { title: 'Dashboard' }
-  },
-  { path: 'ingresso-processos', component: IngressoDeProcessosComponent,
-    data: { title: 'Ingresso de Processos' }
+  { path: 'ingresso-processo', component: IngressoDeProcessosComponent,
+    data: { title: 'Ingresso de Processo' }
   },
   { path: 'checklist-informacoes-requeridas', component: ChecklistInformacoesRequeridasComponent,
     data: { title: 'Checklist de Informações Requeridas' }
@@ -27,9 +24,7 @@ const routes: Routes = [
   { path: 'impressao-resultado', component: ImpressaoResultadoComponent,
     data: { title: 'Impressão do Resultado' }
   },
-  { path: '', component: HomeComponent,
-    data: { title: 'Dashboard' }
-  },
+  { path: '', component: IngressoDeProcessosComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -4,20 +4,25 @@
       <a routerLink="/"><b>ePA</b></a>
     </div>
     <div class="login-box-body">
-      <p class="login-box-msg">Sign in to start your session</p>
-
-      <form action="/" method="post">
+      <p class="login-box-msg">Login</p>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group has-feedback">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" nucleoForm="email" type="text" pInputText class="form-control" name="email" [(ngModel)]="email" maxlength="100" required placeholder="E-mail" />
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+          <div *ngIf="emailNulo" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">E-mail é obrigatório</div>
+          </div>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" class="form-control" placeholder="Senha">
+          <input type="password" nucleoForm="email" type="password" pInputText class="form-control" name="senha" [(ngModel)]="senha" maxlength="100" required placeholder="Senha" />
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          <div *ngIf="senhaNulo" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Senha é obrigatório</div>
+          </div>
         </div>
         <div class="row">
-          <div class="col-xs-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+          <div class="col-xs-4 pull-right">
+            <button type="submit" class="btn btn-primary btn-block btn-flat" pTooltip="Acessar" tooltipPosition="top">Acessar</button>
           </div>
         </div>
       </form>

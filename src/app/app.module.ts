@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ReactiveFormsModule }    from '@angular/forms';
+import { RadioButtonModule } from 'primeng/components/radiobutton/radiobutton';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -30,6 +32,7 @@ import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 
 // MÓDULOS
@@ -39,6 +42,8 @@ import { NucleoModule } from './admin/nucleo/nucleo.module';
 import { TermoEspecificoModule } from './admin/termo-especifico/termo-especifico.module';
 import { TermoGeralModule } from './admin/termo-geral/termo-geral.module';
 import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
+import { ProponenteDialogComponent } from './dialog/proponente-dialog/proponente-dialog.component';
+import { InteressadoDialogComponent } from './dialog/interessado-dialog/interessado-dialog.component';
 
 @NgModule({
   declarations: [
@@ -49,10 +54,14 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     PageNotFoundComponent,
     ImpressaoResultadoComponent,
     IngressoDeProcessosComponent,
-    VerificacaoComponent
+    VerificacaoComponent,
+    ProponenteDialogComponent,
+    InteressadoDialogComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    RadioButtonModule,
     ChecklistModule,
     DocumentoModule,
     NucleoModule,
@@ -71,6 +80,7 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     PaginatorModule,
     FieldsetModule,
     PanelModule,
+    DynamicDialogModule,
     CommonModule,
     FormsModule,
     InputTextareaModule,

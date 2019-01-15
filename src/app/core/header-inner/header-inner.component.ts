@@ -3,4 +3,7 @@ import { Component } from '@angular/core';
   selector: 'app-header-inner',
   templateUrl: './header-inner.component.html'
 })
-export class HeaderInnerComponent {}
+export class HeaderInnerComponent {
+  nome: string = "Administrador";
+  cargo: string = "Assistente";
+}
