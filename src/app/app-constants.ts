@@ -10,4 +10,6 @@ export class AppConstants {
   public static ROWS_PER_PAGE = [10,20,30,40,50,100];
   public static ROWS = 10;
   public static NENHUM_REGISTRO_ENCONTRADO = "Nenhum registro foi encontrado";
+  public static NENHUM_REGISTRO_ADICIONADO = "Nenhum registro adicionado";
+  public static NAO_ENCONTRADO: string = "Não encontrado!";
 }

@@ -1,4 +1,4 @@
-<form autocomplete="off" #nucleoForm="ngForm">
+<form autocomplete="off" #nucleoForm="ngForm" class="form-horizontal">
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">
@@ -6,11 +6,13 @@
       </h3>
     </div>
     <div class="box-body">
-      <div class="p-grid">
-        <div class="p-col">
-          <label for="nome">{{titulo}}</label>
-          <div>
-            <input id="nome" type="text" pInputText class="p-col-6" name="nucleo" [(ngModel)]="entity.nome" />
+      <div>
+        <div class="form-group">
+          <div class="col-sm-12 col-md-4">
+            <label for="nome">{{titulo}}</label>
+            <div>
+              <input id="nome" type="text" pInputText class="form-control" name="nucleo" [(ngModel)]="entity.nome" />
+            </div>
           </div>
         </div>
       </div>
@@ -30,11 +32,11 @@
       </h3>
     </div>
     <div class="box-body">
-      <p-table [value]="listaPesquisa">
+      <p-table [value]="listaPesquisa" [responsive]="true">
         <ng-template pTemplate="header">
           <tr>
             <th class="p-col-10">Núcleo</th>
-            <th class="p-col-2">Ações</th>
+            <th class="p-col-2" style="width: 150px;">Ações</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-nucleo>

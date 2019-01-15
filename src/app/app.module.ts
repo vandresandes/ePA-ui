@@ -6,6 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { LayoutModule } from 'angular-admin-lte';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -25,6 +28,9 @@ import { MessagesModule } from 'primeng/messages';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
+import { FieldsetModule } from 'primeng/fieldset';
+import { PanelModule } from 'primeng/panel';
+
 
 // MÓDULOS
 import { ChecklistModule } from './admin/checklist/checklist.module';
@@ -63,6 +69,11 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     TooltipModule,
     TableModule,
     PaginatorModule,
+    FieldsetModule,
+    PanelModule,
+    CommonModule,
+    FormsModule,
+    InputTextareaModule,
     LayoutModule.forRoot(epaUiConf),
     LoadingPageModule, MaterialBarModule
   ],

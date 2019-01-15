@@ -38,6 +38,7 @@ export class ChecklistCadastroComponent implements OnInit {
   lbTermoEspecifico: string = "Termo Específico";
   lbDocumento: string = "Documento";
   lbStatus: string = "Status";
+  msgNaoEncontrado: string = AppConstants.NAO_ENCONTRADO;
 
   constructor(
     private service: ChecklistService,
