@@ -90,7 +90,6 @@ export class TermoGeralService {
     if (!AppUtil.isNull(idMateria)) {
       params = params.append('idMateria', String(idMateria));
     }
-    console.log(params);
     return params;
   }
 

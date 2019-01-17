@@ -44,7 +44,6 @@ export class MateriaService {
     if (!AppUtil.isNull(idDocumento)) {
       params = params.append('idDocumento', String(idDocumento));
     }
-    console.log(params);
     return params;
   }
 }
