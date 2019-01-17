@@ -106,7 +106,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarNucleoPorNome(event: any) {
     let query = event.query;
-    this.nucleoService.pesquisarNomes(query).subscribe(
+    this.nucleoService.filtrarNomes(query).subscribe(
 			data => {
         this.listaNucleo = data
 			},
