@@ -9,7 +9,7 @@ p-button {
 }
 
 .obrigatorio {
-	color: red;
+	color: rgb(201,24,30);
 	font-weight: bold;
 }
 
@@ -18,15 +18,15 @@ p-button {
 }
 
 .skin-blue .main-header .logo {
-  background-color: rgb(0, 101, 175);
+  background-color: rgb(0, 97, 172);
 }
 
 .skin-blue .main-header .navbar {
-  background-color: rgb(0, 101, 175);
+  background-color: rgb(0, 97, 172);
 }
 
 .skin-blue .wrapper, .skin-blue .main-sidebar, .skin-blue .left-side {
-  background-color: #565656;
+  background-color: rgb(158,160,163);
 }
 
 .login-page, .register-page {
@@ -38,3 +38,7 @@ p-button {
   box-shadow: 0 1px 1px 1px;
 }
 
+.radioButton {
+  width:250px;
+  margin-bottom:10px;
+}
