@@ -116,7 +116,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarTipoProcessoPorNome(event: any) {
     let query = event.query;
-    this.tipoProcessoService.pesquisarNomes(query).subscribe(
+    this.tipoProcessoService.filtrarNomes(query).subscribe(
 			data => {
         this.listaTipoProcesso = data
 			},
