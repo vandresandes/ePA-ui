@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Documento } from '../model/documento';
 import { DocumentoDto } from '../dto/documento-dto';
 import { PaginacaoDto } from '../dto/paginacao-dto';
+import { AppUtil } from '../app-util';
 
 @Injectable({
   providedIn: 'root'
@@ -47,22 +48,35 @@ export class DocumentoService {
   }
 
   filtrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idMateria: number) {
-    let body = new HttpParams({
-      fromObject : {
-        // 'idNucleo': String(idNucleo),
-        'idTipoProcesso': String(idTipoProcesso),
-        'idTermoGeral': String(idTermoGeral),
-        'idTermoEspecifico': String(idTermoEspecifico),
-        'idMateria': String(idMateria)
-      }
-    });
+    let parametros = this.criarParamsFitrar(idNucleo, idTipoProcesso, idTermoGeral, idTermoEspecifico, idMateria);
 
     const httpOptions = {
       headers: new HttpHeaders({}),
-      params: body
+      params: parametros
     };
 
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar`, httpOptions).pipe();
+  }
+
+  criarParamsFitrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idMateria: number): HttpParams {
+    var params = new HttpParams();
+    if (!AppUtil.isNull(idNucleo)) {
+      params = params.append('idNucleo', String(idNucleo));
+    }
+    if (!AppUtil.isNull(idTipoProcesso)) {
+      params = params.append('idTipoProcesso', String(idTipoProcesso));
+    }
+    if (!AppUtil.isNull(idTermoGeral)) {
+      params = params.append('idTermoGeral', String(idTermoGeral));
+    }
+    if (!AppUtil.isNull(idTermoEspecifico)) {
+      params = params.append('idTermoEspecifico', String(idTermoEspecifico));
+    }
+    if (!AppUtil.isNull(idMateria)) {
+      params = params.append('idMateria', String(idMateria));
+    }
+    console.log(params);
+    return params;
   }
 
   pesquisarNomes(nome: string) {

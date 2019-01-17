@@ -68,24 +68,35 @@ export class TipoProcessoService {
   }
 
   filtrar(idNucleo: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number) {
-    console.log("buscarPorIds tipoprocesso");
-
-    let body = new HttpParams({
-      fromObject : {
-        // 'idNucleo': AppUtil.convertNumberToString(idNucleo),
-        // 'idTermoGeral': AppUtil.convertNumberToString(idTermoGeral),
-        // 'idTermoEspecifico': AppUtil.convertNumberToString(idTermoEspecifico),
-        // 'idDocumento': AppUtil.convertNumberToString(idDocumento),
-        'idMateria': AppUtil.convertNumberToString(idMateria),
-      }
-    });
+    let parametros = this.criarParamsFitrar(idNucleo, idTermoGeral, idTermoEspecifico, idDocumento, idMateria);
 
     const httpOptions = {
       headers: new HttpHeaders({}),
-      params: body
+      params: parametros
     };
 
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar`, httpOptions).pipe();
+  }
+
+  criarParamsFitrar(idNucleo: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number): HttpParams {
+    var params = new HttpParams();
+    if (!AppUtil.isNull(idNucleo)) {
+      params = params.append('idNucleo', String(idNucleo));
+    }
+    if (!AppUtil.isNull(idTermoGeral)) {
+      params = params.append('idTermoGeral', String(idTermoGeral));
+    }
+    if (!AppUtil.isNull(idTermoEspecifico)) {
+      params = params.append('idTermoEspecifico', String(idTermoEspecifico));
+    }
+    if (!AppUtil.isNull(idDocumento)) {
+      params = params.append('idDocumento', String(idDocumento));
+    }
+    if (!AppUtil.isNull(idMateria)) {
+      params = params.append('idMateria', String(idMateria));
+    }
+    console.log(params);
+    return params;
   }
 
   pesquisarNomes(nome: string) {

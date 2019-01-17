@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { PaginacaoDto } from '../dto/paginacao-dto';
+import { AppUtil } from '../app-util';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,38 @@ export class NucleoService {
     };
 
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
+  }
+
+  filtrar(idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number) {
+    let parametros = this.criarParamsFitrar(idTipoProcesso, idTermoGeral, idTermoEspecifico, idDocumento, idMateria);
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: parametros
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar`, httpOptions).pipe();
+  }
+
+  criarParamsFitrar(idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number): HttpParams {
+    var params = new HttpParams();
+    if (!AppUtil.isNull(idTipoProcesso)) {
+      params = params.append('idTipoProcesso', String(idTipoProcesso));
+    }
+    if (!AppUtil.isNull(idTermoGeral)) {
+      params = params.append('idTermoGeral', String(idTermoGeral));
+    }
+    if (!AppUtil.isNull(idTermoEspecifico)) {
+      params = params.append('idTermoEspecifico', String(idTermoEspecifico));
+    }
+    if (!AppUtil.isNull(idDocumento)) {
+      params = params.append('idDocumento', String(idDocumento));
+    }
+    if (!AppUtil.isNull(idMateria)) {
+      params = params.append('idMateria', String(idMateria));
+    }
+    console.log(params);
+    return params;
   }
 
   pesquisarNomes(nome: string) {
