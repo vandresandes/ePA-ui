@@ -33,6 +33,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { MenuModule } from 'primeng/menu';
 
 
 // MÓDULOS
@@ -44,6 +45,7 @@ import { TermoGeralModule } from './admin/termo-geral/termo-geral.module';
 import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
 import { ProponenteDialogComponent } from './dialog/proponente-dialog/proponente-dialog.component';
 import { InteressadoDialogComponent } from './dialog/interessado-dialog/interessado-dialog.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { InteressadoDialogComponent } from './dialog/interessado-dialog/interess
     IngressoDeProcessosComponent,
     VerificacaoComponent,
     ProponenteDialogComponent,
-    InteressadoDialogComponent
+    InteressadoDialogComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +84,7 @@ import { InteressadoDialogComponent } from './dialog/interessado-dialog/interess
     FieldsetModule,
     PanelModule,
     DynamicDialogModule,
+    MenuModule,
     CommonModule,
     FormsModule,
     InputTextareaModule,

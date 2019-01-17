@@ -46,6 +46,25 @@ export class DocumentoService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
   }
 
+  filtrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idMateria: number) {
+    let body = new HttpParams({
+      fromObject : {
+        // 'idNucleo': String(idNucleo),
+        'idTipoProcesso': String(idTipoProcesso),
+        'idTermoGeral': String(idTermoGeral),
+        'idTermoEspecifico': String(idTermoEspecifico),
+        'idMateria': String(idMateria)
+      }
+    });
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: body
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar`, httpOptions).pipe();
+  }
+
   pesquisarNomes(nome: string) {
     if (nome === null) {
       return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/nomes`).pipe(res=> res);

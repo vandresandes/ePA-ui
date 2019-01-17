@@ -61,6 +61,25 @@ export class TermoGeralService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
   }
 
+  filtrar(idNucleo: number, idTipoProcesso: number, idTermoEspecifico: number, idDocumento: number, idMateria: number) {
+    let body = new HttpParams({
+      fromObject : {
+        // 'idNucleo': String(idNucleo),
+        // 'idTermoEspecifico': String(idTermoEspecifico),
+        // 'idDocumento': String(idDocumento),
+        'idTipoProcesso': String(idTipoProcesso),
+        'idMateria': String(idMateria)
+      }
+    });
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: body
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar`, httpOptions).pipe();
+  }
+
   pesquisarNomes(nome: string) {
     if (nome === null) {
       return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/nomes`).pipe(res=> res);

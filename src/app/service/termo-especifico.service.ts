@@ -61,6 +61,25 @@ export class TermoEspecificoService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
   }
 
+  filtrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idDocumento: number, idMateria: number) {
+    let body = new HttpParams({
+      fromObject : {
+        // 'idNucleo': String(idNucleo),
+        // 'idDocumento': String(idDocumento),
+        'idTipoProcesso': String(idTipoProcesso),
+        'idTermoGeral': String(idTermoGeral),
+        'idMateria': String(idMateria)
+      }
+    });
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: body
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar`, httpOptions).pipe();
+  }
+
   pesquisarNomes(nome: string) {
     if (nome === null) {
       return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/nomes`).pipe(res=> res);

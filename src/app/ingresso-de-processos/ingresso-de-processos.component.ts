@@ -1,3 +1,9 @@
+import { TermoGeral } from './../model/termoGeral';
+import { DocumentoService } from 'src/app/service/documento.service';
+import { AppUtil } from './../app-util';
+import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
+import { MateriaService } from './../service/materia.service';
+import { OrigemService } from './../service/origem.service';
 import { AuthenticationService } from './../service/authentication.service';
 import { InteressadoDialogComponent } from './../dialog/interessado-dialog/interessado-dialog.component';
 import { Proponente } from './../model/proponente';
@@ -6,10 +12,10 @@ import { Component, OnInit } from '@angular/core';
 import { AppConstants } from '../app-constants';
 import { DialogService } from 'primeng/components/dynamicdialog/dialogservice';
 import { ProponenteDialogComponent } from '../dialog/proponente-dialog/proponente-dialog.component';
-import { Interessado } from '../model/interessado';
 import { Message } from 'primeng/components/common/message';
 import { TermoGeralService } from '../service/termo-geral.service';
 import { TermoEspecificoService } from '../service/termo-especifico.service';
+import { NucleoService } from '../service/nucleo.service';
 
 @Component({
   selector: 'app-ingresso-de-processos',
@@ -23,17 +29,20 @@ export class IngressoDeProcessosComponent implements OnInit {
   entity: Processo = new Processo();
   msgs: Message[] = [];
 
+  listaTipoProcesso: any;
+  listaTermoGeral: any;
+  listaTermoEspecifico: any;
+  listaDocumento: any;
+
+  listaNucleo: any;
   listaMotivo: any;
   listaMateria: any;
-  listaAssunto: any;
-  listaSubAssunto: any;
   listaPrioridadeTramitacao: any;
   listaSigiloSegredoJustica: any;
   listaSolicitadaUrgencia: any;
-  listaProponente: [Proponente];
-  listaInteressado: [Proponente];
-  listaTermoGeral: any;
-  listaTermoEspecifico: any;
+  listaOrigem: any;
+  listaProponente: Proponente[] = [];
+  listaInteressado: Proponente[] = [];
 
   lbSelecione: string = AppConstants.SELECIONE;
   lbMotivo: string = "Motivo";
@@ -50,18 +59,24 @@ export class IngressoDeProcessosComponent implements OnInit {
   lbObservacoes: string = "Observações";
   lbBtnSalvar: string = "Salvar";
   lbBtnEnviar: string = "Enviar";
+
   msgNenhumRegistroAdicionado: string = AppConstants.NENHUM_REGISTRO_ADICIONADO;
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
   constructor(
     public dialogService: DialogService,
     private authenticationService: AuthenticationService,
+    private origemService: OrigemService,
+    private materiaService: MateriaService,
+    private nucleoService: NucleoService,
+    private tipoProcessoService: TipoProcessoService,
     private termoGeralService: TermoGeralService,
     private termoEspecificoService: TermoEspecificoService,
+    private documentoService: DocumentoService
     ) {
-      this.buscarTodosTermoGeral();
-      this.buscarTodosTermoEspecifico();
-    }
+    this.buscarTodosOrigem();
+    this.buscarTodosMateria();
+  }
 
   ngOnInit() {
     this.listaMotivo = [
@@ -69,16 +84,6 @@ export class IngressoDeProcessosComponent implements OnInit {
       {nome: 'Processo para ser apensado a outro existente'},
       {nome: 'Processo para ser anexado a outro existente'},
       {nome: 'Processo para servir de consulta a outro existente'}
-    ];
-
-    this.listaMateria = [
-      {nome: 'Disciplinar e Sancionatório'},
-      {nome: 'Licitações e contratos'},
-      {nome: 'Parcerias (Convênios, Contratos de Gestão)'},
-      {nome: 'Patrimônio Público e Meio Ambiente'},
-      {nome: 'Pessoal'},
-      {nome: 'Previdência'},
-      {nome: 'Controle Externo'}
     ];
 
     this.listaPrioridadeTramitacao = [
@@ -105,6 +110,7 @@ export class IngressoDeProcessosComponent implements OnInit {
 
     ref.onClose.subscribe((proponente: Proponente) => {
       if (proponente) {
+        this.listaProponente.push(proponente);
           // adicionar na lista
       }
     });
@@ -119,17 +125,18 @@ export class IngressoDeProcessosComponent implements OnInit {
 
     ref.onClose.subscribe((proponente: Proponente) => {
       if (proponente) {
+        this.listaInteressado.push(proponente);
         // adicionar na lista
       }
     });
   }
 
   excluirProponente(item: Proponente) {
-    this.listaProponente = null;
+    this.listaProponente.splice(this.listaProponente.indexOf(item), 1);
   }
 
   excluirInteressado(item: Proponente) {
-    this.listaInteressado = null;
+    this.listaInteressado.splice(this.listaInteressado.indexOf(item), 1);
   }
 
   salvar() {
@@ -142,55 +149,127 @@ export class IngressoDeProcessosComponent implements OnInit {
     let valid: boolean = true;
     this.msgs = [];
 
-    if (this.entity.motivo === null || this.entity.motivo === undefined) {
+    if (AppUtil.isNull(this.entity.motivo)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbMotivo});
       valid = false;
     }
-    if (this.entity.materia === null || this.entity.materia === undefined) {
+    if (AppUtil.isNull(this.entity.materia)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbMateria});
       valid = false;
     }
-    if (this.entity.assunto === null || this.entity.assunto === undefined) {
+    if (AppUtil.isNull(this.entity.termoGeral)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbAssunto});
       valid = false;
     }
-    if (this.entity.subAssunto === null || this.entity.subAssunto === undefined) {
+    if (AppUtil.isNull(this.entity.termoEspecifico)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbSubAssunto});
       valid = false;
     }
-    if (this.entity.prioridadeTramitacao === null || this.entity.prioridadeTramitacao === undefined) {
+    if (AppUtil.isNull(this.entity.prioridadeTramitacao)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbPrioridadeTramitacao});
       valid = false;
     }
-    if (this.entity.sigiloSegredoJustica === null || this.entity.sigiloSegredoJustica === undefined) {
+    if (AppUtil.isNull(this.entity.sigiloSegredoJustica)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbSigiloOuSegredoDeJustica});
       valid = false;
     }
-    if (this.entity.solicitadaUrgencia === null || this.entity.solicitadaUrgencia === undefined) {
+    if (AppUtil.isNull(this.entity.solicitadaUrgencia)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbSolicitadaUrgencia});
       valid = false;
     }
     return valid;
   }
 
-  buscarTodosTermoGeral() {
-    this.termoGeralService.findAll().subscribe(
+  buscarTodosOrigem() {
+    this.origemService.findAll().subscribe(
 			data => {
-        this.listaTermoGeral = data,
-        this.listaAssunto = data
+        this.listaOrigem = data
 			},
 			error => console.log(error)
     );
   }
 
-  buscarTodosTermoEspecifico() {
-    this.termoEspecificoService.findAll().subscribe(
+  buscarTodosMateria() {
+    this.materiaService.findAll().subscribe(
 			data => {
-        this.listaTermoEspecifico = data,
-        this.listaSubAssunto = data
+        this.listaMateria = data
 			},
 			error => console.log(error)
     );
+  }
+
+  onchangeDropMateria() {
+    this.listaTipoProcesso = null;
+    this.listaTermoGeral = null;
+    this.listaTermoEspecifico = null;
+    this.listaDocumento = null;
+
+    if (!AppUtil.isNull(this.entity.materia)) {
+      this.tipoProcessoService.filtrar(null, null, null, null, this.entity.materia.id).subscribe(
+        data => {
+          this.listaTipoProcesso = data
+        },
+        error => console.log(error)
+      );
+    }
+  }
+
+  onchangeDropTipoProcesso() {
+    this.listaTermoGeral = null;
+    this.listaTermoEspecifico = null;
+    this.listaDocumento = null;
+
+    if (!AppUtil.isNull(this.entity.materia)) {
+      this.termoGeralService.filtrar(
+        null,
+        this.entity.tipoProcesso.id,
+        null,
+        null,
+        this.entity.materia.id
+      ).subscribe(data => {
+        this.listaTermoGeral = data
+      },
+        error => console.log(error)
+      );
+    }
+  }
+
+  onchangeDropAssunto() {
+    this.listaTermoEspecifico = null;
+    this.listaDocumento = null;
+
+    if (!AppUtil.isNull(this.entity.termoGeral)) {
+      this.termoEspecificoService.filtrar(
+        null,
+        this.entity.tipoProcesso.id,
+        this.entity.termoGeral.id,
+        null,
+        this.entity.materia.id
+      ).subscribe(data => {
+        this.listaTermoEspecifico = data,
+        console.log(data)
+      },
+        error => console.log(error)
+      );
+    }
+  }
+
+  onchangeDropSubAssunto() {
+    this.listaDocumento = null;
+
+    if (!AppUtil.isNull(this.entity.termoEspecifico)) {
+      this.documentoService.filtrar(
+        null,
+        this.entity.tipoProcesso.id,
+        this.entity.termoGeral.id,
+        this.entity.termoEspecifico.id,
+        this.entity.materia.id
+      ).subscribe(data => {
+        this.listaDocumento = data
+      },
+        error => console.log(error)
+      );
+    }
   }
 
   enviar() {
