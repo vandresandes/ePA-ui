@@ -1,3 +1,5 @@
+import { EnumPrioridadeTramitacao } from './../enums/enum-prioridade-tramitacao.enum';
+import { EnumSigiloSegredoJustica } from './../enums/enum-sigilo-segredo-justica.enum';
 import { Documento } from './../model/documento';
 import { TermoGeral } from './../model/termoGeral';
 import { DocumentoService } from 'src/app/service/documento.service';
@@ -42,13 +44,14 @@ export class IngressoDeProcessosComponent implements OnInit {
   listaSigiloSegredoJustica: any;
   listaSolicitadaUrgencia: any;
   listaOrigem: any;
+  listaSigiloSegredoJusticaResposta: any;
   listaProponente: Proponente[] = [];
   listaInteressado: Proponente[] = [];
 
+  lbProponente: string = "Proponente";
   lbSelecione: string = AppConstants.SELECIONE;
   lbMotivo: string = "Motivo";
   lbNProcessoNaOrigem: string = "Nº do processo origem (SEI)";
-  lbProponente: string = "Proponente";
   lbInteressados: string = "Interessados";
   lbMateria: string = "Matéria";
   lbAssunto: string = "Assunto";
@@ -61,6 +64,10 @@ export class IngressoDeProcessosComponent implements OnInit {
   lbBtnSalvar: string = AppConstants.BTN_SALVAR;
   lbBtnEnviar: string = "Enviar";
   lbSelecionarArquivo: string = AppConstants.SELECIONE_ARQUIVO;
+  lbOrgao: string = "Órgão";
+  lbNome: string = "Nome";
+  lbEmail: string = "E-mail";
+  lbTelefone: string = "Telefone";
 
   msgNenhumRegistroAdicionado: string = AppConstants.NENHUM_REGISTRO_ADICIONADO;
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
@@ -100,22 +107,15 @@ export class IngressoDeProcessosComponent implements OnInit {
       {nome: 'Segredo de Justiça'}
     ];
 
-    this.entity.solicitadaUrgencia = '0';
-  }
+    this.listaSigiloSegredoJusticaResposta = [
+      {nome: 'Põe em risco a vida, a segurança ou a saúde da população'},
+      {nome: 'Oferece elevado risco à estabilidade financeira ou econômica do Estado'},
+      {nome: 'Pode prejudicar ou causar risco a planos ou operações estratégicas dos órgãos de Segurança do Estado'},
+      {nome: 'Pode prejudicar ou causar risco a projetos de pesquisa e desenvolvimento científico ou tecnológico, assim como a sistemas, bens, instalações ou áreas de interesse estratégico do Estado'},
+      {nome: 'Pode comprometer atividades de inteligência, bem como de investigação ou fiscalização em andamento, relacionadas com a prevenção ou repressão de infrações'}
+    ];
 
-  showProponente() {
-    const ref = this.dialogService.open(ProponenteDialogComponent, {
-      header: 'Proponente',
-      width: '70%',
-      contentStyle: {"max-height": "350px", "overflow": "auto"}
-    });
-
-    ref.onClose.subscribe((proponente: Proponente) => {
-      if (proponente) {
-        this.listaProponente.push(proponente);
-          // adicionar na lista
-      }
-    });
+    this.entity.solicitadaUrgencia = false;
   }
 
   showInteressado() {
@@ -131,10 +131,6 @@ export class IngressoDeProcessosComponent implements OnInit {
         // adicionar na lista
       }
     });
-  }
-
-  excluirProponente(item: Proponente) {
-    this.listaProponente.splice(this.listaProponente.indexOf(item), 1);
   }
 
   excluirInteressado(item: Proponente) {
@@ -272,6 +268,26 @@ export class IngressoDeProcessosComponent implements OnInit {
         error => console.log(error)
       );
     }
+  }
+
+  showPrioridadeTramitacao(): boolean {
+    if (EnumPrioridadeTramitacao.SEM_PRIORIDADE) {
+      this.entity.documentoComprobatorio = null;
+      return false;
+    }
+    return true;
+  }
+
+  showMotivoSigiloOuSegredoJustica(): boolean {
+    if (EnumSigiloSegredoJustica.SEM_SIGILO) {
+      this.entity.motivoSigiloSegredoJustica = null;
+      return false;
+    }
+    return true;
+  }
+
+  onchangeRadioSolicitadaUrgencia() {
+    this.entity.justificativa = null;
   }
 
   enviar() {

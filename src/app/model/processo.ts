@@ -7,12 +7,15 @@ export class Processo {
   numeroProcesso: string;
   motivo: Motivo;
   prioridadeTramitacao: string;
+  justificativa: string;
   sigiloSegredoJustica: string;
-  solicitadaUrgencia: string;
+  motivoSigiloSegredoJustica: string;
+  solicitadaUrgencia: Boolean;
   origem: string;
   materia: Materia;
 
   tipoProcesso: TipoProcesso;
   termoGeral: TermoGeral;
   termoEspecifico: TermoEspecifico;
+  documentoComprobatorio: [];
 }
