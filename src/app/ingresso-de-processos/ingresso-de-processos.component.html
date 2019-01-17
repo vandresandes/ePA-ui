@@ -71,18 +71,24 @@
               <p-dropdown [options]="listaPrioridadeTramitacao" [(ngModel)]="entity.prioridadeTramitacao" optionLabel="nome" name="prioridadeTramitacao"
                 [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}}></p-dropdown>
             </div>
+            <!--
+            <div class="margin-top-bottom-20">
+                <p-fileUpload name="myfile[]" url="" chooseLabel={{lbSelecionarArquivo}} [showUploadButton]="false" [showCancelButton]="false"></p-fileUpload>
+            </div>
+            -->
           </div>
-        </div>
-        <div class="form-group">
           <div class="col-sm-12 col-md-4">
             <label>{{lbSigiloOuSegredoDeJustica}}: <span class="obrigatorio">*</span></label>
             <div>
               <p-dropdown [options]="listaSigiloSegredoJustica" [(ngModel)]="entity.sigiloSegredoJustica" optionLabel="nome" name="sigiloSegredoJustica"
                 [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}}></p-dropdown>
             </div>
+            <!--
+            <div class="margin-top-bottom-20">
+                <p-fileUpload name="myfile[]" url="" chooseLabel={{lbSelecionarArquivo}} [showUploadButton]="false" [showCancelButton]="false"></p-fileUpload>
+            </div>
+            -->
           </div>
-        </div>
-        <div class="form-group">
           <div class="col-sm-12 col-md-4">
             <label>{{lbSolicitadaUrgencia}} <span class="obrigatorio">*</span></label>
             <div>
@@ -90,6 +96,11 @@
               &nbsp;
               <p-radioButton name="gruposolicitadaurgencia" value="0" label="Não" [(ngModel)]="entity.solicitadaUrgencia" inputId="entity.solicitadaUrgencia"></p-radioButton>
             </div>
+            <!--
+            <div class="margin-top-bottom-20">
+                <p-fileUpload name="myfile[]" url="" chooseLabel={{lbSelecionarArquivo}} [showUploadButton]="false" [showCancelButton]="false"></p-fileUpload>
+            </div>
+            -->
           </div>
         </div>
         <div class="panel panel-default">
