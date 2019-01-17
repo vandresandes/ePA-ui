@@ -34,6 +34,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { MenuModule } from 'primeng/menu';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 // MÓDULOS
@@ -85,6 +86,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     PanelModule,
     DynamicDialogModule,
     MenuModule,
+    FileUploadModule,
     CommonModule,
     FormsModule,
     InputTextareaModule,

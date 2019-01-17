@@ -1,5 +1,6 @@
 export class AppConstants {
   public static SELECIONE: string = "Selecione";
+  public static SELECIONE_ARQUIVO: string = "Selecionar arquivo";
   public static CAMPO_OBRIGATORIO: string = "Campo obrigatório";
 
   // Botões
