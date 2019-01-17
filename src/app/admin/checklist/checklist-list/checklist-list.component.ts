@@ -126,7 +126,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarTermoGeralPorNome(event: any) {
     let query = event.query;
-    this.termoGeralService.pesquisarNomes(query).subscribe(
+    this.termoGeralService.filtrarNomes(query).subscribe(
 			data => {
         this.listaTermoGeral = data
 			},

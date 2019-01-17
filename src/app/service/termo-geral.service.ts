@@ -30,21 +30,6 @@ export class TermoGeralService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/${id}`).pipe(res=> res);
   }
 
-  buscar(filtro: TermoGeralDto) {
-    let body = new HttpParams({
-      fromObject : {
-        'nome': filtro.nome
-      }
-    });
-
-    const httpOptions = {
-      headers: new HttpHeaders({}),
-      params: body
-    };
-
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar`, httpOptions).pipe();
-  }
-
   buscarPaginado(filtro: TermoGeralDto, paginacao: PaginacaoDto) {
     let body = new HttpParams({
       fromObject : {
@@ -93,11 +78,22 @@ export class TermoGeralService {
     return params;
   }
 
-  pesquisarNomes(nome: string) {
-    if (nome === null) {
-      return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/nomes`).pipe(res=> res);
-    } else {
-      return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/nomes/${nome}`).pipe(res=> res);
+  filtrarNomes(nome: string) {
+    let parametros = this.criarParamsFiltrarNomes(nome);
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: parametros
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar/nomes`, httpOptions).pipe();
+  }
+
+  criarParamsFiltrarNomes(nome: string): HttpParams {
+    var params = new HttpParams();
+    if (!AppUtil.isNull(nome)) {
+      params = params.append('nome', nome);
     }
+    return params;
   }
 }
