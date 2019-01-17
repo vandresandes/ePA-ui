@@ -1,3 +1,4 @@
+import { Documento } from './../model/documento';
 import { TermoGeral } from './../model/termoGeral';
 import { DocumentoService } from 'src/app/service/documento.service';
 import { AppUtil } from './../app-util';
@@ -57,8 +58,9 @@ export class IngressoDeProcessosComponent implements OnInit {
   lbSigiloOuSegredoDeJustica: string = "Sigilo ou segredo de justiça";
   lbSolicitadaUrgencia: string = "Solicitada urgência";
   lbObservacoes: string = "Observações";
-  lbBtnSalvar: string = "Salvar";
+  lbBtnSalvar: string = AppConstants.BTN_SALVAR;
   lbBtnEnviar: string = "Enviar";
+  lbSelecionarArquivo: string = AppConstants.SELECIONE_ARQUIVO;
 
   msgNenhumRegistroAdicionado: string = AppConstants.NENHUM_REGISTRO_ADICIONADO;
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
@@ -199,9 +201,9 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   onchangeDropMateria() {
-    this.listaTipoProcesso = null;
-    this.listaTermoGeral = null;
-    this.listaTermoEspecifico = null;
+    this.limparDropTipoProcesso();
+    this.limparDropTermoGeral();
+    this.limparDropTermoEspecifico();
     this.listaDocumento = null;
 
     if (!AppUtil.isNull(this.entity.materia)) {
@@ -215,8 +217,8 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   onchangeDropTipoProcesso() {
-    this.listaTermoGeral = null;
-    this.listaTermoEspecifico = null;
+    this.limparDropTermoGeral();
+    this.limparDropTermoEspecifico();
     this.listaDocumento = null;
 
     if (!AppUtil.isNull(this.entity.materia)) {
@@ -235,7 +237,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   onchangeDropAssunto() {
-    this.listaTermoEspecifico = null;
+    this.limparDropTermoEspecifico();
     this.listaDocumento = null;
 
     if (!AppUtil.isNull(this.entity.termoGeral)) {
@@ -274,5 +276,20 @@ export class IngressoDeProcessosComponent implements OnInit {
 
   enviar() {
 
+  }
+
+  limparDropTipoProcesso() {
+    this.listaTipoProcesso = null;
+    this.entity.tipoProcesso = null;
+  }
+
+  limparDropTermoGeral() {
+    this.listaTermoGeral = null;
+    this.entity.termoGeral = null;
+  }
+
+  limparDropTermoEspecifico() {
+    this.listaTermoEspecifico = null;
+    this.entity.termoEspecifico = null;
   }
 }
