@@ -1,30 +1,29 @@
+import { ChecklistService } from './../service/checklist.service';
+import { MotivoSigiloSegredoJusticaService } from './../service/motivo-sigilo-segredo-justica.service';
+import { SigiloSegredoJusticaService } from './../service/sigilo-segredo-justica.service';
+import { PrioridadeTramitacaoService } from './../service/prioridade-tramitacao.service';
 import { EnumPrioridadeTramitacao } from './../enums/enum-prioridade-tramitacao.enum';
 import { EnumSigiloSegredoJustica } from './../enums/enum-sigilo-segredo-justica.enum';
-import { Documento } from './../model/documento';
-import { TermoGeral } from './../model/termoGeral';
 import { DocumentoService } from 'src/app/service/documento.service';
 import { AppUtil } from './../app-util';
 import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
 import { MateriaService } from './../service/materia.service';
 import { OrigemService } from './../service/origem.service';
-import { AuthenticationService } from './../service/authentication.service';
 import { InteressadoDialogComponent } from './../dialog/interessado-dialog/interessado-dialog.component';
-import { Proponente } from './../model/proponente';
 import { Processo } from './../model/processo';
 import { Component, OnInit } from '@angular/core';
 import { AppConstants } from '../app-constants';
 import { DialogService } from 'primeng/components/dynamicdialog/dialogservice';
-import { ProponenteDialogComponent } from '../dialog/proponente-dialog/proponente-dialog.component';
 import { Message } from 'primeng/components/common/message';
 import { TermoGeralService } from '../service/termo-geral.service';
 import { TermoEspecificoService } from '../service/termo-especifico.service';
-import { NucleoService } from '../service/nucleo.service';
+import { Interessado } from '../model/interessado';
 
 @Component({
   selector: 'app-ingresso-de-processos',
   templateUrl: './ingresso-de-processos.component.html',
   styleUrls: ['./ingresso-de-processos.component.scss'],
-  entryComponents: [ProponenteDialogComponent, InteressadoDialogComponent],
+  entryComponents: [InteressadoDialogComponent],
   providers: [DialogService],
 })
 export class IngressoDeProcessosComponent implements OnInit {
@@ -36,17 +35,18 @@ export class IngressoDeProcessosComponent implements OnInit {
   listaTermoGeral: any;
   listaTermoEspecifico: any;
   listaDocumento: any;
+  listaChecklist: any;
+  listaChecklistSelecionado: any[];
 
   listaNucleo: any;
-  listaMotivo: any;
   listaMateria: any;
   listaPrioridadeTramitacao: any;
   listaSigiloSegredoJustica: any;
   listaSolicitadaUrgencia: any;
   listaOrigem: any;
-  listaSigiloSegredoJusticaResposta: any;
-  listaProponente: Proponente[] = [];
-  listaInteressado: Proponente[] = [];
+  listaMotivoSigiloSegredoJustica: any;
+  listaInteressado: Interessado[] = [];
+  solicitadaUrgenciaSelecionado: any;
 
   lbProponente: string = "Proponente";
   lbSelecione: string = AppConstants.SELECIONE;
@@ -74,67 +74,206 @@ export class IngressoDeProcessosComponent implements OnInit {
 
   constructor(
     public dialogService: DialogService,
-    private authenticationService: AuthenticationService,
     private origemService: OrigemService,
     private materiaService: MateriaService,
-    private nucleoService: NucleoService,
     private tipoProcessoService: TipoProcessoService,
     private termoGeralService: TermoGeralService,
     private termoEspecificoService: TermoEspecificoService,
-    private documentoService: DocumentoService
+    private documentoService: DocumentoService,
+    private motivoSigiloSegredoJusticaService: MotivoSigiloSegredoJusticaService,
+    private prioridadeTramitacaoService: PrioridadeTramitacaoService,
+    private sigiloSegredoJusticaService: SigiloSegredoJusticaService,
+    private checklistService: ChecklistService
     ) {
     this.buscarTodosOrigem();
     this.buscarTodosMateria();
+    this.buscarTodosPrioridadeTramitacao();
+    this.buscarTodosSigiloSegredoJustica();
+    this.buscarTodosMotivoSigiloSegredoJustica();
   }
 
   ngOnInit() {
-    this.listaMotivo = [
-      {nome: 'Novo processo'},
-      {nome: 'Processo para ser apensado a outro existente'},
-      {nome: 'Processo para ser anexado a outro existente'},
-      {nome: 'Processo para servir de consulta a outro existente'}
-    ];
-
-    this.listaPrioridadeTramitacao = [
-      {nome: 'Sem prioridade'},
-      {nome: 'Pessoa com idade superior a 60 anos'},
-      {nome: 'Pessoa com necessidades especiais ou doença grave'}
-    ];
-
-    this.listaSigiloSegredoJustica = [
-      {nome: 'Sem sigilo'},
-      {nome: 'Sigiloso'},
-      {nome: 'Segredo de Justiça'}
-    ];
-
-    this.listaSigiloSegredoJusticaResposta = [
-      {nome: 'Põe em risco a vida, a segurança ou a saúde da população'},
-      {nome: 'Oferece elevado risco à estabilidade financeira ou econômica do Estado'},
-      {nome: 'Pode prejudicar ou causar risco a planos ou operações estratégicas dos órgãos de Segurança do Estado'},
-      {nome: 'Pode prejudicar ou causar risco a projetos de pesquisa e desenvolvimento científico ou tecnológico, assim como a sistemas, bens, instalações ou áreas de interesse estratégico do Estado'},
-      {nome: 'Pode comprometer atividades de inteligência, bem como de investigação ou fiscalização em andamento, relacionadas com a prevenção ou repressão de infrações'}
-    ];
-
     this.entity.solicitadaUrgencia = false;
+    this.solicitadaUrgenciaSelecionado = "0";
   }
 
   showInteressado() {
-    const ref = this.dialogService.open(ProponenteDialogComponent, {
+    const ref = this.dialogService.open(InteressadoDialogComponent, {
       header: 'Interessado',
       width: '70%',
       contentStyle: {"max-height": "350px", "overflow": "auto"}
     });
 
-    ref.onClose.subscribe((proponente: Proponente) => {
-      if (proponente) {
-        this.listaInteressado.push(proponente);
+    ref.onClose.subscribe((interessado: Interessado) => {
+      if (interessado) {
+        this.listaInteressado.push(interessado);
         // adicionar na lista
       }
     });
   }
 
-  excluirInteressado(item: Proponente) {
+  excluirInteressado(item: Interessado) {
     this.listaInteressado.splice(this.listaInteressado.indexOf(item), 1);
+  }
+
+  buscarTodosPrioridadeTramitacao() {
+    this.prioridadeTramitacaoService.findAll().subscribe(
+			data => {
+        this.listaPrioridadeTramitacao = data
+			},
+			error => console.log(error)
+    );
+  }
+
+  buscarTodosSigiloSegredoJustica() {
+    this.sigiloSegredoJusticaService.findAll().subscribe(
+			data => {
+        this.listaSigiloSegredoJustica = data
+			},
+			error => console.log(error)
+    );
+  }
+
+  buscarTodosMotivoSigiloSegredoJustica() {
+    this.motivoSigiloSegredoJusticaService.findAll().subscribe(
+			data => {
+        this.listaMotivoSigiloSegredoJustica = data
+			},
+			error => console.log(error)
+    );
+  }
+
+  buscarTodosOrigem() {
+    this.origemService.findAll().subscribe(
+			data => {
+        this.listaOrigem = data
+			},
+			error => console.log(error)
+    );
+  }
+
+  buscarTodosMateria() {
+    this.materiaService.findAll().subscribe(
+			data => {
+        this.listaMateria = data
+			},
+			error => console.log(error)
+    );
+  }
+
+  onchangeDropMateria() {
+    this.limparDropTipoProcesso();
+    this.limparDropTermoGeral();
+    this.limparDropTermoEspecifico();
+    this.limparTableDocumento();
+
+    if (!AppUtil.isNull(this.entity.materia)) {
+      this.tipoProcessoService.filtrar(null, null, null, null, this.entity.materia.id).subscribe(
+        data => {
+          this.listaTipoProcesso = data
+        },
+        error => console.log(error)
+      );
+    }
+  }
+
+  onchangeDropTipoProcesso() {
+    this.limparDropTermoGeral();
+    this.limparDropTermoEspecifico();
+    this.limparTableDocumento();
+
+    if (!AppUtil.isNull(this.entity.materia)) {
+      this.termoGeralService.filtrar(
+        null,
+        this.entity.tipoProcesso.id,
+        null,
+        null,
+        this.entity.materia.id
+      ).subscribe(data => {
+        this.listaTermoGeral = data
+      },
+        error => console.log(error)
+      );
+    }
+  }
+
+  onchangeDropAssunto() {
+    this.limparDropTermoEspecifico();
+    this.limparTableDocumento();
+
+    if (!AppUtil.isNull(this.entity.termoGeral)) {
+      this.termoEspecificoService.filtrar(
+        null,
+        this.entity.tipoProcesso.id,
+        this.entity.termoGeral.id,
+        null,
+        this.entity.materia.id
+      ).subscribe(data => {
+        this.listaTermoEspecifico = data
+      },
+        error => console.log(error)
+      );
+    }
+  }
+
+  onchangeDropSubAssunto() {
+    this.limparTableDocumento();
+
+    if (!AppUtil.isNull(this.entity.termoEspecifico)) {
+      this.checklistService.filtrar(
+        null,
+        this.entity.tipoProcesso.id,
+        this.entity.termoGeral.id,
+        this.entity.termoEspecifico.id,
+        null,
+        this.entity.materia.id
+      ).subscribe(data => {
+        this.listaChecklist = data
+      },
+        error => console.log(error)
+      );
+    }
+  }
+
+  showPrioridadeTramitacao(): boolean {
+    if (!AppUtil.isNull(this.entity.prioridadeTramitacao) && EnumPrioridadeTramitacao.SEM_PRIORIDADE !== this.entity.prioridadeTramitacao.id) {
+      return true;
+    }
+    this.entity.documentoComprobatorio = null;
+    return false;
+  }
+
+  showMotivoSigiloOuSegredoJustica(): boolean {
+    if (!AppUtil.isNull(this.entity.sigiloSegredoJustica) && EnumSigiloSegredoJustica.SEM_SIGILO !== this.entity.sigiloSegredoJustica.id) {
+      return true;
+    }
+    this.entity.motivoSigiloSegredoJustica = null;
+    return false;
+  }
+
+  showJustificativaSolicitadaUrgencia(): boolean {
+    this.entity.justificativa = null;
+    return this.solicitadaUrgenciaSelecionado === '1';
+  }
+
+  limparDropTipoProcesso() {
+    this.listaTipoProcesso = null;
+    this.entity.tipoProcesso = null;
+  }
+
+  limparDropTermoGeral() {
+    this.listaTermoGeral = null;
+    this.entity.termoGeral = null;
+  }
+
+  limparDropTermoEspecifico() {
+    this.listaTermoEspecifico = null;
+    this.entity.termoEspecifico = null;
+  }
+
+  limparTableDocumento() {
+    this.listaDocumento = null;
+    this.listaChecklist = null;
   }
 
   salvar() {
@@ -147,10 +286,19 @@ export class IngressoDeProcessosComponent implements OnInit {
     let valid: boolean = true;
     this.msgs = [];
 
-    if (AppUtil.isNull(this.entity.motivo)) {
-      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbMotivo});
-      valid = false;
+    return valid;
+  }
+
+  enviar() {
+    if (this.isValidSalvar()) {
+      // service
     }
+  }
+
+  isValidEnviar(): boolean {
+    let valid: boolean = true;
+    this.msgs = [];
+
     if (AppUtil.isNull(this.entity.materia)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbMateria});
       valid = false;
@@ -176,136 +324,5 @@ export class IngressoDeProcessosComponent implements OnInit {
       valid = false;
     }
     return valid;
-  }
-
-  buscarTodosOrigem() {
-    this.origemService.findAll().subscribe(
-			data => {
-        this.listaOrigem = data
-			},
-			error => console.log(error)
-    );
-  }
-
-  buscarTodosMateria() {
-    this.materiaService.findAll().subscribe(
-			data => {
-        this.listaMateria = data
-			},
-			error => console.log(error)
-    );
-  }
-
-  onchangeDropMateria() {
-    this.limparDropTipoProcesso();
-    this.limparDropTermoGeral();
-    this.limparDropTermoEspecifico();
-    this.listaDocumento = null;
-
-    if (!AppUtil.isNull(this.entity.materia)) {
-      this.tipoProcessoService.filtrar(null, null, null, null, this.entity.materia.id).subscribe(
-        data => {
-          this.listaTipoProcesso = data
-        },
-        error => console.log(error)
-      );
-    }
-  }
-
-  onchangeDropTipoProcesso() {
-    this.limparDropTermoGeral();
-    this.limparDropTermoEspecifico();
-    this.listaDocumento = null;
-
-    if (!AppUtil.isNull(this.entity.materia)) {
-      this.termoGeralService.filtrar(
-        null,
-        this.entity.tipoProcesso.id,
-        null,
-        null,
-        this.entity.materia.id
-      ).subscribe(data => {
-        this.listaTermoGeral = data
-      },
-        error => console.log(error)
-      );
-    }
-  }
-
-  onchangeDropAssunto() {
-    this.limparDropTermoEspecifico();
-    this.listaDocumento = null;
-
-    if (!AppUtil.isNull(this.entity.termoGeral)) {
-      this.termoEspecificoService.filtrar(
-        null,
-        this.entity.tipoProcesso.id,
-        this.entity.termoGeral.id,
-        null,
-        this.entity.materia.id
-      ).subscribe(data => {
-        this.listaTermoEspecifico = data,
-        console.log(data)
-      },
-        error => console.log(error)
-      );
-    }
-  }
-
-  onchangeDropSubAssunto() {
-    this.listaDocumento = null;
-
-    if (!AppUtil.isNull(this.entity.termoEspecifico)) {
-      this.documentoService.filtrar(
-        null,
-        this.entity.tipoProcesso.id,
-        this.entity.termoGeral.id,
-        this.entity.termoEspecifico.id,
-        this.entity.materia.id
-      ).subscribe(data => {
-        this.listaDocumento = data
-      },
-        error => console.log(error)
-      );
-    }
-  }
-
-  showPrioridadeTramitacao(): boolean {
-    if (EnumPrioridadeTramitacao.SEM_PRIORIDADE) {
-      this.entity.documentoComprobatorio = null;
-      return false;
-    }
-    return true;
-  }
-
-  showMotivoSigiloOuSegredoJustica(): boolean {
-    if (EnumSigiloSegredoJustica.SEM_SIGILO) {
-      this.entity.motivoSigiloSegredoJustica = null;
-      return false;
-    }
-    return true;
-  }
-
-  onchangeRadioSolicitadaUrgencia() {
-    this.entity.justificativa = null;
-  }
-
-  enviar() {
-
-  }
-
-  limparDropTipoProcesso() {
-    this.listaTipoProcesso = null;
-    this.entity.tipoProcesso = null;
-  }
-
-  limparDropTermoGeral() {
-    this.listaTermoGeral = null;
-    this.entity.termoGeral = null;
-  }
-
-  limparDropTermoEspecifico() {
-    this.listaTermoEspecifico = null;
-    this.entity.termoEspecifico = null;
   }
 }

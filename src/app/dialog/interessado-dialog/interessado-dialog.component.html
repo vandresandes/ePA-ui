@@ -1,1 +1,42 @@
-interessado-dialog works!
+<form autocomplete="off" #proponenteForm="ngForm" (ngSubmit)="salvar()" class="form-horizontal">
+  <div class="box box-default">
+    <div class="box-body">
+      <p-messages [(value)]="msgs"></p-messages>
+      <div>
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3">
+            <label for="nomeNucleo">{{lbOrgao}} <span class="obrigatorio">*</span></label>
+            <div>
+              <p-dropdown [options]="listaOrgao" [(ngModel)]="entity.orgao" optionLabel="nome" name="orgao"
+                [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}}></p-dropdown>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <label for="nomeNucleo">{{lbNome}} <span class="obrigatorio">*</span></label>
+            <div>
+              <input id="nomeNucleo" nucleoForm="entity.nome" type="text" pInputText class="form-control" name="nomeNucleo" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <label for="nomeNucleo">{{lbEmail}} <span class="obrigatorio">*</span></label>
+            <div>
+              <input id="nomeNucleo" nucleoForm="entity.email" type="email" pInputText class="form-control" name="nomeNucleo" [(ngModel)]="entity.email" maxlength="100" [disabled]="readonly" required />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-2">
+            <label for="nomeNucleo">{{lbTelefone}} <span class="obrigatorio">*</span></label>
+            <div>
+              <input id="nomeNucleo" nucleoForm="entity.telefone" type="text" pInputText class="form-control" name="nomeNucleo" [(ngModel)]="entity.telefone" maxlength="100" [disabled]="readonly" required />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-footer clearfix">
+      <div class="pull-right">
+        <p-button *ngIf="!readonly" icon="fa fa-floppy-o" iconPos="left" label={{labelBtnSalvar}} pTooltip={{labelBtnSalvar}} tooltipPosition="top" class="btn-5"></p-button>
+        <p-button icon="fa fa-undo" iconPos="left" label={{labelBtnCancelar}} pTooltip={{labelBtnCancelar}} tooltipPosition="top" (click)="cancelar()" type="button"></p-button>
+      </div>
+    </div>
+  </div>
+</form>

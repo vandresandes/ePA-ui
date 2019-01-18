@@ -1,3 +1,4 @@
+import { AppUtil } from './../app-util';
 import { ChecklistPesquisaDto } from './../dto/checklist-pesquisa-dto';
 import { Checklist } from './../model/checklist';
 import { Injectable } from '@angular/core';
@@ -29,53 +30,78 @@ export class ChecklistService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/${id}`).pipe(res=> res);
   }
 
-  pesquisar(nome: string) {
-    if (nome === null) {
-      return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/`).pipe(res=> res);
-    } else {
-      return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar/${nome}`).pipe(res=> res);
-    }
-  }
-
-  buscar(filtro: ChecklistPesquisaDto) {
-    let body = new HttpParams({
-      fromObject : {
-        'nucleo': filtro.nucleo,
-        'tipoProcesso': filtro.tipoProcesso,
-        'termoGeral': filtro.termoGeral,
-        'termoEspecifico': filtro.termoEspecifico,
-        'documento': filtro.documento,
-        'status': String(filtro.status)
-      }
-    });
-
-    const httpOptions = {
-      headers: new HttpHeaders({}),
-      params: body
-    };
-
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscar`, httpOptions).pipe();
-  }
-
   buscarPaginado(filtro: ChecklistPesquisaDto, paginacao: PaginacaoDto) {
-    let body = new HttpParams({
-      fromObject : {
-        'nucleo': filtro.nucleo,
-        'tipoProcesso': filtro.tipoProcesso,
-        'termoGeral': filtro.termoGeral,
-        'termoEspecifico': filtro.termoEspecifico,
-        'documento': filtro.documento,
-        'status': String(filtro.status),
-        'page': String( paginacao.page ),
-        'size': String( paginacao.rows )
-      }
-    });
+    let parametros = this.criarParamsBuscarPaginado(filtro, paginacao);
 
     const httpOptions = {
       headers: new HttpHeaders({}),
-      params: body
+      params: parametros
     };
 
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
   }
+
+  criarParamsBuscarPaginado(filtro: ChecklistPesquisaDto, paginacao: PaginacaoDto): HttpParams {
+    var params = new HttpParams();
+    if (!AppUtil.isNull(filtro.nucleo)) {
+      params = params.append('nucleo', String(filtro.nucleo));
+    }
+    if (!AppUtil.isNull(filtro.tipoProcesso)) {
+      params = params.append('tipoProcesso', String(filtro.tipoProcesso));
+    }
+    if (!AppUtil.isNull(filtro.termoGeral)) {
+      params = params.append('termoGeral', String(filtro.termoGeral));
+    }
+    if (!AppUtil.isNull(filtro.termoEspecifico)) {
+      params = params.append('termoEspecifico', String(filtro.termoEspecifico));
+    }
+    if (!AppUtil.isNull(filtro.documento)) {
+      params = params.append('documento', String(filtro.documento));
+    }
+    if (!AppUtil.isNull(filtro.status)) {
+      params = params.append('status', String(filtro.status));
+    }
+    if (!AppUtil.isNull(paginacao.page)) {
+      params = params.append('page', String(paginacao.page));
+    }
+    if (!AppUtil.isNull(paginacao.rows)) {
+      params = params.append('size', String(paginacao.rows));
+    }
+    return params;
+  }
+
+  filtrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number) {
+    let parametros = this.criarParamsFitrar(idNucleo, idTipoProcesso, idTermoGeral, idTermoEspecifico, idDocumento, idMateria);
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: parametros
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar`, httpOptions).pipe();
+  }
+
+  criarParamsFitrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number): HttpParams {
+    var params = new HttpParams();
+    if (!AppUtil.isNull(idNucleo)) {
+      params = params.append('idNucleo', String(idNucleo));
+    }
+    if (!AppUtil.isNull(idTipoProcesso)) {
+      params = params.append('idTipoProcesso', String(idTipoProcesso));
+    }
+    if (!AppUtil.isNull(idTermoGeral)) {
+      params = params.append('idTermoGeral', String(idTermoGeral));
+    }
+    if (!AppUtil.isNull(idTermoEspecifico)) {
+      params = params.append('idTermoEspecifico', String(idTermoEspecifico));
+    }
+    if (!AppUtil.isNull(idDocumento)) {
+      params = params.append('idDocumento', String(idDocumento));
+    }
+    if (!AppUtil.isNull(idMateria)) {
+      params = params.append('idMateria', String(idMateria));
+    }
+    return params;
+  }
+
 }

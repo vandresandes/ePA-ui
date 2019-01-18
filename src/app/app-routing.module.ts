@@ -24,7 +24,9 @@ const routes: Routes = [
   { path: 'impressao-resultado', component: ImpressaoResultadoComponent,
     data: { title: 'Impressão do Resultado' }
   },
-  { path: '', component: IngressoDeProcessosComponent },
+  { path: '', component: IngressoDeProcessosComponent,
+    data: { title: 'Ingresso de Processo' }
+  },
   { path: '**', component: PageNotFoundComponent }
 ];
 

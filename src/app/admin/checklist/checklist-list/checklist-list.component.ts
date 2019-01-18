@@ -136,7 +136,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarTermoEspecificoPorNome(event: any) {
     let query = event.query;
-    this.termoEspecificoService.pesquisarNomes(query).subscribe(
+    this.termoEspecificoService.filtrarNomes(query).subscribe(
 			data => {
         this.listaTermoEspecifico = data
 			},
@@ -146,7 +146,7 @@ export class ChecklistListComponent implements OnInit {
 
   buscarDocumentoPorNome(event: any) {
     let query = event.query;
-    this.documentoService.pesquisarNomes(query).subscribe(
+    this.documentoService.filtrarNomes(query).subscribe(
 			data => {
         this.listaDocumento = data
 			},

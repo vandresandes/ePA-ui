@@ -39,6 +39,7 @@ import { PaginatorModule } from 'primeng/paginator';
     RadioButtonModule,
     PaginatorModule,
     FormsModule
-  ]
+  ],
+  exports: [StatusPipe]
 })
 export class ChecklistModule { }

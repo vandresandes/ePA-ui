@@ -8,9 +8,7 @@ import { LayoutModule } from 'angular-admin-lte';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ReactiveFormsModule }    from '@angular/forms';
-import { RadioButtonModule } from 'primeng/components/radiobutton/radiobutton';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -21,21 +19,25 @@ import { IngressoDeProcessosComponent } from './ingresso-de-processos/ingresso-d
 import { ImpressaoResultadoComponent } from './impressao-resultado/impressao-resultado.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { VerificacaoComponent } from './verificacao/verificacao.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { InteressadoDialogComponent } from './dialog/interessado-dialog/interessado-dialog.component';
 
 // PRIMENG
 import { ButtonModule } from 'primeng/button';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { FieldsetModule } from 'primeng/fieldset';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
+import { ListboxModule } from 'primeng/listbox';
+import { MenuModule } from 'primeng/menu';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
-import { TooltipModule } from 'primeng/tooltip';
-import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
-import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
-import { MenuModule } from 'primeng/menu';
-import { FileUploadModule } from 'primeng/fileupload';
-
+import { RadioButtonModule } from 'primeng/components/radiobutton/radiobutton';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
 
 // MÓDULOS
 import { ChecklistModule } from './admin/checklist/checklist.module';
@@ -44,9 +46,6 @@ import { NucleoModule } from './admin/nucleo/nucleo.module';
 import { TermoEspecificoModule } from './admin/termo-especifico/termo-especifico.module';
 import { TermoGeralModule } from './admin/termo-geral/termo-geral.module';
 import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
-import { ProponenteDialogComponent } from './dialog/proponente-dialog/proponente-dialog.component';
-import { InteressadoDialogComponent } from './dialog/interessado-dialog/interessado-dialog.component';
-import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +57,6 @@ import { NavbarComponent } from './navbar/navbar.component';
     ImpressaoResultadoComponent,
     IngressoDeProcessosComponent,
     VerificacaoComponent,
-    ProponenteDialogComponent,
     InteressadoDialogComponent,
     NavbarComponent
   ],
@@ -87,6 +85,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     DynamicDialogModule,
     MenuModule,
     FileUploadModule,
+    ListboxModule,
     CommonModule,
     FormsModule,
     InputTextareaModule,

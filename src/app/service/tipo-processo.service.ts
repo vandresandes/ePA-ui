@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { PaginacaoDto } from '../dto/paginacao-dto';
-import { log } from 'util';
 
 @Injectable({
   providedIn: 'root'
