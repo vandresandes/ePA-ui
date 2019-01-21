@@ -18,6 +18,7 @@ import { Message } from 'primeng/components/common/message';
 import { TermoGeralService } from '../service/termo-geral.service';
 import { TermoEspecificoService } from '../service/termo-especifico.service';
 import { Interessado } from '../model/interessado';
+import { PrioridadeTramitacao } from '../model/prioridade-tramitacao';
 
 @Component({
   selector: 'app-ingresso-de-processos',
@@ -36,7 +37,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   listaTermoEspecifico: any;
   listaDocumento: any;
   listaChecklist: any;
-  listaChecklistSelecionado: any[];
+  uploadedFiles: any[] = [];
 
   listaNucleo: any;
   listaMateria: any;
@@ -90,6 +91,8 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.buscarTodosPrioridadeTramitacao();
     this.buscarTodosSigiloSegredoJustica();
     this.buscarTodosMotivoSigiloSegredoJustica();
+    this.buscarSemPrioridadeTramitacao();
+    this.buscarSemSigilo();
   }
 
   ngOnInit() {
@@ -156,6 +159,28 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.materiaService.findAll().subscribe(
 			data => {
         this.listaMateria = data
+			},
+			error => console.log(error)
+    );
+  }
+
+  buscarSemPrioridadeTramitacao() {
+    let entity: any;
+    this.prioridadeTramitacaoService.findById(EnumPrioridadeTramitacao.SEM_PRIORIDADE).subscribe(
+			data => {
+        entity = data,
+        this.entity.prioridadeTramitacao = entity
+			},
+			error => console.log(error)
+    );
+  }
+
+  buscarSemSigilo() {
+    let entity: any;
+    this.sigiloSegredoJusticaService.findById(EnumSigiloSegredoJustica.SEM_SIGILO).subscribe(
+			data => {
+        entity = data,
+        this.entity.sigiloSegredoJustica = entity
 			},
 			error => console.log(error)
     );

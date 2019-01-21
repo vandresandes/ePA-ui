@@ -16,6 +16,10 @@ export class MateriaService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}`).pipe();
   }
 
+  findById(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/${id}`).pipe(res=> res);
+  }
+
   filtrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number) {
     let parametros = this.criarParamsFitrar(idNucleo, idTipoProcesso, idTermoGeral, idTermoEspecifico, idDocumento);
 

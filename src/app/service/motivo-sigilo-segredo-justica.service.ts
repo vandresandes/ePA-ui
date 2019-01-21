@@ -13,4 +13,8 @@ export class MotivoSigiloSegredoJusticaService {
   findAll() {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}`).pipe();
   }
+
+  findById(id: number) {
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/${id}`).pipe(res=> res);
+  }
 }
