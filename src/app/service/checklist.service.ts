@@ -44,19 +44,19 @@ export class ChecklistService {
   criarParamsBuscarPaginado(filtro: ChecklistPesquisaDto, paginacao: PaginacaoDto): HttpParams {
     var params = new HttpParams();
     if (!AppUtil.isNull(filtro.nucleo)) {
-      params = params.append('nucleo', String(filtro.nucleo));
+      params = params.append('nomeNucleo', String(filtro.nucleo));
     }
     if (!AppUtil.isNull(filtro.tipoProcesso)) {
-      params = params.append('tipoProcesso', String(filtro.tipoProcesso));
+      params = params.append('nomeTipoProcesso', String(filtro.tipoProcesso));
     }
     if (!AppUtil.isNull(filtro.termoGeral)) {
-      params = params.append('termoGeral', String(filtro.termoGeral));
+      params = params.append('nomeTermoGeral', String(filtro.termoGeral));
     }
     if (!AppUtil.isNull(filtro.termoEspecifico)) {
-      params = params.append('termoEspecifico', String(filtro.termoEspecifico));
+      params = params.append('nomeTermoEspecifico', String(filtro.termoEspecifico));
     }
     if (!AppUtil.isNull(filtro.documento)) {
-      params = params.append('documento', String(filtro.documento));
+      params = params.append('nomeDocumento', String(filtro.documento));
     }
     if (!AppUtil.isNull(filtro.status)) {
       params = params.append('status', String(filtro.status));

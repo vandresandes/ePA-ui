@@ -32,20 +32,28 @@ export class NucleoService {
   }
 
   buscarPaginado(filtro: NucleoDto, paginacao: PaginacaoDto) {
-    let body = new HttpParams({
-      fromObject : {
-        'nome': filtro.nome,
-        'page': String( paginacao.page ),
-        'size': String( paginacao.rows )
-      }
-    });
+    let parametros = this.criarParamsBuscarPaginado(filtro, paginacao);
 
     const httpOptions = {
       headers: new HttpHeaders({}),
-      params: body
+      params: parametros
     };
 
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
+  }
+
+  criarParamsBuscarPaginado(filtro: NucleoDto, paginacao: PaginacaoDto): HttpParams {
+    var params = new HttpParams();
+    if (!AppUtil.isNull(filtro.nome)) {
+      params = params.append('nome', filtro.nome);
+    }
+    if (!AppUtil.isNull(paginacao.page)) {
+      params = params.append('page', String(paginacao.page));
+    }
+    if (!AppUtil.isNull(paginacao.rows)) {
+      params = params.append('size', String(paginacao.rows));
+    }
+    return params;
   }
 
   filtrar(idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number) {
