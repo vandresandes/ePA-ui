@@ -186,14 +186,30 @@ export class IngressoDeProcessosComponent implements OnInit {
     );
   }
 
+  onchangeDropOrigem() {
+    this.limparDropTipoProcesso();
+    this.limparDropTermoGeral();
+    this.limparDropTermoEspecifico();
+    this.limparTableDocumento();
+    this.onchangeDropMateria();
+  }
+
   onchangeDropMateria() {
     this.limparDropTipoProcesso();
     this.limparDropTermoGeral();
     this.limparDropTermoEspecifico();
     this.limparTableDocumento();
 
-    if (!AppUtil.isNull(this.entity.materia)) {
-      this.tipoProcessoService.filtrar(null, null, null, null, this.entity.materia.id).subscribe(
+    if (!AppUtil.isNull(this.entity.origem) && !AppUtil.isNull(this.entity.materia)) {
+      this.tipoProcessoService.filtrar(
+        null,
+        null,
+        null,
+        null,
+        this.entity.materia.id,
+        this.entity.origem.id
+        ).subscribe(
+
         data => {
           this.listaTipoProcesso = data
         },

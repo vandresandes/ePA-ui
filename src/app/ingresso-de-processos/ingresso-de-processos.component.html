@@ -58,7 +58,7 @@
         <div class="col-sm-12 col-md-4">
           <label>Origem: <span class="obrigatorio">*</span></label>
           <div>
-            <p-dropdown [options]="listaOrigem" [(ngModel)]="entity.origem" name="origem" optionLabel="nome"
+            <p-dropdown [options]="listaOrigem" [(ngModel)]="entity.origem" name="origem" optionLabel="nome" (onChange)="onchangeDropOrigem()"
               [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}}></p-dropdown>
           </div>
         </div>
@@ -66,7 +66,7 @@
           <label>{{lbMateria}}: <span class="obrigatorio">*</span></label>
           <div>
             <p-dropdown [options]="listaMateria" [(ngModel)]="entity.materia" name="materia" optionLabel="nome" (onChange)="onchangeDropMateria()"
-              [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}}></p-dropdown>
+              [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="entity.origem == undefined || entity.origem == null" placeholder={{lbSelecione}}></p-dropdown>
           </div>
         </div>
       </div>
@@ -205,7 +205,7 @@
                 <td>{{item.status | status}}</td>
                 <td>
                   <p-fileUpload *ngIf="item.documento.tipo == 'EM_ANALISE' || item.documento.tipo == 'DOCUMENTO'" name="uploadedFiles[]" multiple="multiple" name="uploadedFiles"
-                  chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false"></p-fileUpload>
+                  chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
                   <input *ngIf="item.documento.tipo != 'EM_ANALISE'" type="text" nucleoForm="item.descricaoDocumento" pInputText class="form-control" name="descricaoDocumento" [(ngModel)]="item.descricaoDocumento" maxlength="100" />
                 </td>
               </tr>
