@@ -41,6 +41,9 @@ import { PaginatorModule } from 'primeng/paginator';
     RadioButtonModule,
     PaginatorModule,
     FormsModule
+  ],
+  exports: [
+    TipoDocumentoPipe
   ]
 })
 export class DocumentoModule { }
