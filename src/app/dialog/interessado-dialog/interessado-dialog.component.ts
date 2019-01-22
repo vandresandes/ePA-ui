@@ -1,3 +1,4 @@
+import { OrigemService } from './../../service/origem.service';
 import { Component, OnInit } from '@angular/core';
 import { Interessado } from 'src/app/model/interessado';
 import { Message } from 'primeng/components/common/message';
@@ -24,8 +25,14 @@ export class InteressadoDialogComponent implements OnInit {
   lbEmail: string = "E-mail";
   lbTelefone: string = "Telefone";
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
+  msgNenhumResultadoEncontrado: string = AppConstants.NENHUM_RESULTADO_ENCONTRADO;
 
-  constructor(public ref: DynamicDialogRef) { }
+  constructor(
+    public ref: DynamicDialogRef,
+    private origemService: OrigemService
+    ) {
+      this.buscarTodosOrigem();
+  }
 
   ngOnInit() {
   }
@@ -63,6 +70,15 @@ export class InteressadoDialogComponent implements OnInit {
 
   cancelar() {
     this.ref.close();
+  }
+
+  buscarTodosOrigem() {
+    this.origemService.findAll().subscribe(
+			data => {
+        this.listaOrgao = data
+			},
+			error => console.log(error)
+    );
   }
 
 }

@@ -18,7 +18,6 @@ import { Message } from 'primeng/components/common/message';
 import { TermoGeralService } from '../service/termo-geral.service';
 import { TermoEspecificoService } from '../service/termo-especifico.service';
 import { Interessado } from '../model/interessado';
-import { PrioridadeTramitacao } from '../model/prioridade-tramitacao';
 
 @Component({
   selector: 'app-ingresso-de-processos',
@@ -46,6 +45,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   listaSolicitadaUrgencia: any;
   listaOrigem: any;
   listaMotivoSigiloSegredoJustica: any;
+  listaOrgao: any;
   listaInteressado: Interessado[] = [];
   solicitadaUrgenciaSelecionado: any;
 
@@ -69,6 +69,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   lbNome: string = "Nome";
   lbEmail: string = "E-mail";
   lbTelefone: string = "Telefone";
+  msgNenhumResultadoEncontrado: string = AppConstants.NENHUM_RESULTADO_ENCONTRADO;
 
   msgNenhumRegistroAdicionado: string = AppConstants.NENHUM_REGISTRO_ADICIONADO;
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
@@ -104,7 +105,7 @@ export class IngressoDeProcessosComponent implements OnInit {
     const ref = this.dialogService.open(InteressadoDialogComponent, {
       header: 'Interessado',
       width: '70%',
-      contentStyle: {"max-height": "350px", "overflow": "auto"}
+      contentStyle: {"max-height": "350px", "height": "500px", "overflow": "auto"}
     });
 
     ref.onClose.subscribe((interessado: Interessado) => {
@@ -149,7 +150,8 @@ export class IngressoDeProcessosComponent implements OnInit {
   buscarTodosOrigem() {
     this.origemService.findAll().subscribe(
 			data => {
-        this.listaOrigem = data
+        this.listaOrigem = data,
+        this.listaOrgao = data
 			},
 			error => console.log(error)
     );

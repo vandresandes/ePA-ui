@@ -21,4 +21,5 @@ export class Processo {
   prioridadeTramitacao: PrioridadeTramitacao;
   sigiloSegredoJustica: SigiloSegredoJustica;
   motivoSigiloSegredoJustica: MotivoSigiloSegredoJustica;
+  orgao: any;
 }

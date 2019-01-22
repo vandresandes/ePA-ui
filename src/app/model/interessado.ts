@@ -1,5 +1,5 @@
 export class Interessado {
-  orgao: string;
+  orgao: any;
   nome: string;
   email: string;
   telefone: string;

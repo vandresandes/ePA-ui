@@ -37,6 +37,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { PanelModule } from 'primeng/panel';
 import { RadioButtonModule } from 'primeng/components/radiobutton/radiobutton';
 import { TableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 
 // MÓDULOS
@@ -78,6 +79,7 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     MessageModule,
     MessagesModule,
     TooltipModule,
+    TabViewModule,
     TableModule,
     PaginatorModule,
     FieldsetModule,

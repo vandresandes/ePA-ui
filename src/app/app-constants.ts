@@ -13,4 +13,5 @@ export class AppConstants {
   public static NENHUM_REGISTRO_ENCONTRADO = "Nenhum registro foi encontrado";
   public static NENHUM_REGISTRO_ADICIONADO = "Nenhum registro adicionado";
   public static NAO_ENCONTRADO: string = "Não encontrado!";
+  public static NENHUM_RESULTADO_ENCONTRADO: string = "Nenhum resultado encontrado";
 }
