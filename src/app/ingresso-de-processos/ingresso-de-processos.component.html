@@ -161,7 +161,7 @@
               </div>
             </div>
             <div class="panel-body">
-              <p-table [value]="listaInteressado" [responsive]="true">
+              <p-table [value]="listaInteressado" [responsive]="true" [autoLayout]="true">
                 <ng-template pTemplate="header">
                   <tr>
                     <th class="col-sm-3">Órgão</th>
@@ -194,12 +194,12 @@
         </p-tabPanel>
         <p-tabPanel header="Checklist">
           <div>
-            <p-table [value]="listaChecklist" [responsive]="true">
+            <p-table [value]="listaChecklist" [responsive]="true" [autoLayout]="true">
               <ng-template pTemplate="header">
                 <tr>
-                  <th class="col-sm-4">Documento</th>
-                  <th class="col-sm-2">Tipo</th>
-                  <th class="col-sm-6">Selecione o documento</th>
+                  <th class="col-sm-5">Documento</th>
+                  <th style="width: 100px">Tipo</th>
+                  <th class="col-sm-5">Selecione o documento</th>
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-item>

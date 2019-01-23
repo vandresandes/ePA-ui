@@ -32,11 +32,11 @@
       </h3>
     </div>
     <div class="box-body">
-      <p-table [value]="listaPesquisa" [responsive]="true">
+      <p-table [value]="listaPesquisa" [responsive]="true" [autoLayout]="true">
         <ng-template pTemplate="header">
           <tr>
-            <th class="p-col-10">Núcleo</th>
-            <th class="p-col-2" style="width: 150px;">Ações</th>
+            <th>Núcleo</th>
+            <th style="width: 150px;">Ações</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-nucleo>

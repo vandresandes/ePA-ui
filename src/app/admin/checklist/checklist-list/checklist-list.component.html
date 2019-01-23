@@ -66,16 +66,16 @@
         </h3>
       </div>
       <div class="box-body">
-        <p-table [value]="listaPesquisa">
+        <p-table [value]="listaPesquisa" [responsive]="true" [autoLayout]="true">
           <ng-template pTemplate="header">
             <tr>
-              <th class="p-col">Núcleo</th>
-              <th class="p-col">Tipo de Processo</th>
-              <th class="p-col">Termo Geral</th>
-              <th class="p-col">Termo Específico</th>
-              <th class="p-col">Documento</th>
-              <th class="p-col">Status</th>
-              <th class="p-col">Ações</th>
+              <th>Núcleo</th>
+              <th>Tipo de Processo</th>
+              <th>Termo Geral</th>
+              <th>Termo Específico</th>
+              <th>Documento</th>
+              <th>Status</th>
+              <th style="width: 150px">Ações</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>

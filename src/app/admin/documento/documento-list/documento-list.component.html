@@ -32,12 +32,12 @@
         </h3>
       </div>
       <div class="box-body">
-        <p-table [value]="listaPesquisa" [responsive]="true">
+        <p-table [value]="listaPesquisa" [responsive]="true" [autoLayout]="true">
           <ng-template pTemplate="header">
             <tr>
-              <th class="col-sm-8">Documento</th>
-              <th class="col-sm-2">Tipo</th>
-              <th class="col-sm-2" style="width: 150px;">Ações</th>
+              <th>Documento</th>
+              <th style="width: 100px">Tipo</th>
+              <th style="width: 150px;">Ações</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-item>
