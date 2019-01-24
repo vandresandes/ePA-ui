@@ -7,6 +7,7 @@ import { NucleoListComponent } from './nucleo-list/nucleo-list.component';
 import { NucleoCadastroComponent } from './nucleo-cadastro/nucleo-cadastro.component';
 
 // PRIMENG
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
@@ -25,6 +26,7 @@ import { PaginatorModule } from 'primeng/paginator';
   ],
   imports: [
     CommonModule,
+    AutoCompleteModule,
     NucleoRoutingModule,
     ButtonModule,
     InputTextModule,

@@ -8,9 +8,11 @@ const routes: Routes = [
   { path: 'nucleo/pesquisa', component: NucleoListComponent,
     data: { title: 'Pesquisar Núcleo' }
   },
+  /*
   { path: 'nucleo/cadastro', component: NucleoCadastroComponent,
     data: { title: 'Cadastrar Núcleo', acao: EnumCrud.CREATE }
   },
+  */
   { path: 'nucleo/visualizar/:id', component: NucleoCadastroComponent,
     data: { title: 'Visualizar Núcleo', acao: EnumCrud.READ }
   },

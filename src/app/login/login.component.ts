@@ -1,5 +1,6 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AppUtil } from './../app-util';
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 
@@ -15,15 +16,15 @@ export class LoginComponent implements OnInit {
   emailNulo = false;
   senhaNulo = false;
   returnUrl: string;
-  home: string = "/ingresso-processos";
-  email: string;
-  senha: string;
+  home: string = "/ingressoprocesso";
+  errorsUsername: boolean;
+  errorsPassword: boolean;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService
+      private formBuilder: FormBuilder,
+      private route: ActivatedRoute,
+      private router: Router,
+      private authenticationService: AuthenticationService
   ) {
       // redirecionar para home se já estiver logado
       if (this.authenticationService.currentUserValue) {
@@ -31,40 +32,35 @@ export class LoginComponent implements OnInit {
       }
   }
 
-    ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
+  ngOnInit() {
+      this.loginForm = this.formBuilder.group({
+          username: ['', Validators.required],
+          password: ['', Validators.required]
+      });
 
-        // obter url de retorno dos parâmetros de rota ou padrão para home
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || this.home;
+      // obter url de retorno dos parâmetros de rota ou padrão para home
+      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || this.home;
+  }
+
+  // conveniência getter para facilitar o acesso aos campos de formulário
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {
+    this.errorsUsername = this.f.username.errors && this.f.username.errors.required;
+    this.errorsPassword = this.f.password.errors && this.f.password.errors.required;
+
+    // pare aqui se o formulário for inválido
+    if (this.loginForm.invalid) {
+      return;
     }
 
-    // conveniência getter para facilitar o acesso aos campos de formulário
-    get f() { return this.loginForm.controls; }
+    this.loading = true;
 
-    onSubmit() {
-      this.emailNulo = false;
-      this.senhaNulo = false;
-
-      if (this.email === '' || this.email === null || this.email === undefined) {
-        this.emailNulo = true;
-      }
-      if (this.senha === '' || this.senha === null || this.senha === undefined) {
-        this.senhaNulo = true;
-      }
-      if (this.emailNulo || this.senhaNulo) {
-        return;
-      }
-
-        this.loading = true;
-
-        this.authenticationService.login().subscribe(
-          data => {
-            this.router.navigate([this.home])
-          },
-          error => alert(error), () => console.log("loginTemp ok.")
-         );
-    }
+    this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe(
+      data => {
+        this.router.navigate([this.home])
+      },
+      error => alert(error), () => console.log("login ok.")
+      );
+  }
 }

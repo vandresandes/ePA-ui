@@ -11,13 +11,14 @@ import { MateriaService } from './../service/materia.service';
 import { OrigemService } from './../service/origem.service';
 import { InteressadoDialogComponent } from './../dialog/interessado-dialog/interessado-dialog.component';
 import { Processo } from './../model/processo';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AppConstants } from '../app-constants';
 import { DialogService } from 'primeng/components/dynamicdialog/dialogservice';
 import { Message } from 'primeng/components/common/message';
 import { TermoGeralService } from '../service/termo-geral.service';
 import { TermoEspecificoService } from '../service/termo-especifico.service';
 import { Interessado } from '../model/interessado';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-ingresso-de-processos',

@@ -50,4 +50,24 @@ export class MateriaService {
     }
     return params;
   }
+
+  filtrarNomes(nome: string) {
+    let parametros = this.criarParamsFiltrarNomes(nome);
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: parametros
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar/nomes`, httpOptions).pipe();
+  }
+
+  criarParamsFiltrarNomes(nome: string): HttpParams {
+    var params = new HttpParams();
+    if (!AppUtil.isNull(nome)) {
+      params = params.append('nome', nome);
+    }
+    return params;
+  }
+
 }

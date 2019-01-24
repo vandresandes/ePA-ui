@@ -4,5 +4,5 @@ export class ChecklistPesquisaDto {
   termoGeral: string;
   termoEspecifico: string;
   documento: string;
-  status: boolean;
+  obrigatorio: boolean;
 }

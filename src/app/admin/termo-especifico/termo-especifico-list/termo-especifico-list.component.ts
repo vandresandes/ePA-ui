@@ -72,6 +72,7 @@ export class TermoEspecificoListComponent implements OnInit {
   }
 
   confirmarExclusao(id: number) {
+    console.log("excluindo");
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir?',
       header: 'Exclusão',

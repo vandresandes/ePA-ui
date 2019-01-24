@@ -1,28 +1,32 @@
 <div class="hold-transition login-page">
   <div class="login-box">
     <div class="login-logo">
-      <a routerLink="/"><b>ePA</b></a>
+      <strong>ePA</strong>
     </div>
     <div class="login-box-body">
       <p class="login-box-msg">Login</p>
-      <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group has-feedback">
-          <input type="email" nucleoForm="email" type="text" pInputText class="form-control" name="email" [(ngModel)]="email" maxlength="100" required placeholder="E-mail" />
+          <label for="username">Usuário</label>
+          <input id="username" type="text" formControlName="username" class="form-control" required />
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-          <div *ngIf="emailNulo" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">E-mail é obrigatório</div>
+          <div *ngIf="errorsUsername" class="obrigatorio-login">
+            <div>Usuário é obrigatório</div>
           </div>
         </div>
         <div class="form-group has-feedback">
-          <input type="password" nucleoForm="email" type="password" pInputText class="form-control" name="senha" [(ngModel)]="senha" maxlength="100" required placeholder="Senha" />
+          <label for="username">Senha</label>
+          <input id="password" type="password" formControlName="password" class="form-control" required />
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          <div *ngIf="senhaNulo" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Senha é obrigatório</div>
+          <div *ngIf="errorsPassword" class="obrigatorio-login">
+            <div>Senha é obrigatório</div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-4 pull-right">
-            <button type="submit" class="btn btn-primary btn-block btn-flat" pTooltip="Acessar" tooltipPosition="top">Acessar</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat" pTooltip="Acessar" tooltipPosition="top" icon="fa fa-sign-out">
+              <i class="fa fa-sign-out"></i> Acessar
+            </button>
           </div>
         </div>
       </form>

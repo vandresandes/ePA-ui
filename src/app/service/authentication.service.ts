@@ -22,17 +22,19 @@ public get currentUserValue(): User {
   return this.currentUserSubject.value;
 }
 
-login() {
-  console.log("login");
-  return this.http.get<any>(`${environment.apiUrl}`)
+login(username: string, password: string) {
+  return this.http.get<any>(`${environment.apiUrlFake}`)
   .pipe(map(user => {
-    // login bem-sucedido se houver um token jwt na resposta
-    if (user && user.token) {
+    if (username === user.username && password === user.password) {
+      // login bem-sucedido se houver um token jwt na resposta
+      if (user && user.token) {
         // armazenar detalhes do usuário e token jwt no armazenamento local para manter o usuário logado entre as atualizações da página
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
+      }
+      return user;
     }
-    return user;
+    throw 'Usuário ou Senha inválida!';
   }));
 }
 

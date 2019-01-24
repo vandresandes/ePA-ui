@@ -39,6 +39,7 @@ import { RadioButtonModule } from 'primeng/components/radiobutton/radiobutton';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
+import { MenubarModule } from 'primeng/menubar';
 
 // MÓDULOS
 import { ChecklistModule } from './admin/checklist/checklist.module';
@@ -80,6 +81,7 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     MessagesModule,
     TooltipModule,
     TabViewModule,
+    MenubarModule,
     TableModule,
     PaginatorModule,
     FieldsetModule,

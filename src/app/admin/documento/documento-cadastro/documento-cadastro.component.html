@@ -7,16 +7,17 @@
             <div class="col-sm-12">
               <label for="nomeDocumento">{{lbDocumento}} <span class="obrigatorio">*</span></label>
               <div>
-                <input id="nomeDocumento" nucleoForm="entity.nome" type="text" pInputText class="form-control" name="nomeDocumento" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
+                <input id="nomeDocumento" nucleoForm="entity.nome" type="text" pInputText style="width:100%" name="nomeDocumento" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
               </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-12">
+            <div class="col-sm-12 col-md-6">
               <label for="tipoDocumento">{{lbTipo}} <span class="obrigatorio">*</span></label>
               <div>
-                  <div><p-radioButton name="tipoDocumento" value="DOCUMENTO" label="Documento" [(ngModel)]="entity.tipo" inputId="entity.tipo" [disabled]="readonly"></p-radioButton></div>
-                  <div><p-radioButton name="tipoDocumento" value="INFORMACAO" label="Informação" [(ngModel)]="entity.tipo" inputId="entity.tipo" [disabled]="readonly"></p-radioButton></div>
+                <p-radioButton name="grupoTipoDocumento" value="DOCUMENTO" label="Documento" [(ngModel)]="entity.tipo" inputId="entity.tipo" [disabled]="readonly"></p-radioButton>
+                &nbsp;
+                <p-radioButton name="grupoTipoDocumento" value="INFORMACAO" label="Informação" [(ngModel)]="entity.tipo" inputId="entity.tipo" [disabled]="readonly"></p-radioButton>
               </div>
             </div>
           </div>

@@ -47,6 +47,9 @@ export class NucleoService {
     if (!AppUtil.isNull(filtro.nome)) {
       params = params.append('nome', filtro.nome);
     }
+    if (!AppUtil.isNull(filtro.nomeMateria)) {
+      params = params.append('nomeMateria', filtro.nomeMateria);
+    }
     if (!AppUtil.isNull(paginacao.page)) {
       params = params.append('page', String(paginacao.page));
     }

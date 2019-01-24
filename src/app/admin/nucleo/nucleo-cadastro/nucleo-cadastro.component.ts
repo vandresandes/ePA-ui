@@ -1,3 +1,5 @@
+import { MateriaService } from './../../../service/materia.service';
+import { AppUtil } from 'src/app/app-util';
 import { Message } from 'primeng/components/common/api';
 import { EnumCrud } from './../../../enums/enum-crud.enum';
 import { Nucleo } from 'src/app/model/nucleo';
@@ -16,13 +18,17 @@ export class NucleoCadastroComponent implements OnInit {
   entity: Nucleo = new Nucleo();
   readonly: boolean = false;
   msgs: Message[] = [];
+  listaMateria: any;
   lbNucleo: string = "Núcleo";
+  lbMateria: string = "Matéria";
   labelBtnSalvar: string = AppConstants.BTN_SALVAR;
   labelBtnCancelar: string = AppConstants.BTN_CANCELAR;
+  lbSelecione: string = AppConstants.SELECIONE;
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
   constructor(
     private service: NucleoService,
+    private materiaService: MateriaService,
     private route: ActivatedRoute,
     private router: Router
     )
@@ -36,15 +42,26 @@ export class NucleoCadastroComponent implements OnInit {
         this.service.findById(id).subscribe(
           data => {
             this.entity.id = data['id'],
-            this.entity.nome = data['nome']
+            this.entity.nome = data['nome'],
+            this.entity.materia = data['materia']
           },
           error => console.log(error)
         );
       }
     });
+    this.findAllMateria();
   }
 
   ngOnInit() {
+  }
+
+  findAllMateria() {
+    this.materiaService.findAll().subscribe(
+			data => {
+        this.listaMateria = data
+			},
+			error => console.log(error)
+    );
   }
 
   salvar() {
@@ -63,8 +80,12 @@ export class NucleoCadastroComponent implements OnInit {
     let valid: boolean = true;
     this.msgs = [];
 
-    if (this.entity.nome === null || this.entity.nome === undefined) {
+    if (AppUtil.isNull(this.entity.nome)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbNucleo});
+      valid = false;
+    }
+    if (AppUtil.isNull(this.entity.materia)) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbMateria});
       valid = false;
     }
     return valid;

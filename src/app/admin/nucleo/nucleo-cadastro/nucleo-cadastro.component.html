@@ -4,10 +4,17 @@
         <p-messages [(value)]="msgs"></p-messages>
         <div>
           <div class="form-group">
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6">
               <label for="nomeNucleo">{{lbNucleo}} <span class="obrigatorio">*</span></label>
               <div>
-                <input id="nomeNucleo" nucleoForm="entity.nome" type="text" pInputText class="form-control" name="nomeNucleo" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
+                <input id="nomeNucleo" nucleoForm="entity.nome" type="text" pInputText style="width:100%" name="nomeNucleo" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <label for="nucleoChecklist">{{lbMateria}} <span class="obrigatorio">*</span></label>
+              <div>
+                <p-dropdown [options]="listaMateria" [(ngModel)]="entity.materia" optionLabel="nome" name="materia"
+                  [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}}></p-dropdown>
               </div>
             </div>
           </div>

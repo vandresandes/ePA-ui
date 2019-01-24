@@ -8,10 +8,17 @@
     <div class="box-body">
       <div>
         <div class="form-group">
-          <div class="col-sm-12 col-md-4">
+          <div class="col-sm-12 col-md-6">
             <label for="nome">{{titulo}}</label>
             <div>
               <input id="nome" type="text" pInputText class="form-control" name="nucleo" [(ngModel)]="entity.nome" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label>Matéria</label>
+            <div>
+              <p-autoComplete [(ngModel)]="entity.nomeMateria" [suggestions]="listaMateria" [minLength]="3" emptyMessage={{msgNaoEncontrado}} name="materiaNucleo"
+                (completeMethod)="buscarMateriaPorNome($event)" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
             </div>
           </div>
         </div>
@@ -36,12 +43,14 @@
         <ng-template pTemplate="header">
           <tr>
             <th>Núcleo</th>
+            <th>Matéria</th>
             <th style="width: 150px;">Ações</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-nucleo>
           <tr>
             <td>{{nucleo.nome}}</td>
+            <td>{{nucleo.materia.nome}}</td>
             <td>
               <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(nucleo.id)" type="button"></p-button>
               <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(nucleo.id)" type="button"></p-button>
@@ -61,7 +70,7 @@
         (onPageChange)="paginate($event)"></p-paginator>
     </div>
   </div>
-  <div class="p-grid">
+  <div class="p-grid" *ngIf="false">
     <div class="p-col">
       <div class="pull-right">
         <p-button icon="fa fa-file-o" iconPos="left" label="Cadastrar {{titulo}}" pTooltip="Cadastrar {{titulo}}" tooltipPosition="top" (click)="novo()" type="button"></p-button>

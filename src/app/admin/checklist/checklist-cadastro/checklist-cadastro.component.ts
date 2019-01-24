@@ -1,3 +1,4 @@
+import { AppUtil } from 'src/app/app-util';
 import { AppConstants } from './../../../app-constants';
 import { ChecklistService } from './../../../service/checklist.service';
 import { Checklist } from './../../../model/checklist';
@@ -19,6 +20,7 @@ import { Message } from 'primeng/components/common/api';
 export class ChecklistCadastroComponent implements OnInit {
 
   entity: Checklist = new Checklist();
+  obrigatorio: string;
   readonly: boolean = false;
   listaNucleo: any;
   listaTipoProcesso: any;
@@ -37,8 +39,10 @@ export class ChecklistCadastroComponent implements OnInit {
   lbTermoGeral: string = "Termo Geral";
   lbTermoEspecifico: string = "Termo Específico";
   lbDocumento: string = "Documento";
-  lbStatus: string = "Status";
+  lbTipo: string = "Tipo";
+  lbPrioridade: string = "Prioridade";
   msgNaoEncontrado: string = AppConstants.NAO_ENCONTRADO;
+
 
   constructor(
     private service: ChecklistService,
@@ -65,7 +69,9 @@ export class ChecklistCadastroComponent implements OnInit {
             this.entity.termoGeral = data['termoGeral'],
             this.entity.termoEspecifico = data['termoEspecifico'],
             this.entity.documento = data['documento'],
-            this.entity.status = data['status']
+            this.entity.obrigatorio = data['obrigatorio'],
+            this.entity.prioridade = data['prioridade'],
+            this.obrigatorio = data['obrigatorio']
           },
           error => console.log(error)
         );
@@ -79,13 +85,15 @@ export class ChecklistCadastroComponent implements OnInit {
     this.buscarTipoProcessoPorNome();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   salvar() {
     if (this.isValidSalvar()) {
+      this.entity.obrigatorio = this.obrigatorio === '1';
       this.service.save(this.entity).subscribe(
         data => {
+          console.log(data),
+
           this.verificarCadastro(data)
         },
         error => console.log(error)
@@ -97,28 +105,32 @@ export class ChecklistCadastroComponent implements OnInit {
     let valid: boolean = true;
     this.msgs = [];
 
-    if (this.entity.nucleo === null || this.entity.nucleo === undefined) {
+    if (AppUtil.isNull(this.entity.nucleo)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbNucleo});
       valid = false;
     }
-    if (this.entity.tipoProcesso === null || this.entity.tipoProcesso === undefined) {
+    if (AppUtil.isNull(this.entity.tipoProcesso)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbTipoprocesso});
       valid = false;
     }
-    if (this.entity.termoGeral === null || this.entity.termoGeral === undefined) {
+    if (AppUtil.isNull(this.entity.termoGeral)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbTermoGeral});
       valid = false;
     }
-    if (this.entity.termoEspecifico === null || this.entity.termoEspecifico === undefined) {
+    if (AppUtil.isNull(this.entity.termoEspecifico)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbTermoEspecifico});
       valid = false;
     }
-    if (this.entity.documento === null || this.entity.documento === undefined) {
+    if (AppUtil.isNull(this.entity.documento)) {
       this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbDocumento});
       valid = false;
     }
-    if (this.entity.status === null || this.entity.status === undefined) {
-      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbStatus});
+    if (AppUtil.isNull(this.obrigatorio)) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbTipo});
+      valid = false;
+    }
+    if (AppUtil.isNull(this.entity.prioridade)) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbPrioridade});
       valid = false;
     }
     return valid;

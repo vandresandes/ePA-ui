@@ -36,18 +36,31 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12">
               <label for="documentoChecklist">{{lbDocumento}} <span class="obrigatorio">*</span></label>
               <div>
                 <p-dropdown [options]="listaDocumento" [(ngModel)]="entity.documento" optionLabel="nome" name="documentoChecklist"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}}></p-dropdown>
               </div>
             </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-12 col-md-6">
-              <label for="statusChecklist">{{lbStatus}} <span class="obrigatorio">*</span></label>
+              <label>{{lbTipo}} <span class="obrigatorio">*</span></label>
               <div>
-                <p-radioButton name="grupostatus" value="1" label="Obrigatório" [(ngModel)]="entity.status" inputId="entity.status" [disabled]="readonly"></p-radioButton>
-                <p-radioButton name="grupostatus" value="0" label="Complementar" [(ngModel)]="entity.status" inputId="entity.status" [disabled]="readonly"></p-radioButton>
+                <p-radioButton name="grupoObrigatorio" value="1" label="Obrigatório" [(ngModel)]="obrigatorio" [disabled]="readonly"></p-radioButton>
+                &nbsp;
+                <p-radioButton name="grupoObrigatorio" value="0" label="Complementar" [(ngModel)]="obrigatorio" [disabled]="readonly"></p-radioButton>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <label>{{lbPrioridade}} <span class="obrigatorio">*</span></label>
+              <div>
+                <p-radioButton name="grupoPrioridade" value="BAIXA" label="Baixa" [(ngModel)]="entity.prioridade" inputId="ok" [disabled]="readonly"></p-radioButton>
+                &nbsp;
+                <p-radioButton name="grupoPrioridade" value="MEDIA" label="Média" [(ngModel)]="entity.prioridade" inputId="entity.prioridade" [disabled]="readonly"></p-radioButton>
+                &nbsp;
+                <p-radioButton name="grupoPrioridade" value="ALTA" label="Alta" [(ngModel)]="entity.prioridade" inputId="entity.prioridade" [disabled]="readonly"></p-radioButton>
               </div>
             </div>
           </div>

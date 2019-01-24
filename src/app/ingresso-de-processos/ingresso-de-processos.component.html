@@ -3,7 +3,7 @@
     <div class="box-body">
       <p-messages [(value)]="msgs"></p-messages>
       <p-tabView>
-        <p-tabPanel header="Detalhes">
+        <p-tabPanel header="Informações">
           <div class="form-group">
             <div class="col-sm-12 col-md-3">
               <label>{{lbNProcessoNaOrigem}}:</label>
@@ -193,35 +193,33 @@
           </div>
         </p-tabPanel>
         <p-tabPanel header="Checklist">
-          <div>
-            <p-table [value]="listaChecklist" [responsive]="true" [autoLayout]="true">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th class="col-sm-5">Documento</th>
-                  <th style="width: 100px">Tipo</th>
-                  <th class="col-sm-5">Selecione o documento</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-item>
-                <tr>
-                  <td>{{item.documento.nome}}</td>
-                  <td>{{item.status | status}}</td>
-                  <td>
-                    <p-fileUpload *ngIf="item.documento.tipo == 'EM_ANALISE' || item.documento.tipo == 'DOCUMENTO'" name="uploadedFiles[]" multiple="multiple" name="uploadedFiles"
-                      chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
-                    <input *ngIf="item.documento.tipo != 'EM_ANALISE'" type="text" nucleoForm="item.descricaoDocumento" pInputText class="form-control" name="descricaoDocumento" [(ngModel)]="item.descricaoDocumento" maxlength="100" />
-                  </td>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="emptymessage">
-                <tr>
-                  <td [attr.colspan]="3">
-                    {{msgNenhumRegistroAdicionado}}
-                  </td>
-                </tr>
-              </ng-template>
-            </p-table>
-          </div>
+          <p-table [value]="listaChecklist" [responsive]="true" [autoLayout]="true">
+            <ng-template pTemplate="header">
+              <tr>
+                <th class="col-sm-5">Documento</th>
+                <th style="width: 100px">Tipo</th>
+                <th class="col-sm-5">Selecione o documento</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+              <tr>
+                <td>{{item.documento.nome}}</td>
+                <td>{{item.status | status}}</td>
+                <td>
+                  <p-fileUpload *ngIf="item.documento.tipo == 'EM_ANALISE' || item.documento.tipo == 'DOCUMENTO'" name="uploadedFiles[]" multiple="multiple" name="uploadedFiles"
+                    chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
+                  <input *ngIf="item.documento.tipo != 'EM_ANALISE'" type="text" nucleoForm="item.descricaoDocumento" pInputText class="form-control" name="descricaoDocumento" [(ngModel)]="item.descricaoDocumento" maxlength="100" />
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td [attr.colspan]="3">
+                  {{msgNenhumRegistroAdicionado}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
         </p-tabPanel>
       </p-tabView>
     </div>

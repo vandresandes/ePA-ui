@@ -3,10 +3,10 @@
       <div class="box-body">
         <p-messages [(value)]="msgs"></p-messages>
         <div class="form-group">
-          <div class="col-sm-12 col-md-4">
+          <div class="col-sm-12 col-md-6">
             <label for="nomeTipoProcesso">{{lbTipoProcesso}} <span class="obrigatorio">*</span></label>
             <div>
-              <input id="nomeTipoProcesso" nucleoForm="entity.nome" type="text" pInputText class="form-control" name="nomeTipoProcesso" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
+              <input id="nomeTipoProcesso" nucleoForm="entity.nome" type="text" pInputText style="width:100%" name="nomeTipoProcesso" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
             </div>
           </div>
         </div>

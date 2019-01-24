@@ -1,3 +1,4 @@
+import { MateriaService } from './../../../service/materia.service';
 import { AppConstants } from './../../../app-constants';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { Component, OnInit } from '@angular/core';
@@ -19,16 +20,19 @@ export class NucleoListComponent implements OnInit {
   listaPesquisa: any;
   nome: string = null;
   titulo: string = "Núcleo";
+  listaMateria: any;
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
   msgNenhumRegistroEncontrado: string = AppConstants.NENHUM_REGISTRO_ENCONTRADO;
+  msgNaoEncontrado: string = "Não encontrado!";
 
   constructor(
     private service: NucleoService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private materiaService: MateriaService) { }
 
   ngOnInit() {}
 
@@ -39,6 +43,17 @@ export class NucleoListComponent implements OnInit {
         this.listaPesquisa = data['content'],
         this.paginacao.totalRecords = data['totalElements'],
         this.paginacao.totalPages = data['totalPages']
+			},
+			error => console.log(error)
+    );
+  }
+
+  buscarMateriaPorNome(event: any) {
+    let query = event.query;
+    this.materiaService.filtrarNomes(query).subscribe(
+			data => {
+        this.listaMateria = data
+
 			},
 			error => console.log(error)
     );

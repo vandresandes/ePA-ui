@@ -5,7 +5,7 @@ import { TermoGeralService } from './../../../service/termo-geral.service';
 import { TipoProcessoService } from './../../../service/tipo-processo.service';
 import { ChecklistService } from './../../../service/checklist.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NucleoService } from 'src/app/service/nucleo.service';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
 import { AppConstants } from 'src/app/app-constants';
@@ -39,11 +39,11 @@ export class ChecklistListComponent implements OnInit {
     private tipoProcessoService: TipoProcessoService,
     private termoGeralService: TermoGeralService,
     private termoEspecificoService: TermoEspecificoService,
-    private documentoService: DocumentoService
+    private documentoService: DocumentoService,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
-
   }
 
   pesquisar() {
@@ -51,7 +51,9 @@ export class ChecklistListComponent implements OnInit {
       data => {
         this.listaPesquisa = data['content'],
         this.paginacao.totalRecords = data['totalElements'],
-        this.paginacao.totalPages = data['totalPages']
+        this.paginacao.totalPages = data['totalPages'],
+        console.log(this.listaPesquisa)
+
 			},
 			error => console.log(error)
     );

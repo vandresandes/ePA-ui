@@ -58,8 +58,8 @@ export class ChecklistService {
     if (!AppUtil.isNull(filtro.documento)) {
       params = params.append('nomeDocumento', String(filtro.documento));
     }
-    if (!AppUtil.isNull(filtro.status)) {
-      params = params.append('status', String(filtro.status));
+    if (!AppUtil.isNull(filtro.obrigatorio)) {
+      params = params.append('obrigatorio', String(filtro.obrigatorio));
     }
     if (!AppUtil.isNull(paginacao.page)) {
       params = params.append('page', String(paginacao.page));

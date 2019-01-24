@@ -1,9 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-// body {
-//   font-family: 'Roboto, "Helvetica Neue", sans-serif';
-// }
-
 p-button {
   margin-right: 5px;
 }
@@ -11,6 +7,11 @@ p-button {
 .obrigatorio {
 	color: rgb(201,24,30);
 	font-weight: bold;
+}
+
+.obrigatorio-login {
+	color: rgb(201,24,30);
+	font-weight: normal;
 }
 
 .grupo {
@@ -33,7 +34,6 @@ p-button {
   background: #eeeeee;
 }
 
-
 .login-box-body, .register-box-body {
   box-shadow: 0 1px 1px 1px;
 }
@@ -47,3 +47,28 @@ p-button {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+// NAVBAR COM PRIMENG ##################################### INÍCIO
+
+.ui-menubar .ui-menubar-custom {
+  float: left;
+  padding: 0;
+}
+
+.ui-menubar .ui-menubar-root-list {
+   float: right;
+}
+
+body .ui-menubar .ui-menuitem-link .ui-menuitem-text {
+  color: black;
+}
+
+body .ui-menubar .ui-menuitem.ui-menuitem-active > .ui-menuitem-link {
+  background-color: rgb(0, 97, 172);
+}
+
+// NAVBAR COM PRIMENG ##################################### FIM
+
+// body {
+//   font-family: 'Roboto, "Helvetica Neue", sans-serif';
+// }

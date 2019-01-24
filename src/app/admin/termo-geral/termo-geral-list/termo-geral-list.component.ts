@@ -3,15 +3,14 @@ import { TermoGeralDto } from './../../../dto/termo-geral-dto';
 import { Component, OnInit } from '@angular/core';
 import { TermoGeralService } from 'src/app/service/termo-geral.service';
 import { Router } from '@angular/router';
-import { ConfirmationService } from 'primeng/components/common/confirmationservice';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
+import { ConfirmationService } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-termo-geral-list',
   templateUrl: './termo-geral-list.component.html',
   styleUrls: ['./termo-geral-list.component.scss'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService]
 })
 export class TermoGeralListComponent implements OnInit {
 
@@ -26,8 +25,8 @@ export class TermoGeralListComponent implements OnInit {
   constructor(
     private service: TermoGeralService,
     private router: Router,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+    private confirmationService: ConfirmationService
+    ) { }
 
   ngOnInit() {}
 
