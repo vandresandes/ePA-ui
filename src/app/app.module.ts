@@ -12,11 +12,9 @@ import { ReactiveFormsModule }    from '@angular/forms';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
-import { ChecklistInformacoesRequeridasComponent } from './checklist-informacoes-requeridas/checklist-informacoes-requeridas.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { IngressoDeProcessosComponent } from './ingresso-de-processos/ingresso-de-processos.component';
-import { ImpressaoResultadoComponent } from './impressao-resultado/impressao-resultado.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { VerificacaoComponent } from './verificacao/verificacao.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -54,9 +52,7 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ChecklistInformacoesRequeridasComponent,
     PageNotFoundComponent,
-    ImpressaoResultadoComponent,
     IngressoDeProcessosComponent,
     VerificacaoComponent,
     InteressadoDialogComponent,

@@ -3,18 +3,18 @@
   <p-menubar [model]="items" [style]="{'background-color' : 'rgb(0, 97, 172)'}">
     <img src="assets/img/logo.png" alt="">
   </p-menubar>
+  <p>
+    {{currentUser | json}}
+  </p>
 </div>
 
-<p>
-  {{currentUser | json}}
-</p>
 
 <!-- Exibe quando não estiver logado -->
 <div class="container">
-  <h3>
+  <h3 *ngIf="currentUser">
     {{title}}
   </h3>
-  <div style="margin-top: 20px">
+  <div>
     <router-outlet></router-outlet>
   </div>
 </div>
