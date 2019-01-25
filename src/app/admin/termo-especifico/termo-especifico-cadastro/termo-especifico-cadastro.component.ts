@@ -46,7 +46,13 @@ export class TermoEspecificoCadastroComponent implements OnInit {
             this.entity.id = data['id'],
             this.entity.nome = data['nome']
           },
-          error => console.log(error)
+          error => {
+            const status: number = error['status'];
+            console.log(error);
+            if (status == 404) {
+              this.router.navigate(['/termoespecifico/pesquisa'])
+            }
+          }
         );
       }
     });

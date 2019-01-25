@@ -54,7 +54,13 @@ export class NucleoCadastroComponent implements OnInit {
             this.entity.nome = data['nome'],
             this.entity.materia = data['materia']
           },
-          error => console.log(error)
+          error => {
+            const status: number = error['status'];
+            console.log(error);
+            if (status == 404) {
+              this.router.navigate(['/nucleo/pesquisa'])
+            }
+          }
         );
       }
     });

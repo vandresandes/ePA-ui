@@ -64,7 +64,7 @@ export class ChecklistCadastroComponent implements OnInit {
 
   ngOnInit() { }
 
-  carregarParams() {
+  carregarParams(): void {
     this.route.params.forEach((params: Params) => {
       const id = this.route.params['value']['id'];
 
@@ -84,7 +84,13 @@ export class ChecklistCadastroComponent implements OnInit {
             this.entity.prioridade = data['prioridade'],
             this.obrigatorio = data['obrigatorio']
           },
-          error => console.log(error)
+          error => {
+            const status: number = error['status'];
+            console.log(error);
+            if (status == 404) {
+              this.router.navigate(['/checklist/pesquisa'])
+            }
+          }
         );
       }
     });
@@ -95,8 +101,6 @@ export class ChecklistCadastroComponent implements OnInit {
       this.entity.obrigatorio = this.obrigatorio === '1';
       this.service.save(this.entity).subscribe(
         data => {
-          console.log(data),
-
           this.verificarCadastro(data)
         },
         error => console.log(error)

@@ -51,9 +51,7 @@ export class ChecklistListComponent implements OnInit {
       data => {
         this.listaPesquisa = data['content'],
         this.paginacao.totalRecords = data['totalElements'],
-        this.paginacao.totalPages = data['totalPages'],
-        console.log(this.listaPesquisa)
-
+        this.paginacao.totalPages = data['totalPages']
 			},
 			error => console.log(error)
     );

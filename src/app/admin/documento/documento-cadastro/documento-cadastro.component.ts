@@ -49,7 +49,13 @@ export class DocumentoCadastroComponent implements OnInit {
             this.entity.nome = data['nome'],
             this.entity.tipo = data['tipo']
           },
-          error => console.log(error)
+          error => {
+            const status: number = error['status'];
+            console.log(error);
+            if (status == 404) {
+              this.router.navigate(['/documento/pesquisa'])
+            }
+          }
         );
       }
     });
