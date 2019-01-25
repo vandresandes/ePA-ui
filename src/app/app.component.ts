@@ -31,6 +31,7 @@ export class AppComponent {
       {
         label: 'Processo',
         items: [
+          { label: 'Pesquisar Processos', command: (event) =>  this.router.navigate(['/pesquisaprocesso']) },
           { label: 'Ingresso de Processo', command: (event) =>  this.router.navigate(['/ingressoprocesso']) }
         ]
       },

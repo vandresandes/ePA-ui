@@ -4,10 +4,11 @@ import { PrioridadeTramitacao } from './prioridade-tramitacao';
 import { TermoEspecifico } from './termoEspecifico';
 import { TermoGeral } from './termoGeral';
 import { TipoProcesso } from './tipoProcesso';
-import { Motivo } from './motivo';
 import { Materia } from './materia';
 import { Origem } from './origem';
+
 export class Processo {
+  id: number;
   numeroProcesso: string;
   justificativa: string;
   solicitadaUrgencia: boolean;

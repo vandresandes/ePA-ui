@@ -3,19 +3,26 @@ import { TermoEspecificoListComponent } from './termo-especifico-list/termo-espe
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
+import { AuthGuard } from 'src/app/auth';
 
 const routes: Routes = [
-  { path: 'termoespecifico/pesquisa', component: TermoEspecificoListComponent,
-    data: { title: 'Pesquisar Termo Específico' }
-  },
-  { path: 'termoespecifico/cadastro', component: TermoEspecificoCadastroComponent,
-    data: { title: 'Cadastrar Termo Específico', acao: EnumCrud.CREATE }
-  },
-  { path: 'termoespecifico/visualizar/:id', component: TermoEspecificoCadastroComponent,
-    data: { title: 'Visualizar Termo Específico', acao: EnumCrud.READ }
-  },
-  { path: 'termoespecifico/editar/:id', component: TermoEspecificoCadastroComponent,
-    data: { title: 'Editar Termo Específico', acao: EnumCrud.UPDATE }
+  {
+    path: 'termoespecifico',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'pesquisa', component: TermoEspecificoListComponent,
+        data: { title: 'Pesquisar Termo Específico' }
+      },
+      { path: 'cadastro', component: TermoEspecificoCadastroComponent,
+        data: { title: 'Cadastrar Termo Específico', acao: EnumCrud.CREATE }
+      },
+      { path: 'visualizar/:id', component: TermoEspecificoCadastroComponent,
+        data: { title: 'Visualizar Termo Específico', acao: EnumCrud.READ }
+      },
+      { path: 'editar/:id', component: TermoEspecificoCadastroComponent,
+        data: { title: 'Editar Termo Específico', acao: EnumCrud.UPDATE }
+      }
+    ]
   }
 ];
 

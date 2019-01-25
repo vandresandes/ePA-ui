@@ -1,24 +1,23 @@
-import { ChecklistService } from './../service/checklist.service';
-import { MotivoSigiloSegredoJusticaService } from './../service/motivo-sigilo-segredo-justica.service';
-import { SigiloSegredoJusticaService } from './../service/sigilo-segredo-justica.service';
-import { PrioridadeTramitacaoService } from './../service/prioridade-tramitacao.service';
-import { EnumPrioridadeTramitacao } from './../enums/enum-prioridade-tramitacao.enum';
-import { EnumSigiloSegredoJustica } from './../enums/enum-sigilo-segredo-justica.enum';
 import { DocumentoService } from 'src/app/service/documento.service';
-import { AppUtil } from './../app-util';
 import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
-import { MateriaService } from './../service/materia.service';
-import { OrigemService } from './../service/origem.service';
-import { InteressadoDialogComponent } from './../dialog/interessado-dialog/interessado-dialog.component';
-import { Processo } from './../model/processo';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { AppConstants } from '../app-constants';
 import { DialogService } from 'primeng/components/dynamicdialog/dialogservice';
 import { Message } from 'primeng/components/common/message';
-import { TermoGeralService } from '../service/termo-geral.service';
-import { TermoEspecificoService } from '../service/termo-especifico.service';
-import { Interessado } from '../model/interessado';
 import { ActivatedRoute, Params } from '@angular/router';
+import { InteressadoDialogComponent } from 'src/app/dialog/interessado-dialog/interessado-dialog.component';
+import { Processo, Interessado } from 'src/app/model';
+import { AppConstants } from 'src/app/app-constants';
+import { ProcessoService } from 'src/app/service/processo.service';
+import { OrigemService } from 'src/app/service/origem.service';
+import { MateriaService } from 'src/app/service/materia.service';
+import { TermoGeralService } from 'src/app/service/termo-geral.service';
+import { TermoEspecificoService } from 'src/app/service/termo-especifico.service';
+import { MotivoSigiloSegredoJusticaService } from 'src/app/service/motivo-sigilo-segredo-justica.service';
+import { PrioridadeTramitacaoService } from 'src/app/service/prioridade-tramitacao.service';
+import { SigiloSegredoJusticaService } from 'src/app/service/sigilo-segredo-justica.service';
+import { ChecklistService } from 'src/app/service/checklist.service';
+import { EnumPrioridadeTramitacao, EnumSigiloSegredoJustica } from 'src/app/enums';
+import { AppUtil } from 'src/app/app-util';
 
 @Component({
   selector: 'app-ingresso-de-processos',
@@ -76,17 +75,18 @@ export class IngressoDeProcessosComponent implements OnInit {
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
   constructor(
+    private service: ProcessoService,
     public dialogService: DialogService,
     private origemService: OrigemService,
     private materiaService: MateriaService,
     private tipoProcessoService: TipoProcessoService,
     private termoGeralService: TermoGeralService,
     private termoEspecificoService: TermoEspecificoService,
-    private documentoService: DocumentoService,
     private motivoSigiloSegredoJusticaService: MotivoSigiloSegredoJusticaService,
     private prioridadeTramitacaoService: PrioridadeTramitacaoService,
     private sigiloSegredoJusticaService: SigiloSegredoJusticaService,
-    private checklistService: ChecklistService
+    private checklistService: ChecklistService,
+    private route: ActivatedRoute
     ) {
     this.buscarTodosOrigem();
     this.buscarTodosMateria();
@@ -95,6 +95,7 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.buscarTodosMotivoSigiloSegredoJustica();
     this.buscarSemPrioridadeTramitacao();
     this.buscarSemSigilo();
+    this.carregarEntity();
   }
 
   ngOnInit() {
@@ -187,6 +188,37 @@ export class IngressoDeProcessosComponent implements OnInit {
 			},
 			error => console.log(error)
     );
+  }
+
+  /**
+   * Mocky
+   */
+  carregarEntity() {
+    this.route.params.forEach((params: Params) => {
+      if (this.route.params['value']['id'] !== undefined) {
+        const id = this.route.params['value']['id'];
+
+        this.service.findAll().subscribe(
+          data => {
+            this.findById(id, data)
+          },
+          error => console.log(error)
+        );
+      }
+    });
+  }
+
+   /**
+   * Mocky
+   */
+  findById(id: number, listaPesquisa: any) {
+    for (var i = 0; i < listaPesquisa.length; i++) {
+      let processo = listaPesquisa[i];
+			if (id == processo['id']) {
+        this.entity.id = processo['id'];
+        this.entity.numeroProcesso = processo['numeroProcesso'];
+			}
+		}
   }
 
   onchangeDropOrigem() {

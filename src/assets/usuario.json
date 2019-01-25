@@ -1,7 +1,7 @@
 {
   "id": 1000,
   "username": "admin",
-  "password": "admin",
+  "password": "1234",
   "firstName": "admin",
   "lastName": "admin",
   "token": "xxxxxxxxxx"

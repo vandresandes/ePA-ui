@@ -10,6 +10,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  resource: string = "usuario.json";
+
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -23,8 +25,11 @@ public get currentUserValue(): User {
 }
 
 login(username: string, password: string) {
-  return this.http.get<any>(`${environment.apiUrlFake}`)
+  return this.http.get<any>(`${environment.apiUrlFake}/${this.resource}`)
   .pipe(map(user => {
+    console.log(user);
+
+
     if (username === user.username && password === user.password) {
       // login bem-sucedido se houver um token jwt na resposta
       if (user && user.token) {

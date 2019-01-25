@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { epaUiConf } from './epa-ui.conf';
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
 import { LayoutModule } from 'angular-admin-lte';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -12,13 +11,12 @@ import { ReactiveFormsModule }    from '@angular/forms';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { IngressoDeProcessosComponent } from './ingresso-de-processos/ingresso-de-processos.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { VerificacaoComponent } from './verificacao/verificacao.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { InteressadoDialogComponent } from './dialog/interessado-dialog/interessado-dialog.component';
+import { IngressoDeProcessosComponent } from './processo/ingresso-de-processos/ingresso-de-processos.component';
+import { PesquisaProcessoComponent } from './processo/pesquisa-processo/pesquisa-processo.component';
 
 // PRIMENG
 import { ButtonModule } from 'primeng/button';
@@ -51,12 +49,11 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     PageNotFoundComponent,
-    IngressoDeProcessosComponent,
-    VerificacaoComponent,
     InteressadoDialogComponent,
-    NavbarComponent
+    NavbarComponent,
+    IngressoDeProcessosComponent,
+    PesquisaProcessoComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +66,6 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     TermoGeralModule,
     TipoProcessoModule,
     AppRoutingModule,
-    CoreModule,
     BrowserAnimationsModule,
     ButtonModule,
     InputTextModule,

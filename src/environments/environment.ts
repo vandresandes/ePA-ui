@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://10.52.3.42:8080',
-  apiUrlFake: 'assets/usuario.json',
+  apiUrlFake: 'assets'
 };
 
 /*
