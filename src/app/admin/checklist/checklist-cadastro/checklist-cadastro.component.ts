@@ -52,12 +52,23 @@ export class ChecklistCadastroComponent implements OnInit {
     private tipoProcessoService: TipoProcessoService,
     private termoGeralService: TermoGeralService,
     private termoEspecificoService: TermoEspecificoService,
-    private documentoService: DocumentoService
-    )
+    private documentoService: DocumentoService)
   {
+    this.carregarParams();
+    this.buscarNucleoPorNome();
+    this.buscarDocumentoPorNome();
+    this.buscarTermoEspecificoPorNome();
+    this.buscarTermoGeralPorNome();
+    this.buscarTipoProcessoPorNome();
+  }
+
+  ngOnInit() { }
+
+  carregarParams() {
     this.route.params.forEach((params: Params) => {
-      if (this.route.params['value']['id'] !== undefined) {
-        const id = this.route.params['value']['id'];
+      const id = this.route.params['value']['id'];
+
+      if (!AppUtil.isNull(id)) {
         this.readonly = this.route['data']['value']['acao'] == EnumCrud.READ;
 
         this.labelBtnCancelar = AppConstants.BTN_VOLTAR;
@@ -77,15 +88,7 @@ export class ChecklistCadastroComponent implements OnInit {
         );
       }
     });
-
-    this.buscarNucleoPorNome();
-    this.buscarDocumentoPorNome();
-    this.buscarTermoEspecificoPorNome();
-    this.buscarTermoGeralPorNome();
-    this.buscarTipoProcessoPorNome();
   }
-
-  ngOnInit() { }
 
   salvar() {
     if (this.isValidSalvar()) {

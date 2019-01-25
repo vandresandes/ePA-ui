@@ -20,8 +20,8 @@ export class PesquisaProcessoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private service: ProcessoService) {
-
+    private service: ProcessoService
+  ) {
     this.pesquisar();
   }
 

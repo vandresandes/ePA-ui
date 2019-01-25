@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
 import { AppConstants } from 'src/app/app-constants';
+import { AppUtil } from 'src/app/app-util';
 
 @Component({
   selector: 'app-documento-cadastro',
@@ -27,12 +28,18 @@ export class DocumentoCadastroComponent implements OnInit {
   constructor(
     private service: DocumentoService,
     private route: ActivatedRoute,
-    private router: Router
-    )
+    private router: Router)
   {
+    this.carregarParams();
+  }
+
+  ngOnInit() {}
+
+  carregarParams() {
     this.route.params.forEach((params: Params) => {
-      if (this.route.params['value']['id'] !== undefined) {
-        const id = this.route.params['value']['id'];
+      const id = this.route.params['value']['id'];
+
+      if (!AppUtil.isNull(id)) {
         this.readonly = this.route['data']['value']['acao'] == EnumCrud.READ;
 
         this.labelBtnCancelar = "Voltar";
@@ -47,8 +54,6 @@ export class DocumentoCadastroComponent implements OnInit {
       }
     });
   }
-
-  ngOnInit() {}
 
   salvar() {
     console.log(this.entity);

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { NucleoService } from 'src/app/service/nucleo.service';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { AppConstants } from 'src/app/app-constants';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nucleo-cadastro',
@@ -30,12 +31,20 @@ export class NucleoCadastroComponent implements OnInit {
     private service: NucleoService,
     private materiaService: MateriaService,
     private route: ActivatedRoute,
-    private router: Router
-    )
+    private router: Router)
   {
+    this.carregarParams();
+    this.findAllMateria();
+  }
+
+  ngOnInit() {
+  }
+
+  carregarParams() {
     this.route.params.forEach((params: Params) => {
-      if (this.route.params['value']['id'] !== undefined) {
-        const id = this.route.params['value']['id'];
+      const id = this.route.params['value']['id'];
+
+      if (!AppUtil.isNull(id)) {
         this.readonly = this.route['data']['value']['acao'] == EnumCrud.READ;
 
         this.labelBtnCancelar = "Voltar";
@@ -49,10 +58,6 @@ export class NucleoCadastroComponent implements OnInit {
         );
       }
     });
-    this.findAllMateria();
-  }
-
-  ngOnInit() {
   }
 
   findAllMateria() {

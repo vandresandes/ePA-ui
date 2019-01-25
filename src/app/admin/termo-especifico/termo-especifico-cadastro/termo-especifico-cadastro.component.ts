@@ -5,6 +5,7 @@ import { TermoEspecificoService } from 'src/app/service/termo-especifico.service
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { EnumCrud } from 'src/app/enums/enum-crud.enum';
 import { AppConstants } from 'src/app/app-constants';
+import { AppUtil } from 'src/app/app-util';
 
 @Component({
   selector: 'app-termo-especifico-cadastro',
@@ -24,12 +25,19 @@ export class TermoEspecificoCadastroComponent implements OnInit {
   constructor(
     private service: TermoEspecificoService,
     private route: ActivatedRoute,
-    private router: Router
-    )
+    private router: Router)
   {
+    this.carregarParams();
+  }
+
+  ngOnInit() {
+  }
+
+  carregarParams() {
     this.route.params.forEach((params: Params) => {
-      if (this.route.params['value']['id'] !== undefined) {
-        const id = this.route.params['value']['id'];
+      const id = this.route.params['value']['id'];
+
+      if (!AppUtil.isNull(id)) {
         this.readonly = this.route['data']['value']['acao'] == EnumCrud.READ;
 
         this.labelBtnCancelar = AppConstants.BTN_VOLTAR;
@@ -42,9 +50,6 @@ export class TermoEspecificoCadastroComponent implements OnInit {
         );
       }
     });
-  }
-
-  ngOnInit() {
   }
 
   salvar() {
