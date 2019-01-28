@@ -1,0 +1,29 @@
+<form autocomplete="off" #listaProcessosForm="ngForm" class="form-horizontal">
+  <div class="box box-primary">
+    <div class="box-body" style="margin-top: 20px">
+      <p-table [value]="lista" selectionMode="single" [(selection)]="itemSelecionado" [responsive]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-sm-1">Selecione</th>
+            <th class="col-sm-10">Nº processo (SEI)</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr [pSelectableRow]="item">
+            <td>
+              <p-tableRadioButton [value]="item"></p-tableRadioButton>
+            </td>
+            <td>
+              {{item.numeroProcesso}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div class="box-footer clearfix">
+      <div class="pull-right">
+        <p-button icon="fa fa-chevron-circle-right" iconPos="left" label="Continuar" pTooltip="Continuar" tooltipPosition="top" (click)="continuar()" [disabled]="!itemSelecionado"></p-button>
+      </div>
+    </div>
+  </div>
+</form>
