@@ -1,21 +1,20 @@
 <form autocomplete="off" #pesquisaForm="ngForm" class="form-horizontal">
   <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title">
-        Lista de Processos
-      </h3>
-    </div>
-    <div class="box-body">
+    <div class="box-body" style="margin-top: 20px">
       <p-table [value]="listaPesquisa" [responsive]="true" [autoLayout]="true">
         <ng-template pTemplate="header">
           <tr>
-            <th>Nº do processo origem (SEI)</th>
+            <th class="col-sm-2">Nº processo (SEI)</th>
+            <th class="col-sm-2">Data de ingresso PGE</th>
+            <th class="col-sm-7">Descritivo</th>
             <th style="width: 150px;">Ações</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-item>
           <tr>
             <td>{{item.numeroProcesso}}</td>
+            <td></td>
+            <td></td>
             <td>
               <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)" type="button"></p-button>
             </td>
@@ -23,7 +22,7 @@
         </ng-template>
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td [attr.colspan]="2">
+            <td [attr.colspan]="4">
               {{msgNenhumRegistroEncontrado}}
             </td>
           </tr>

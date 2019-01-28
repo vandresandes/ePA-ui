@@ -49,7 +49,7 @@ export class PesquisaProcessoComponent implements OnInit {
 
   visualizar(id: number) {
     const link = ['/ingressoprocesso', id];
-    this.router.navigate(link);
+    // this.router.navigate(link);
   }
 
 }

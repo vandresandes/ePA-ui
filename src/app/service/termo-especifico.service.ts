@@ -38,7 +38,7 @@ export class TermoEspecificoService {
       params: parametros
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}`, httpOptions).pipe();
   }
 
   criarParamsBuscarPaginado(filtro: TermoEspecificoDto, paginacao: PaginacaoDto): HttpParams {
@@ -94,7 +94,7 @@ export class TermoEspecificoService {
       params: parametros
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar/nomes`, httpOptions).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/nomes`, httpOptions).pipe();
   }
 
   criarParamsFiltrarNomes(nome: string): HttpParams {

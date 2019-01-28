@@ -44,6 +44,7 @@ import { NucleoModule } from './admin/nucleo/nucleo.module';
 import { TermoEspecificoModule } from './admin/termo-especifico/termo-especifico.module';
 import { TermoGeralModule } from './admin/termo-geral/termo-geral.module';
 import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
+import { ListaDeProcessosComponent } from './processo/lista-de-processos/lista-de-processos.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
     InteressadoDialogComponent,
     NavbarComponent,
     IngressoDeProcessosComponent,
-    PesquisaProcessoComponent
+    PesquisaProcessoComponent,
+    ListaDeProcessosComponent
   ],
   imports: [
     BrowserModule,

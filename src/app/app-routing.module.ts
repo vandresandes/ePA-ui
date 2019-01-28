@@ -1,3 +1,4 @@
+import { ListaDeProcessosComponent } from './processo/lista-de-processos/lista-de-processos.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -8,6 +9,12 @@ import { PesquisaProcessoComponent } from './processo/pesquisa-processo/pesquisa
 const routes: Routes = [
   { path: 'login', component: LoginComponent,
     data: { title: '' }
+  },
+  { path: 'listadeprocesso', component: ListaDeProcessosComponent,
+    data: { title: 'Lista de Processos' }
+  },
+  { path: 'listadeprocesso/:numeroProcesso', component: ListaDeProcessosComponent,
+    data: { title: 'Lista de Processos' }
   },
   { path: 'ingressoprocesso', component: IngressoDeProcessosComponent,
     data: { title: 'Ingresso de Processo' }

@@ -41,7 +41,7 @@
           </div>
           <div class="form-group">
             <div class="col-sm-12 col-md-6">
-              <label for="documentoChecklist">Documento</label>
+              <label>Documento</label>
               <div>
                 <p-autoComplete [(ngModel)]="entity.documento" [suggestions]="listaDocumento" [minLength]="3" emptyMessage={{msgNaoEncontrado}} name="documentoChecklist"
                   (completeMethod)="buscarDocumentoPorNome($event)" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>

@@ -16,7 +16,7 @@ export class NucleoService {
   constructor(private httpClient: HttpClient) { }
 
   findAll() {
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}`).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/all`).pipe();
   }
 
   save(entity: Nucleo) {
@@ -39,7 +39,7 @@ export class NucleoService {
       params: parametros
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}`, httpOptions).pipe();
   }
 
   criarParamsBuscarPaginado(filtro: NucleoDto, paginacao: PaginacaoDto): HttpParams {
@@ -98,7 +98,7 @@ export class NucleoService {
       params: parametros
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar/nomes`, httpOptions).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/nomes`, httpOptions).pipe();
   }
 
   criarParamsFiltrarNomes(nome: string): HttpParams {

@@ -15,7 +15,7 @@ export class ChecklistService {
   constructor(private httpClient: HttpClient) { }
 
   findAll() {
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}`).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/all`).pipe();
   }
 
   save(entity: Checklist) {
@@ -38,7 +38,7 @@ export class ChecklistService {
       params: parametros
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/buscarpaginado`, httpOptions).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}`, httpOptions).pipe();
   }
 
   criarParamsBuscarPaginado(filtro: ChecklistPesquisaDto, paginacao: PaginacaoDto): HttpParams {

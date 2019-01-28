@@ -31,8 +31,9 @@ export class AppComponent {
       {
         label: 'Processo',
         items: [
-          { label: 'Pesquisar Processos', command: (event) =>  this.router.navigate(['/pesquisaprocesso']) },
-          { label: 'Ingresso de Processo', command: (event) =>  this.router.navigate(['/ingressoprocesso']) }
+          { label: 'Cadastrar', command: (event) =>  this.router.navigate(['/listadeprocesso']) },
+          { label: 'Acompanhar', command: (event) =>  this.router.navigate(['/pesquisaprocesso']) }
+          // { label: 'Cadastro', command: (event) =>  this.router.navigate(['/ingressoprocesso']) }
         ]
       },
       {

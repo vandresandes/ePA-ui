@@ -222,6 +222,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   onchangeDropOrigem() {
+    this.limparDropMateria();
     this.limparDropTipoProcesso();
     this.limparDropTermoGeral();
     this.limparDropTermoEspecifico();
@@ -235,6 +236,7 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.limparDropTermoEspecifico();
     this.limparTableDocumento();
 
+    /*
     if (!AppUtil.isNull(this.entity.origem) && !AppUtil.isNull(this.entity.materia)) {
       this.tipoProcessoService.filtrar(
         null,
@@ -248,6 +250,21 @@ export class IngressoDeProcessosComponent implements OnInit {
         data => {
           this.listaTipoProcesso = data
         },
+        error => console.log(error)
+      );
+    }
+    */
+
+    if (!AppUtil.isNull(this.entity.materia)) {
+      this.termoGeralService.filtrar(
+        null,
+        null,
+        null,
+        null,
+        this.entity.materia.id
+      ).subscribe(data => {
+        this.listaTermoGeral = data
+      },
         error => console.log(error)
       );
     }
@@ -280,7 +297,7 @@ export class IngressoDeProcessosComponent implements OnInit {
     if (!AppUtil.isNull(this.entity.termoGeral)) {
       this.termoEspecificoService.filtrar(
         null,
-        this.entity.tipoProcesso.id,
+        null,
         this.entity.termoGeral.id,
         null,
         this.entity.materia.id
@@ -298,7 +315,7 @@ export class IngressoDeProcessosComponent implements OnInit {
     if (!AppUtil.isNull(this.entity.termoEspecifico)) {
       this.checklistService.filtrar(
         null,
-        this.entity.tipoProcesso.id,
+        null,
         this.entity.termoGeral.id,
         this.entity.termoEspecifico.id,
         null,
@@ -347,10 +364,15 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.entity.termoEspecifico = null;
   }
 
+  limparDropMateria() {
+    this.entity.materia = null;
+  }
+
   limparTableDocumento() {
     this.listaDocumento = null;
     this.listaChecklist = null;
   }
+
 
   salvar() {
     if (this.isValidSalvar()) {

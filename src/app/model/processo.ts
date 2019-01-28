@@ -23,4 +23,5 @@ export class Processo {
   sigiloSegredoJustica: SigiloSegredoJustica;
   motivoSigiloSegredoJustica: MotivoSigiloSegredoJustica;
   orgao: any;
+  andamento: any;
 }
