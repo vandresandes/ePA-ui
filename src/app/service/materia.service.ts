@@ -13,7 +13,7 @@ export class MateriaService {
   constructor(private httpClient: HttpClient) { }
 
   findAll() {
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}`).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/all`).pipe();
   }
 
   findById(id: number) {
@@ -59,7 +59,7 @@ export class MateriaService {
       params: parametros
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar/nomes`, httpOptions).pipe();
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/nomes`, httpOptions).pipe();
   }
 
   criarParamsFiltrarNomes(nome: string): HttpParams {

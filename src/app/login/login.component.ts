@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   emailNulo = false;
   senhaNulo = false;
   returnUrl: string;
-  home: string = "/ingressoprocesso";
+  home: string = "/listadeprocesso";
   errorsUsername: boolean;
   errorsPassword: boolean;
   errorsOrgao: boolean;

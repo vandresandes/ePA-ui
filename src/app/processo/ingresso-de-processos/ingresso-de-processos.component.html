@@ -206,7 +206,6 @@
                 <td>
                   <p-fileUpload *ngIf="item.documento.tipo == 'EM_ANALISE' || item.documento.tipo == 'DOCUMENTO'" name="uploadedFiles[]" multiple="multiple" name="uploadedFiles"
                     chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
-                  <input *ngIf="item.documento.tipo != 'EM_ANALISE'" type="text" nucleoForm="item.descricaoDocumento" pInputText class="form-control" name="descricaoDocumento" [(ngModel)]="item.descricaoDocumento" maxlength="100" />
                 </td>
               </tr>
             </ng-template>
