@@ -37,7 +37,6 @@ export class AppComponent {
           { label: 'Acompanhar', title: 'Acompanhar', command: (event) =>  this.router.navigate(['/pesquisaprocesso']) }
         ]
       },
-      /*
       {
         label: 'Manutenção',
         items: [
@@ -49,7 +48,6 @@ export class AppComponent {
           { label: 'Checklist', title: 'Checklist', command: (event) =>  this.router.navigate(['/checklist/pesquisa']) }
         ]
       },
-      */
       {
         label: 'Sair', icon: 'fa fa-sign-out', command: (event) =>  this.logout()
       }

@@ -69,34 +69,31 @@
             </div>
           </div>
           <div class="form-group">
-            <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="col-sm-12">
               <label>{{lbMateria}}: <span class="obrigatorio">*</span></label>
               <div>
                 <p-dropdown [options]="listaMateria" [(ngModel)]="entity.materia" name="materia" optionLabel="nome" (onChange)="onchangeDropMateria()"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="entity.origem == undefined || entity.origem == null" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-4">
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
               <label>Assunto: <span class="obrigatorio">*</span></label>
               <div>
                 <p-dropdown [options]="listaTermoGeral" [(ngModel)]="entity.termoGeral" name="termoGeral" optionLabel="nome" (onChange)="onchangeDropAssunto()"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="!listaTermoGeral" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-4">
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
               <label>Subassunto: <span class="obrigatorio">*</span></label>
               <div>
                 <p-dropdown [options]="listaTermoEspecifico" [(ngModel)]="entity.termoEspecifico" name="termoEspecifico" optionLabel="nome" (onChange)="onchangeDropSubAssunto()"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="!listaTermoEspecifico" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
             </div>
-            <!-- <div class="col-sm-12 col-md-6 col-lg-4">
-              <label>Tipo de Processo: <span class="obrigatorio">*</span></label>
-              <div>
-                <p-dropdown [options]="listaTipoProcesso" [(ngModel)]="entity.tipoProcesso" name="tipoProcesso" optionLabel="nome" (onChange)="onchangeDropTipoProcesso()"
-                  [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="!listaTipoProcesso" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
-              </div>
-            </div> -->
           </div>
           <div class="form-group">
             <div class="col-sm-12 col-md-4">
@@ -105,39 +102,44 @@
                 <p-dropdown [options]="listaPrioridadeTramitacao" [(ngModel)]="entity.prioridadeTramitacao" name="prioridadeTramitacao" optionLabel="nome"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
-              <div class="margin-top-bottom-20" *ngIf="showPrioridadeTramitacao()">
-                <label>Documento comprobatório: <span class="obrigatorio">*</span></label>
-                <div>
-                  <input type="file" class="form-control">
-                </div>
+            </div>
+            <div class="col-sm-12 col-md-8" *ngIf="showPrioridadeTramitacao()">
+              <label>Documento comprobatório: <span class="obrigatorio">*</span></label>
+              <div>
+                <!-- <input type="file" class="form-control"> -->
+                <p-fileUpload name="documentoComprobatorio" chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
               </div>
             </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-12 col-md-4">
               <label>{{lbSigiloOuSegredoDeJustica}}: <span class="obrigatorio">*</span></label>
               <div>
                 <p-dropdown [options]="listaSigiloSegredoJustica" [(ngModel)]="entity.sigiloSegredoJustica" name="sigiloSegredoJustica" optionLabel="nome" (onchange)="onchangeDropSigiloSegredoJustica()"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
-              <div class="margin-top-bottom-20" *ngIf="showMotivoSigiloOuSegredoJustica()">
-                <label>Motivo do sigilo/segredo de justiça: <span class="obrigatorio">*</span></label>
-                <div>
-                  <p-dropdown [options]="listaMotivoSigiloSegredoJustica" [(ngModel)]="entity.motivoSigiloSegredoJustica" name="motivoSigiloSegredoJustica" optionLabel="nome"
-                    [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
-                </div>
+            </div>
+            <div class="col-sm-12 col-md-8" *ngIf="showMotivoSigiloOuSegredoJustica()">
+              <label>Motivo do sigilo/segredo de justiça: <span class="obrigatorio">*</span></label>
+              <div>
+                <p-dropdown [options]="listaMotivoSigiloSegredoJustica" [(ngModel)]="entity.motivoSigiloSegredoJustica" name="motivoSigiloSegredoJustica" optionLabel="nome"
+                  [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
             </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-12 col-md-4">
               <label>{{lbSolicitadaUrgencia}} <span class="obrigatorio">*</span></label>
-              <div style="height: 34px;">
+              <div>
                 <p-radioButton name="gruposolicitadaurgencia" value="1" label="Sim" [(ngModel)]="solicitadaUrgenciaSelecionado" inputId="solicitadaUrgenciaSelecionado"></p-radioButton>
                 &nbsp;
                 <p-radioButton name="gruposolicitadaurgencia" value="0" label="Não" [(ngModel)]="solicitadaUrgenciaSelecionado" inputId="solicitadaUrgenciaSelecionado"></p-radioButton>
               </div>
-              <div class="margin-top-bottom-20" *ngIf="showJustificativaSolicitadaUrgencia()">
-                <label>Justificativa: <span class="obrigatorio">*</span></label>
-                <div>
-                  <textarea pInputTextarea [(ngModel)]="entity.justificativa" name="justificativa" class="form-control" rows="4"></textarea>
-                </div>
+            </div>
+            <div class="col-sm-12 col-md-8" *ngIf="showJustificativaSolicitadaUrgencia()">
+              <label>Justificativa: <span class="obrigatorio">*</span></label>
+              <div>
+                <textarea pInputTextarea [(ngModel)]="entity.justificativa" name="justificativa" class="form-control" rows="4"></textarea>
               </div>
             </div>
           </div>
@@ -204,14 +206,23 @@
             <ng-template pTemplate="body" let-item>
               <tr>
                 <td>{{item.documento.nome}}</td>
-                <td>{{item.condicao}}</td>
+                <td>
+                  <div *ngIf="item.condicao">
+                    {{item.condicao}}
+                    <div>
+                      <p-dropdown [options]="listaSimNao" [(ngModel)]="item.condicaoAceita" name="simNao" optionLabel="label"
+                        autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} (onChange)="onchangeDropCondicao(item)">
+                    </p-dropdown>
+                    </div>
+                  </div>
+                </td>
                 <td>{{item.obrigatorio | status}}</td>
                 <td>
-                  <p-fileUpload *ngIf="item.documento.tipo == 'EM_ANALISE' || item.documento.tipo == 'DOCUMENTO'" name="uploadedFiles[]" multiple="multiple" name="uploadedFiles"
+                  <p-fileUpload *ngIf="item.documento.tipo == 'EM_ANALISE' || item.documento.tipo == 'DOCUMENTO'" multiple="multiple" name="uploadedFiles"
                   chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
                 </td>
                 <td>
-                  <textarea pInputTextarea [(ngModel)]="entity.esclarecimento" name="esclarecimento" class="form-control" rows="1"></textarea>
+                  <textarea  *ngIf="item.condicao" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2"></textarea>
                 </td>
               </tr>
             </ng-template>

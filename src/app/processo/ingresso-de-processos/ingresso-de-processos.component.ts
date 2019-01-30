@@ -46,6 +46,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   listaOrigem: any;
   listaMotivoSigiloSegredoJustica: any;
   listaOrgao: any;
+  listaSimNao: any;
   listaInteressado: Interessado[] = [];
   solicitadaUrgenciaSelecionado: any;
 
@@ -96,6 +97,7 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.buscarSemPrioridadeTramitacao();
     this.buscarSemSigilo();
     this.carregarEntity();
+    this.listaSimNao = [{id: 1, label: "Sim"}, {id: 0, label: "Não"}];
   }
 
   ngOnInit() {
@@ -422,5 +424,9 @@ export class IngressoDeProcessosComponent implements OnInit {
       valid = false;
     }
     return valid;
+  }
+
+  onchangeDropCondicao(item: any) {
+    item['obrigatorio'] = item['condicaoAceita']['id'] == 1;
   }
 }
