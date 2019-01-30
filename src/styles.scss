@@ -25,6 +25,15 @@ p-button {
 
 // NAVBAR COM PRIMENG ##################################### INÍCIO
 
+.ui-menubar  {
+  color: #ffffff !important;
+  font-weight: bolder !important;
+}
+
+.ui-menuitem {
+  background-color: rgb(0, 97, 172);
+}
+
 .ui-menubar .ui-menubar-custom {
   float: left;
   padding: 0;
@@ -35,7 +44,22 @@ p-button {
 }
 
 body .ui-menubar .ui-menuitem-link .ui-menuitem-text {
-  color: black;
+  color: white;
+}
+
+body .ui-menubar .ui-menuitem #idTitulo {
+  margin-right: 25vw;
+  text-align: center;
+  color: white
+}
+
+body .ui-menubar .ui-menuitem-link .ui-menuitem-text #idTitulo {
+  color: white;
+}
+
+span#titulo {
+  position:relative;
+  margin-left: 33vw;
 }
 
 body .ui-menubar .ui-menuitem.ui-menuitem-active > .ui-menuitem-link {

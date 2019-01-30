@@ -1,3 +1,4 @@
+import { AppConstants } from './app-constants';
 import { Subscriber } from 'rxjs';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, Params, ActivationStart } from '@angular/router';
@@ -15,6 +16,7 @@ export class AppComponent {
   logado: boolean = false;
   currentUser: User;
   items: MenuItem[];
+  titulo: string = AppConstants.TITULO_SISTEMA;
 
   constructor(private router: Router, private authenticationService: AuthenticationService) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
@@ -31,22 +33,23 @@ export class AppComponent {
       {
         label: 'Processo',
         items: [
-          { label: 'Cadastrar', command: (event) =>  this.router.navigate(['/listadeprocesso']) },
-          { label: 'Acompanhar', command: (event) =>  this.router.navigate(['/pesquisaprocesso']) }
-          // { label: 'Cadastro', command: (event) =>  this.router.navigate(['/ingressoprocesso']) }
+          { label: 'Cadastrar', title: 'Cadastrar', command: (event) =>  this.router.navigate(['/listadeprocesso']) },
+          { label: 'Acompanhar', title: 'Acompanhar', command: (event) =>  this.router.navigate(['/pesquisaprocesso']) }
         ]
       },
+      /*
       {
         label: 'Manutenção',
         items: [
-          { label: 'Núcleo', command: (event) =>  this.router.navigate(['/nucleo/pesquisa'])},
-          { label: 'Tipo de Processo', command: (event) =>  this.router.navigate(['/tipoprocesso/pesquisa']) },
-          { label: 'Termo Geral', command: (event) =>  this.router.navigate(['/termogeral/pesquisa']) },
-          { label: 'Termo Específico', command: (event) =>  this.router.navigate(['/termoespecifico/pesquisa']) },
-          { label: 'Documento', command: (event) =>  this.router.navigate(['/documento/pesquisa']) },
-          { label: 'Checklist', command: (event) =>  this.router.navigate(['/checklist/pesquisa']) }
+          { label: 'Núcleo', title: 'Núcleo', command: (event) =>  this.router.navigate(['/nucleo/pesquisa'])},
+          { label: 'Tipo de Processo', title: 'Tipo de Processo', command: (event) =>  this.router.navigate(['/tipoprocesso/pesquisa']) },
+          { label: 'Termo Geral', title: 'Termo Geral', command: (event) =>  this.router.navigate(['/termogeral/pesquisa']) },
+          { label: 'Termo Específico', title: 'Termo Específico', command: (event) =>  this.router.navigate(['/termoespecifico/pesquisa']) },
+          { label: 'Documento', title: 'Documento', command: (event) =>  this.router.navigate(['/documento/pesquisa']) },
+          { label: 'Checklist', title: 'Checklist', command: (event) =>  this.router.navigate(['/checklist/pesquisa']) }
         ]
       },
+      */
       {
         label: 'Sair', icon: 'fa fa-sign-out', command: (event) =>  this.logout()
       }

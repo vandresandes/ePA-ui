@@ -14,4 +14,6 @@ export class AppConstants {
   public static NENHUM_REGISTRO_ADICIONADO = "Nenhum registro adicionado";
   public static NAO_ENCONTRADO: string = "Não encontrado!";
   public static NENHUM_RESULTADO_ENCONTRADO: string = "Nenhum resultado encontrado";
+
+  public static TITULO_SISTEMA: string = "Processo Administrativo eletrônico - ePA";
 }
