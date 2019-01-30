@@ -194,24 +194,30 @@
           <p-table [value]="listaChecklist" [responsive]="true" [autoLayout]="true">
             <ng-template pTemplate="header">
               <tr>
-                <th class="col-sm-5">Documento</th>
-                <th style="width: 100px">Tipo</th>
-                <th class="col-sm-5">Selecione o documento</th>
+                <th class="col-sm-3">Documento</th>
+                <th class="col-sm-3">Condição</th>
+                <th class="col-sm-1">Tipo</th>
+                <th class="col-sm-3">Selecione o documento</th>
+                <th class="col-sm-2">Esclarecimentos</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
               <tr>
                 <td>{{item.documento.nome}}</td>
-                <td>{{item.status | status}}</td>
+                <td>{{item.condicao}}</td>
+                <td>{{item.obrigatorio | status}}</td>
                 <td>
                   <p-fileUpload *ngIf="item.documento.tipo == 'EM_ANALISE' || item.documento.tipo == 'DOCUMENTO'" name="uploadedFiles[]" multiple="multiple" name="uploadedFiles"
-                    chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
+                  chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
+                </td>
+                <td>
+                  <textarea pInputTextarea [(ngModel)]="entity.esclarecimento" name="esclarecimento" class="form-control" rows="1"></textarea>
                 </td>
               </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
               <tr>
-                <td [attr.colspan]="3">
+                <td [attr.colspan]="5">
                   {{msgNenhumRegistroAdicionado}}
                 </td>
               </tr>
