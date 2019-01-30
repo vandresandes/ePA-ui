@@ -1,5 +1,3 @@
-import { DocumentoService } from 'src/app/service/documento.service';
-import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DialogService } from 'primeng/components/dynamicdialog/dialogservice';
 import { Message } from 'primeng/components/common/message';
@@ -43,7 +41,6 @@ export class IngressoDeProcessosComponent implements OnInit {
   listaPrioridadeTramitacao: any;
   listaSigiloSegredoJustica: any;
   listaSolicitadaUrgencia: any;
-  listaOrigem: any;
   listaMotivoSigiloSegredoJustica: any;
   listaOrgao: any;
   listaSimNao: any;
@@ -80,7 +77,6 @@ export class IngressoDeProcessosComponent implements OnInit {
     public dialogService: DialogService,
     private origemService: OrigemService,
     private materiaService: MateriaService,
-    private tipoProcessoService: TipoProcessoService,
     private termoGeralService: TermoGeralService,
     private termoEspecificoService: TermoEspecificoService,
     private motivoSigiloSegredoJusticaService: MotivoSigiloSegredoJusticaService,
@@ -154,7 +150,6 @@ export class IngressoDeProcessosComponent implements OnInit {
   buscarTodosOrigem() {
     this.origemService.findAll().subscribe(
 			data => {
-        this.listaOrigem = data,
         this.listaOrgao = data
 			},
 			error => console.log(error)

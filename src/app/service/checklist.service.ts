@@ -44,19 +44,19 @@ export class ChecklistService {
   criarParamsBuscarPaginado(filtro: ChecklistPesquisaDto, paginacao: PaginacaoDto): HttpParams {
     var params = new HttpParams();
     if (!AppUtil.isNull(filtro.nucleo)) {
-      params = params.append('nomeNucleo', String(filtro.nucleo));
+      params = params.append('nucleo.nome', String(filtro.nucleo));
     }
     if (!AppUtil.isNull(filtro.tipoProcesso)) {
-      params = params.append('nomeTipoProcesso', String(filtro.tipoProcesso));
+      params = params.append('tipoProcesso.nome', String(filtro.tipoProcesso));
     }
     if (!AppUtil.isNull(filtro.termoGeral)) {
-      params = params.append('nomeTermoGeral', String(filtro.termoGeral));
+      params = params.append('termoGeral.nome', String(filtro.termoGeral));
     }
     if (!AppUtil.isNull(filtro.termoEspecifico)) {
-      params = params.append('nomeTermoEspecifico', String(filtro.termoEspecifico));
+      params = params.append('termoEspecifico.nome', String(filtro.termoEspecifico));
     }
     if (!AppUtil.isNull(filtro.documento)) {
-      params = params.append('nomeDocumento', String(filtro.documento));
+      params = params.append('documento.nome', String(filtro.documento));
     }
     if (!AppUtil.isNull(filtro.obrigatorio)) {
       params = params.append('obrigatorio', String(filtro.obrigatorio));
@@ -84,22 +84,22 @@ export class ChecklistService {
   criarParamsFitrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number): HttpParams {
     var params = new HttpParams();
     if (!AppUtil.isNull(idNucleo)) {
-      params = params.append('idNucleo', String(idNucleo));
+      params = params.append('nucleo.id', String(idNucleo));
     }
     if (!AppUtil.isNull(idTipoProcesso)) {
-      params = params.append('idTipoProcesso', String(idTipoProcesso));
+      params = params.append('tipoProcesso.id', String(idTipoProcesso));
     }
     if (!AppUtil.isNull(idTermoGeral)) {
-      params = params.append('idTermoGeral', String(idTermoGeral));
+      params = params.append('termoGeral.id', String(idTermoGeral));
     }
     if (!AppUtil.isNull(idTermoEspecifico)) {
-      params = params.append('idTermoEspecifico', String(idTermoEspecifico));
+      params = params.append('termoEspecifico.id', String(idTermoEspecifico));
     }
     if (!AppUtil.isNull(idDocumento)) {
-      params = params.append('idDocumento', String(idDocumento));
+      params = params.append('documento.id', String(idDocumento));
     }
     if (!AppUtil.isNull(idMateria)) {
-      params = params.append('idMateria', String(idMateria));
+      params = params.append('nucleo.materia.id', String(idMateria));
     }
     return params;
   }

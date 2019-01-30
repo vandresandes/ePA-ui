@@ -63,7 +63,7 @@
             <div class="col-sm-12">
               <label>Origem: <span class="obrigatorio">*</span></label>
               <div>
-                <p-dropdown [options]="listaOrigem" [(ngModel)]="entity.origem" name="origem" optionLabel="nomeDescricao" (onChange)="onchangeDropOrigem()"
+                <p-dropdown [options]="listaOrgao" [(ngModel)]="entity.origem" name="origem" optionLabel="nomeDescricao" (onChange)="onchangeDropOrigem()"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
             </div>
@@ -196,15 +196,16 @@
           <p-table [value]="listaChecklist" [responsive]="true" [autoLayout]="true">
             <ng-template pTemplate="header">
               <tr>
-                <th class="col-sm-3">Documento</th>
-                <th class="col-sm-3">Condição</th>
                 <th class="col-sm-1">Tipo</th>
+                <th class="col-sm-4">Item</th>
+                <th class="col-sm-3">Condição</th>
+                <th class="col-sm-1">Exigência</th>
                 <th class="col-sm-3">Selecione o documento</th>
-                <th class="col-sm-2">Esclarecimentos</th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
               <tr>
+                <td>{{item.documento.tipo | tipoDocumento}}</td>
                 <td>{{item.documento.nome}}</td>
                 <td>
                   <div *ngIf="item.condicao">
@@ -214,15 +215,15 @@
                         autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} (onChange)="onchangeDropCondicao(item)">
                     </p-dropdown>
                     </div>
+                    <div *ngIf="item.condicaoAceita && item.condicaoAceita.id == 0" style="margin-top: 10px">
+                      <textarea  *ngIf="item.condicao" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2"></textarea>
+                    </div>
                   </div>
                 </td>
                 <td>{{item.obrigatorio | status}}</td>
                 <td>
-                  <p-fileUpload *ngIf="item.documento.tipo == 'EM_ANALISE' || item.documento.tipo == 'DOCUMENTO'" multiple="multiple" name="uploadedFiles"
+                  <p-fileUpload *ngIf="item.documento.tipo == 'DOCUMENTO'" multiple="multiple" name="uploadedFiles"
                   chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
-                </td>
-                <td>
-                  <textarea  *ngIf="item.condicao" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2"></textarea>
                 </td>
               </tr>
             </ng-template>

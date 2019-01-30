@@ -48,7 +48,7 @@ export class NucleoService {
       params = params.append('nome', filtro.nome);
     }
     if (!AppUtil.isNull(filtro.nomeMateria)) {
-      params = params.append('nomeMateria', filtro.nomeMateria);
+      params = params.append('materia.nome', String(filtro.nomeMateria));
     }
     if (!AppUtil.isNull(paginacao.page)) {
       params = params.append('page', String(paginacao.page));
@@ -73,19 +73,19 @@ export class NucleoService {
   criarParamsFitrar(idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idDocumento: number, idMateria: number): HttpParams {
     var params = new HttpParams();
     if (!AppUtil.isNull(idTipoProcesso)) {
-      params = params.append('idTipoProcesso', String(idTipoProcesso));
+      params = params.append('tipoProcesso.id', String(idTipoProcesso));
     }
     if (!AppUtil.isNull(idTermoGeral)) {
-      params = params.append('idTermoGeral', String(idTermoGeral));
+      params = params.append('termoGeral.id', String(idTermoGeral));
     }
     if (!AppUtil.isNull(idTermoEspecifico)) {
-      params = params.append('idTermoEspecifico', String(idTermoEspecifico));
+      params = params.append('termoEspecifico.id', String(idTermoEspecifico));
     }
     if (!AppUtil.isNull(idDocumento)) {
-      params = params.append('idDocumento', String(idDocumento));
+      params = params.append('documento.id', String(idDocumento));
     }
     if (!AppUtil.isNull(idMateria)) {
-      params = params.append('idMateria', String(idMateria));
+      params = params.append('materia.id', String(idMateria));
     }
     return params;
   }
