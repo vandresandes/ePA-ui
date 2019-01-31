@@ -1,5 +1,5 @@
 <form autocomplete="off" #ingressoProcessosForm="ngForm" class="form-horizontal">
-  <div class="box box-primary">
+  <div class="box box-primary" style="width: 80%">
     <div class="box-body">
       <p-messages [(value)]="msgs"></p-messages>
       <p-tabView>
@@ -215,7 +215,7 @@
                         autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} (onChange)="onchangeDropCondicao(item)">
                     </p-dropdown>
                     </div>
-                    <div *ngIf="item.condicaoAceita && item.condicaoAceita.id == 0" style="margin-top: 10px">
+                    <div *ngIf="item.apresentarJustificativaCondicao && item.condicaoAceita && item.condicaoAceita.id == 0" style="margin-top: 10px">
                       <textarea  *ngIf="item.condicao" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2"></textarea>
                     </div>
                   </div>
