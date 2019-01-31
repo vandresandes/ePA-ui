@@ -1,5 +1,5 @@
 export enum EnumSigiloSegredoJustica {
-  SEM_SIGILO = 1,
-  SIGILOSO = 2,
-  SEGREDO_DE_JUSTICA = 3
+  SEM_SIGILO = "SEM_SIGILO",
+  SIGILOSO = "SIGILOSO",
+  SEGREDO_DE_JUSTICA = "SEGREDO_DE_JUSTICA"
 }

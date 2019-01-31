@@ -1,11 +1,11 @@
+import { EnumSigiloSegredoJustica } from 'src/app/enums';
 import { MotivoSigiloSegredoJustica } from './motivo-sigilo-segredo-justica';
-import { SigiloSegredoJustica } from './sigilo-segredo-justica';
-import { PrioridadeTramitacao } from './prioridade-tramitacao';
 import { TermoEspecifico } from './termoEspecifico';
 import { TermoGeral } from './termoGeral';
 import { TipoProcesso } from './tipoProcesso';
 import { Materia } from './materia';
 import { Origem } from './origem';
+import { EnumPrioridadeTramitacao } from '../enums';
 
 export class Processo {
   id: number;
@@ -19,8 +19,8 @@ export class Processo {
   tipoProcesso: TipoProcesso;
   termoGeral: TermoGeral;
   termoEspecifico: TermoEspecifico;
-  prioridadeTramitacao: PrioridadeTramitacao;
-  sigiloSegredoJustica: SigiloSegredoJustica;
+  prioridadeTramitacao: EnumPrioridadeTramitacao;
+  sigiloSegredoJustica: EnumSigiloSegredoJustica;
   motivoSigiloSegredoJustica: MotivoSigiloSegredoJustica;
   orgao: any;
   andamento: any;

@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MotivoSigiloSegredoJusticaService {
-  resource: string = "motivosigilosegredosusticacontroller";
+  resource: string = "motivosigilosegredojustica";
 
   constructor(private httpClient: HttpClient) { }
 

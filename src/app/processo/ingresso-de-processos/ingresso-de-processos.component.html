@@ -99,7 +99,7 @@
             <div class="col-sm-12 col-md-4">
               <label>{{lbPrioridadeTramitacao}}: <span class="obrigatorio">*</span></label>
               <div>
-                <p-dropdown [options]="listaPrioridadeTramitacao" [(ngModel)]="entity.prioridadeTramitacao" name="prioridadeTramitacao" optionLabel="nome"
+                <p-dropdown [options]="listaPrioridadeTramitacao" [(ngModel)]="entity.prioridadeTramitacao" name="prioridadeTramitacao" optionLabel="descricao"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
             </div>
@@ -115,7 +115,7 @@
             <div class="col-sm-12 col-md-4">
               <label>{{lbSigiloOuSegredoDeJustica}}: <span class="obrigatorio">*</span></label>
               <div>
-                <p-dropdown [options]="listaSigiloSegredoJustica" [(ngModel)]="entity.sigiloSegredoJustica" name="sigiloSegredoJustica" optionLabel="nome" (onchange)="onchangeDropSigiloSegredoJustica()"
+                <p-dropdown [options]="listaSigiloSegredoJustica" [(ngModel)]="entity.sigiloSegredoJustica" name="sigiloSegredoJustica" optionLabel="descricao" (onchange)="onchangeDropSigiloSegredoJustica()"
                   [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
               </div>
             </div>

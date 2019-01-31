@@ -167,7 +167,7 @@ export class IngressoDeProcessosComponent implements OnInit {
 
   buscarSemPrioridadeTramitacao() {
     let entity: any;
-    this.prioridadeTramitacaoService.findById(EnumPrioridadeTramitacao.SEM_PRIORIDADE).subscribe(
+    this.prioridadeTramitacaoService.buscarPorValor(EnumPrioridadeTramitacao.SEM_PRIORIDADE).subscribe(
 			data => {
         entity = data,
         this.entity.prioridadeTramitacao = entity
@@ -178,7 +178,7 @@ export class IngressoDeProcessosComponent implements OnInit {
 
   buscarSemSigilo() {
     let entity: any;
-    this.sigiloSegredoJusticaService.findById(EnumSigiloSegredoJustica.SEM_SIGILO).subscribe(
+    this.sigiloSegredoJusticaService.buscarPorValor(EnumSigiloSegredoJustica.SEM_SIGILO).subscribe(
 			data => {
         entity = data,
         this.entity.sigiloSegredoJustica = entity
@@ -326,7 +326,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   showPrioridadeTramitacao(): boolean {
-    if (!AppUtil.isNull(this.entity.prioridadeTramitacao) && EnumPrioridadeTramitacao.SEM_PRIORIDADE !== this.entity.prioridadeTramitacao.id) {
+    if (!AppUtil.isNull(this.entity.prioridadeTramitacao) && EnumPrioridadeTramitacao.SEM_PRIORIDADE !== this.entity.prioridadeTramitacao['valor']) {
       return true;
     }
     this.entity.documentoComprobatorio = null;
@@ -334,7 +334,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   showMotivoSigiloOuSegredoJustica(): boolean {
-    if (!AppUtil.isNull(this.entity.sigiloSegredoJustica) && EnumSigiloSegredoJustica.SEM_SIGILO !== this.entity.sigiloSegredoJustica.id) {
+    if (!AppUtil.isNull(this.entity.sigiloSegredoJustica) && EnumSigiloSegredoJustica.SEM_SIGILO !== this.entity.sigiloSegredoJustica['valor']) {
       return true;
     }
     this.entity.motivoSigiloSegredoJustica = null;

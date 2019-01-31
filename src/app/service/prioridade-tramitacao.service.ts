@@ -6,15 +6,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PrioridadeTramitacaoService {
-  resource: string = "prioridadetramitacaocontroller";
+  resource: string = "prioridadetramitacao";
 
   constructor(private httpClient: HttpClient) { }
+
+  buscarPorValor(valor: String) {
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/${valor}`).pipe();
+  }
 
   findAll() {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}`).pipe();
   }
 
-  findById(id: number) {
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/${id}`).pipe(res=> res);
-  }
 }
