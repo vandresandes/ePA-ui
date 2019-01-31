@@ -7,6 +7,7 @@ import { TipoProcessoListComponent } from './tipo-processo-list/tipo-processo-li
 import { TipoProcessoCadastroComponent } from './tipo-processo-cadastro/tipo-processo-cadastro.component';
 
 // PRIMENG
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
@@ -22,6 +23,7 @@ import { PaginatorModule } from 'primeng/paginator';
   imports: [
     CommonModule,
     TipoProcessoRoutingModule,
+    AutoCompleteModule,
     ButtonModule,
     InputTextModule,
     TableModule,

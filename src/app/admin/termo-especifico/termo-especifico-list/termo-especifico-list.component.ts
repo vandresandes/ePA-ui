@@ -18,6 +18,7 @@ export class TermoEspecificoListComponent implements OnInit {
   entity: TermoEspecificoDto = new TermoEspecificoDto();
   listaPesquisa: any;
   titulo: string = "Termo Específico";
+  listaNomeTermoEspecifico: any;
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -31,6 +32,17 @@ export class TermoEspecificoListComponent implements OnInit {
 
   ngOnInit() {}
 
+
+  filtrarNomes(event: any) {
+    let query = event.query;
+    this.service.filtrarNomes(query).subscribe(
+			data => {
+        this.listaNomeTermoEspecifico = data
+
+			},
+			error => console.log(error)
+    );
+  }
 
   pesquisar() {
     this.service.buscarPaginado(this.entity, this.paginacao).subscribe(

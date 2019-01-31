@@ -7,6 +7,7 @@ import { TermoEspecificoListComponent } from './termo-especifico-list/termo-espe
 import { TermoEspecificoCadastroComponent } from './termo-especifico-cadastro/termo-especifico-cadastro.component';
 
 // PRIMENG
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
@@ -22,6 +23,7 @@ import { PaginatorModule } from 'primeng/paginator';
   imports: [
     CommonModule,
     TermoEspecificoRoutingModule,
+    AutoCompleteModule,
     ButtonModule,
     InputTextModule,
     TableModule,

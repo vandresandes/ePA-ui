@@ -11,7 +11,8 @@
             <div class="col-sm-12 col-md-6">
               <label for="nome">{{titulo}}</label>
               <div>
-                <input id="nome" type="text" pInputText class="form-control" name="nome" [(ngModel)]="entity.nome" />
+                <p-autoComplete id="nome" [(ngModel)]="entity.nome" [suggestions]="listaNomeDocumento" [minLength]="3" emptyMessage={{msgNaoEncontrado}} name="nucleo"
+                (completeMethod)="filtrarNomes($event)" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
               </div>
             </div>
           </div>

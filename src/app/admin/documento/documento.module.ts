@@ -7,6 +7,7 @@ import { DocumentoListComponent } from './documento-list/documento-list.componen
 import { DocumentoCadastroComponent } from './documento-cadastro/documento-cadastro.component';
 
 // PRIMENG
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
@@ -29,6 +30,7 @@ import { PaginatorModule } from 'primeng/paginator';
   imports: [
     CommonModule,
     DocumentoRoutingModule,
+    AutoCompleteModule,
     ButtonModule,
     InputTextModule,
     TableModule,

@@ -17,6 +17,7 @@ export class TermoGeralListComponent implements OnInit {
   entity: TermoGeralDto = new TermoGeralDto();
   listaPesquisa: any;
   titulo: string = "Termo Geral";
+  listaNomeTermoGeral: any;
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -30,6 +31,17 @@ export class TermoGeralListComponent implements OnInit {
 
   ngOnInit() {}
 
+
+  filtrarNomes(event: any) {
+    let query = event.query;
+    this.service.filtrarNomes(query).subscribe(
+			data => {
+        this.listaNomeTermoGeral = data
+
+			},
+			error => console.log(error)
+    );
+  }
 
   pesquisar() {
     this.service.buscarPaginado(this.entity, this.paginacao).subscribe(

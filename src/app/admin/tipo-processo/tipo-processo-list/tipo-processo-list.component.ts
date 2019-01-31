@@ -18,6 +18,7 @@ export class TipoProcessoListComponent implements OnInit {
   entity: TipoProcessoDto = new TipoProcessoDto();
   listaPesquisa: any;
   titulo: string = "Tipo de Processo";
+  listaNomeTipoProcesso: any;
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -31,6 +32,17 @@ export class TipoProcessoListComponent implements OnInit {
 
   ngOnInit() {}
 
+
+  filtrarNomes(event: any) {
+    let query = event.query;
+    this.service.filtrarNomes(query).subscribe(
+			data => {
+        this.listaNomeTipoProcesso = data
+
+			},
+			error => console.log(error)
+    );
+  }
 
   pesquisar() {
     this.service.buscarPaginado(this.entity, this.paginacao).subscribe(

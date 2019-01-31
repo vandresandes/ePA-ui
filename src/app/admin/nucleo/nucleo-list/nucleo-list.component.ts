@@ -21,6 +21,7 @@ export class NucleoListComponent implements OnInit {
   nome: string = null;
   titulo: string = "Núcleo";
   listaMateria: any;
+  listaNomeNucleo: any;
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -43,6 +44,17 @@ export class NucleoListComponent implements OnInit {
         this.listaPesquisa = data['content'],
         this.paginacao.totalRecords = data['totalElements'],
         this.paginacao.totalPages = data['totalPages']
+			},
+			error => console.log(error)
+    );
+  }
+
+  filtrarNomes(event: any) {
+    let query = event.query;
+    this.service.filtrarNomes(query).subscribe(
+			data => {
+        this.listaNomeNucleo = data
+
 			},
 			error => console.log(error)
     );

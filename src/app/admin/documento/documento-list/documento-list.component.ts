@@ -15,7 +15,7 @@ export class DocumentoListComponent implements OnInit {
   entity: DocumentoDto = new DocumentoDto();
   listaPesquisa: any;
   titulo: string = "Documento";
-  testando: string = "INFORMACAO";
+  listaNomeDocumento: any;
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -28,6 +28,17 @@ export class DocumentoListComponent implements OnInit {
 
   ngOnInit() {}
 
+
+  filtrarNomes(event: any) {
+    let query = event.query;
+    this.service.filtrarNomes(query).subscribe(
+			data => {
+        this.listaNomeDocumento = data
+
+			},
+			error => console.log(error)
+    );
+  }
 
   pesquisar() {
     this.service.buscarPaginado(this.entity, this.paginacao).subscribe(
