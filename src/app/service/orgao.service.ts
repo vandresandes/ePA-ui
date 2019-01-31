@@ -6,9 +6,9 @@ import { AppUtil } from '../app-util';
 @Injectable({
   providedIn: 'root'
 })
-export class OrigemService {
+export class OrgaoService {
 
-  resource: string = "origem";
+  resource: string = "orgao";
 
   constructor(private httpClient: HttpClient) { }
 

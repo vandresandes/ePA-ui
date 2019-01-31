@@ -6,7 +6,6 @@ import { InteressadoDialogComponent } from 'src/app/dialog/interessado-dialog/in
 import { Processo, Interessado } from 'src/app/model';
 import { AppConstants } from 'src/app/app-constants';
 import { ProcessoService } from 'src/app/service/processo.service';
-import { OrigemService } from 'src/app/service/origem.service';
 import { MateriaService } from 'src/app/service/materia.service';
 import { TermoGeralService } from 'src/app/service/termo-geral.service';
 import { TermoEspecificoService } from 'src/app/service/termo-especifico.service';
@@ -16,6 +15,7 @@ import { SigiloSegredoJusticaService } from 'src/app/service/sigilo-segredo-just
 import { ChecklistService } from 'src/app/service/checklist.service';
 import { EnumPrioridadeTramitacao, EnumSigiloSegredoJustica } from 'src/app/enums';
 import { AppUtil } from 'src/app/app-util';
+import { OrgaoService } from 'src/app/service/orgao.service';
 
 @Component({
   selector: 'app-ingresso-de-processos',
@@ -75,7 +75,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   constructor(
     private service: ProcessoService,
     public dialogService: DialogService,
-    private origemService: OrigemService,
+    private orgaoService: OrgaoService,
     private materiaService: MateriaService,
     private termoGeralService: TermoGeralService,
     private termoEspecificoService: TermoEspecificoService,
@@ -148,7 +148,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   buscarTodosOrigem() {
-    this.origemService.findAll().subscribe(
+    this.orgaoService.findAll().subscribe(
 			data => {
         this.listaOrgao = data
 			},

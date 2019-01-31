@@ -1,10 +1,10 @@
+import { OrgaoService } from './../service/orgao.service';
 import { AppUtil } from './../app-util';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 import { AppConstants } from '../app-constants';
-import { OrigemService } from '../service/origem.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private authenticationService: AuthenticationService,
-      private origemService: OrigemService
+      private orgaoService: OrgaoService
   ) {
       // redirecionar para home se já estiver logado
       if (this.authenticationService.currentUserValue) {
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
   }
 
   findAllOrgao() {
-    this.origemService.findAll().subscribe(
+    this.orgaoService.findAll().subscribe(
 			data => {
         this.listaOrgao = data
 			},

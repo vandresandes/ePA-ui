@@ -1,4 +1,4 @@
-import { OrigemService } from './../../service/origem.service';
+import { OrgaoService } from './../../service/orgao.service';
 import { Component, OnInit } from '@angular/core';
 import { Interessado } from 'src/app/model/interessado';
 import { Message } from 'primeng/components/common/message';
@@ -29,7 +29,7 @@ export class InteressadoDialogComponent implements OnInit {
 
   constructor(
     public ref: DynamicDialogRef,
-    private origemService: OrigemService
+    private orgaoService: OrgaoService
     ) {
       this.buscarTodosOrigem();
   }
@@ -73,7 +73,7 @@ export class InteressadoDialogComponent implements OnInit {
   }
 
   buscarTodosOrigem() {
-    this.origemService.findAll().subscribe(
+    this.orgaoService.findAll().subscribe(
 			data => {
         this.listaOrgao = data
 			},
