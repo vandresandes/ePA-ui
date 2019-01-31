@@ -1,6 +1,6 @@
 <form autocomplete="off" #listaProcessosForm="ngForm" class="form-horizontal">
-  <div class="box box-primary" style="border-bottom: none">
-    <div class="box-body" style="margin-top: 20px; width: 70%">
+  <div class="box box-primary" style="box-shadow: 0 0px 0px 0px;">
+    <div class="box-body col-sm-12 col-md-8" style="margin-top: 20px;">
       <p-table [value]="lista" selectionMode="single" [(selection)]="itemSelecionado" [responsive]="true" [autoLayout]="true">
         <ng-template pTemplate="header">
           <tr>
@@ -20,9 +20,11 @@
         </ng-template>
       </p-table>
     </div>
-    <div class="box-footer clearfix" style="width: 70%">
+    <div class="box-footer clearfix col-sm-12 col-md-8">
       <div class="pull-right">
-        <p-button icon="fa fa-chevron-circle-right" iconPos="left" label="Continuar" pTooltip="Continuar" tooltipPosition="top" (click)="continuar()" [disabled]="!itemSelecionado" type="button"></p-button>
+        <p-button icon="fa fa-chevron-circle-right" iconPos="left" label="Continuar" pTooltip="Continuar" tooltipPosition="top" (click)="continuar()"
+          [disabled]="!itemSelecionado" type="button">
+        </p-button>
       </div>
     </div>
   </div>
