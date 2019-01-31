@@ -1,6 +1,6 @@
 <form autocomplete="off" #ingressoProcessosForm="ngForm" class="form-horizontal">
   <div class="box box-primary">
-    <div class="box-body col-sm-12 col-md-10">
+    <div class="box-body col-md-12 col-lg-10">
       <p-messages [(value)]="msgs"></p-messages>
       <p-tabView>
         <p-tabPanel header="Informações">
@@ -33,19 +33,23 @@
                 <div class="col-sm-12 col-md-6">
                   <label>{{lbNome}} <span class="obrigatorio">*</span></label>
                   <div>
-                    <input nucleoForm="entity.nome" type="text" pInputText class="form-control" name="nomeProponente" [(ngModel)]="entity.nome" maxlength="100" [disabled]="readonly" required />
+                    <input nucleoForm="entity.nome" type="text" pInputText class="form-control" name="nomeProponente" [(ngModel)]="entity.nomeProponente" maxlength="100" [disabled]="readonly" required />
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-3">
                   <label>{{lbEmail}} <span class="obrigatorio">*</span></label>
                   <div>
-                    <input nucleoForm="entity.email" type="email" pInputText class="form-control" name="emailProponente" [(ngModel)]="entity.email" maxlength="100" [disabled]="readonly" required />
+                    <input nucleoForm="entity.email" type="email" [email]="true" pInputText class="form-control" name="emailProponente" #emailProponente="ngModel"
+                      [(ngModel)]="entity.emailProponente" maxlength="100" [disabled]="readonly" required />
+                  </div>
+                  <div *ngIf="emailProponente.value && !emailProponente.valid && false" class="obrigatorio-login">
+                    <div>E-mail inválido</div>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-3">
                   <label>{{lbTelefone}} <span class="obrigatorio">*</span></label>
                   <div>
-                    <input nucleoForm="entity.telefone" type="text" pInputText class="form-control" name="telefoneProponente" [(ngModel)]="entity.telefone" maxlength="100" [disabled]="readonly" required />
+                    <input nucleoForm="entity.telefone" type="text" pInputText class="form-control" name="telefoneProponente" [(ngModel)]="entity.telefoneProponente" maxlength="100" [disabled]="readonly" required />
                   </div>
                 </div>
               </div>
@@ -238,7 +242,7 @@
         </p-tabPanel>
       </p-tabView>
     </div>
-    <div class="box-footer clearfix col-sm-12 col-md-10">
+    <div class="box-footer clearfix col-md-12 col-lg-10">
       <div class="pull-right">
         <p-button icon="fa fa-floppy-o" iconPos="left" label={{lbBtnSalvar}} pTooltip={{lbBtnSalvar}} tooltipPosition="top" class="btn-5" (click)="salvar()"></p-button>
         <p-button icon="fa fa-share" iconPos="left" label={{lbBtnEnviar}} pTooltip={{lbBtnEnviar}} tooltipPosition="top" (click)="enviar()"></p-button>

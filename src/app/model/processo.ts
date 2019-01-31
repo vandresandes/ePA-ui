@@ -24,4 +24,9 @@ export class Processo {
   motivoSigiloSegredoJustica: MotivoSigiloSegredoJustica;
   orgao: any;
   andamento: any;
+
+  // Proponente
+  nomeProponente: string;
+  emailProponente: string;
+  telefoneProponente: string;
 }
