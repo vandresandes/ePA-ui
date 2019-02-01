@@ -244,8 +244,8 @@
     </div>
     <div class="box-footer clearfix col-md-12 col-lg-10">
       <div class="pull-right">
-        <p-button icon="fa fa-floppy-o" iconPos="left" label={{lbBtnSalvar}} pTooltip={{lbBtnSalvar}} tooltipPosition="top" class="btn-5" (click)="salvar()"></p-button>
-        <p-button icon="fa fa-share" iconPos="left" label={{lbBtnEnviar}} pTooltip={{lbBtnEnviar}} tooltipPosition="top" (click)="enviar()"></p-button>
+        <p-button icon="fa fa-floppy-o" iconPos="left" label={{lbBtnSalvar}} pTooltip={{lbBtnSalvar}} tooltipPosition="top" class="btn-5" (onClick)="salvar()"></p-button>
+        <p-button icon="fa fa-share" iconPos="left" label={{lbBtnEnviar}} pTooltip={{lbBtnEnviar}} tooltipPosition="top" [disabled]="true" (onClick)="enviar()"></p-button>
       </div>
     </div>
   </div>
