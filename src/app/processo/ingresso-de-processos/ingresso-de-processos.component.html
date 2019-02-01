@@ -220,7 +220,7 @@
                     </p-dropdown>
                     </div>
                     <div *ngIf="item.apresentarJustificativaCondicao && item.condicaoAceita && item.condicaoAceita.id == 0" style="margin-top: 10px">
-                      <textarea  *ngIf="item.condicao" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2"></textarea>
+                      <textarea  *ngIf="item.condicao" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2" placeholder="Justifique"></textarea>
                     </div>
                   </div>
                 </td>
