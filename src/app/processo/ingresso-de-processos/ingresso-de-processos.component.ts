@@ -71,6 +71,7 @@ export class IngressoDeProcessosComponent implements OnInit {
 
   msgNenhumRegistroAdicionado: string = AppConstants.NENHUM_REGISTRO_ADICIONADO;
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
+  data: any;
 
   constructor(
     private service: ProcessoService,
@@ -385,6 +386,8 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   enviar() {
+    console.log("enviar");
+
     if (this.isValidSalvar()) {
       // service
     }

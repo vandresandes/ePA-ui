@@ -25,8 +25,7 @@ export class TipoProcessoCadastroComponent implements OnInit {
     private service: TipoProcessoService,
     private route: ActivatedRoute,
     private router: Router
-    )
-  {
+  ) {
     this.route.params.forEach((params: Params) => {
       if (this.route.params['value']['id'] !== undefined) {
         const id = this.route.params['value']['id'];
@@ -40,6 +39,10 @@ export class TipoProcessoCadastroComponent implements OnInit {
           },
           error => console.log(error)
         );
+      }
+      let msgSummary = this.route.params['value']['msgSummary'];
+      if (msgSummary !== undefined) {
+        this.msgs.push({severity:'success', summary: msgSummary});
       }
     });
   }
@@ -73,15 +76,14 @@ export class TipoProcessoCadastroComponent implements OnInit {
     let status: number = data['status'];
     if (status === 201) {
       let id: number = data['body']['id'];
-      this.editar(id);
-      this.msgs.push({severity:'success', summary:"Cadastrado com sucesso!"});
+      this.editar(id, AppConstants.REGISTRO_CADASTRADO_COM_SUCESSO);
     } else {
       // verificar se ocorreu error(s)
     }
   }
 
-  editar(id: number) {
-    const link = ['/tipoprocesso/editar', id];
+  editar(id: number, summary?: any) {
+    const link = ['/tipoprocesso/editar', id, {msgSummary: summary}];
     this.router.navigate(link);
   }
 

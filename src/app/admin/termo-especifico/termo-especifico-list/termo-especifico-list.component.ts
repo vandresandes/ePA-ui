@@ -1,8 +1,8 @@
+import { Message } from 'primeng/components/common/api';
 import { Component, OnInit } from '@angular/core';
 import { TermoEspecificoService } from 'src/app/service/termo-especifico.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { TermoEspecificoDto } from 'src/app/dto/termo-especifico-dto';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
 import { AppConstants } from 'src/app/app-constants';
@@ -11,7 +11,7 @@ import { AppConstants } from 'src/app/app-constants';
   selector: 'app-termo-especifico-list',
   templateUrl: './termo-especifico-list.component.html',
   styleUrls: ['./termo-especifico-list.component.scss'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService]
 })
 export class TermoEspecificoListComponent implements OnInit {
 
@@ -19,6 +19,7 @@ export class TermoEspecificoListComponent implements OnInit {
   listaPesquisa: any;
   titulo: string = "Termo Específico";
   listaNomeTermoEspecifico: any;
+  msgs: Message[] = [];
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -27,8 +28,8 @@ export class TermoEspecificoListComponent implements OnInit {
   constructor(
     private service: TermoEspecificoService,
     private router: Router,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+    private confirmationService: ConfirmationService
+  ) { }
 
   ngOnInit() {}
 
@@ -84,16 +85,17 @@ export class TermoEspecificoListComponent implements OnInit {
   }
 
   confirmarExclusao(id: number) {
-    console.log("excluindo");
     this.confirmationService.confirm({
-      message: 'Tem certeza que deseja excluir?',
-      header: 'Exclusão',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
-      accept: () => {
-        this.excluir(id);
-      }
+        message: AppConstants.MSG_EXCLUIR_REGISTRO,
+        header: 'Exclusão',
+        icon: 'pi pi-info-circle',
+        acceptLabel: AppConstants.BTN_EXCLUIR_REGISTRO_SIM,
+        rejectLabel: AppConstants.BTN_EXCLUIR_REGISTRO_NAO,
+        accept: () => {
+          this.excluir(id);
+          this.msgs = [{severity:'info', summary:'Confirmado', detail: AppConstants.MSG_REGISTRO_EXCLUIDO}];
+        },
+        reject: () => {}
     });
   }
 

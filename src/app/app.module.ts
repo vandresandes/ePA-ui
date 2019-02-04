@@ -20,6 +20,7 @@ import { PesquisaProcessoComponent } from './processo/pesquisa-processo/pesquisa
 
 // PRIMENG
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -37,6 +38,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { TooltipModule } from 'primeng/tooltip';
 import { MenubarModule } from 'primeng/menubar';
 
+
 // MÓDULOS
 import { ChecklistModule } from './admin/checklist/checklist.module';
 import { DocumentoModule } from './admin/documento/documento.module';
@@ -45,6 +47,7 @@ import { TermoEspecificoModule } from './admin/termo-especifico/termo-especifico
 import { TermoGeralModule } from './admin/termo-geral/termo-geral.module';
 import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
 import { ListaDeProcessosComponent } from './processo/lista-de-processos/lista-de-processos.component';
+import { ConfirmarExclusaoComponent } from './dialog/confirmar-exclusao/confirmar-exclusao.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,8 @@ import { ListaDeProcessosComponent } from './processo/lista-de-processos/lista-d
     NavbarComponent,
     IngressoDeProcessosComponent,
     PesquisaProcessoComponent,
-    ListaDeProcessosComponent
+    ListaDeProcessosComponent,
+    ConfirmarExclusaoComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +84,7 @@ import { ListaDeProcessosComponent } from './processo/lista-de-processos/lista-d
     PaginatorModule,
     FieldsetModule,
     PanelModule,
+    ConfirmDialogModule,
     DynamicDialogModule,
     MenuModule,
     FileUploadModule,

@@ -1,3 +1,4 @@
+import { Message, ConfirmationService } from 'primeng/components/common/api';
 import { ChecklistPesquisaDto } from './../../../dto/checklist-pesquisa-dto';
 import { DocumentoService } from 'src/app/service/documento.service';
 import { TermoEspecificoService } from 'src/app/service/termo-especifico.service';
@@ -5,7 +6,7 @@ import { TermoGeralService } from './../../../service/termo-geral.service';
 import { TipoProcessoService } from './../../../service/tipo-processo.service';
 import { ChecklistService } from './../../../service/checklist.service';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { NucleoService } from 'src/app/service/nucleo.service';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
 import { AppConstants } from 'src/app/app-constants';
@@ -13,7 +14,8 @@ import { AppConstants } from 'src/app/app-constants';
 @Component({
   selector: 'app-checklist-list',
   templateUrl: './checklist-list.component.html',
-  styleUrls: ['./checklist-list.component.scss']
+  styleUrls: ['./checklist-list.component.scss'],
+  providers: [ConfirmationService]
 })
 export class ChecklistListComponent implements OnInit {
 
@@ -27,6 +29,7 @@ export class ChecklistListComponent implements OnInit {
   listaTermoEspecifico: any;
   listaDocumento: any;
   msgNaoEncontrado: string = "Não encontrado!";
+  msgs: Message[] = [];
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -40,7 +43,7 @@ export class ChecklistListComponent implements OnInit {
     private termoGeralService: TermoGeralService,
     private termoEspecificoService: TermoEspecificoService,
     private documentoService: DocumentoService,
-    private route: ActivatedRoute
+    private confirmationService: ConfirmationService
     ) { }
 
   ngOnInit() {
@@ -88,6 +91,21 @@ export class ChecklistListComponent implements OnInit {
   editar(id: number) {
     const link = ['/checklist/editar', id];
     this.router.navigate(link);
+  }
+
+  confirmarExclusao(id: number) {
+    this.confirmationService.confirm({
+        message: AppConstants.MSG_EXCLUIR_REGISTRO,
+        header: 'Exclusão',
+        icon: 'pi pi-info-circle',
+        acceptLabel: AppConstants.BTN_EXCLUIR_REGISTRO_SIM,
+        rejectLabel: AppConstants.BTN_EXCLUIR_REGISTRO_NAO,
+        accept: () => {
+          this.excluir(id);
+          this.msgs = [{severity:'info', summary:'Confirmado', detail: AppConstants.MSG_REGISTRO_EXCLUIDO}];
+        },
+        reject: () => {}
+    });
   }
 
   excluir(id: number) {

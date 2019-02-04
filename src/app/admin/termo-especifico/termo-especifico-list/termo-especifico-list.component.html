@@ -1,4 +1,6 @@
 <form autocomplete="off" #pesquisaForm="ngForm" class="form-horizontal">
+    <p-messages [value]="msgs"></p-messages>
+    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
     <div class="box box-primary">
       <div class="box-header with-border">
         <h3 class="box-title">
@@ -44,7 +46,7 @@
               <td>
                 <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)" type="button"></p-button>
                 <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(item.id)" type="button"></p-button>
-                <p-button icon="fa fa-trash" iconPos="left" pTooltip="Excluir" tooltipPosition="top" (click)="excluir(item.id)"></p-button>
+                <button type="button" (click)="confirmarExclusao(item.id)" pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
               </td>
             </tr>
           </ng-template>

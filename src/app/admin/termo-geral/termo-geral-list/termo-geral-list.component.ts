@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { TermoGeralService } from 'src/app/service/termo-geral.service';
 import { Router } from '@angular/router';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
-import { ConfirmationService } from 'primeng/components/common/api';
+import { ConfirmationService, Message } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-termo-geral-list',
@@ -18,6 +18,7 @@ export class TermoGeralListComponent implements OnInit {
   listaPesquisa: any;
   titulo: string = "Termo Geral";
   listaNomeTermoGeral: any;
+  msgs: Message[] = [];
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -84,14 +85,16 @@ export class TermoGeralListComponent implements OnInit {
 
   confirmarExclusao(id: number) {
     this.confirmationService.confirm({
-      message: 'Tem certeza que deseja excluir?',
-      header: 'Exclusão',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
-      accept: () => {
-        this.excluir(id);
-      }
+        message: AppConstants.MSG_EXCLUIR_REGISTRO,
+        header: 'Exclusão',
+        icon: 'pi pi-info-circle',
+        acceptLabel: AppConstants.BTN_EXCLUIR_REGISTRO_SIM,
+        rejectLabel: AppConstants.BTN_EXCLUIR_REGISTRO_NAO,
+        accept: () => {
+          this.excluir(id);
+          this.msgs = [{severity:'info', summary:'Confirmado', detail: AppConstants.MSG_REGISTRO_EXCLUIDO}];
+        },
+        reject: () => {}
     });
   }
 

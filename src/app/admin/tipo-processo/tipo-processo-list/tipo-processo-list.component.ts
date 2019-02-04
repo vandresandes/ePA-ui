@@ -1,9 +1,9 @@
+import { Message } from 'primeng/components/common/api';
 import { TipoProcessoDto } from './../../../dto/tipo-processo-dto';
 import { Component, OnInit } from '@angular/core';
 import { TipoProcessoService } from 'src/app/service/tipo-processo.service';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
 import { AppConstants } from 'src/app/app-constants';
 
@@ -11,7 +11,7 @@ import { AppConstants } from 'src/app/app-constants';
   selector: 'app-tipo-processo-list',
   templateUrl: './tipo-processo-list.component.html',
   styleUrls: ['./tipo-processo-list.component.scss'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService]
 })
 export class TipoProcessoListComponent implements OnInit {
 
@@ -19,6 +19,7 @@ export class TipoProcessoListComponent implements OnInit {
   listaPesquisa: any;
   titulo: string = "Tipo de Processo";
   listaNomeTipoProcesso: any;
+  msgs: Message[] = [];
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -27,8 +28,8 @@ export class TipoProcessoListComponent implements OnInit {
   constructor(
     private service: TipoProcessoService,
     private router: Router,
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+    private confirmationService: ConfirmationService
+  ) { }
 
   ngOnInit() {}
 
@@ -85,21 +86,23 @@ export class TipoProcessoListComponent implements OnInit {
 
   confirmarExclusao(id: number) {
     this.confirmationService.confirm({
-      message: 'Tem certeza que deseja excluir?',
-      header: 'Exclusão',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
-      accept: () => {
-        this.excluir(id);
-      }
+        message: AppConstants.MSG_EXCLUIR_REGISTRO,
+        header: 'Exclusão',
+        icon: 'pi pi-info-circle',
+        acceptLabel: AppConstants.BTN_EXCLUIR_REGISTRO_SIM,
+        rejectLabel: AppConstants.BTN_EXCLUIR_REGISTRO_NAO,
+        accept: () => {
+          this.excluir(id);
+          this.msgs = [{severity:'info', summary:'Confirmado', detail: AppConstants.MSG_REGISTRO_EXCLUIDO}];
+          console.log(this.msgs);
+        },
+        reject: () => {}
     });
   }
 
   excluir(id: number) {
     this.service.deleteById(id).subscribe(
 		 	data => {
-        console.log(data),
         this.pesquisar()
 		 	},
 		 	error => console.log(error)

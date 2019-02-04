@@ -1,4 +1,6 @@
 <form autocomplete="off" #nucleoForm="ngForm" class="form-horizontal">
+  <p-messages [value]="msgs"></p-messages>
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
   <div class="box box-primary">
     <div class="box-header with-border">
       <h3 class="box-title">
@@ -48,14 +50,14 @@
             <th style="width: 150px;">Ações</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-nucleo>
+        <ng-template pTemplate="body" let-item>
           <tr>
-            <td>{{nucleo.nome}}</td>
-            <td>{{nucleo.materia.nome}}</td>
+            <td>{{item.nome}}</td>
+            <td>{{item.materia.nome}}</td>
             <td>
-              <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(nucleo.id)" type="button"></p-button>
-              <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(nucleo.id)" type="button"></p-button>
-              <p-button icon="fa fa-trash" iconPos="left" pTooltip="Excluir" tooltipPosition="top" (click)="excluir(nucleo.id)"></p-button>
+              <p-button icon="fa fa-search" iconPos="left" pTooltip="Visualizar" tooltipPosition="top" (click)="visualizar(item.id)" type="button"></p-button>
+              <p-button icon="fa fa-pencil" iconPos="left" pTooltip="Editar" tooltipPosition="top" (click)="editar(item.id)" type="button"></p-button>
+              <button type="button" (click)="confirmarExclusao(item.id)" pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
             </td>
           </tr>
         </ng-template>

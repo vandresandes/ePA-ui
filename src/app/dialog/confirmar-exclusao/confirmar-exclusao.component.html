@@ -1,0 +1,17 @@
+<form autocomplete="off" #simNaoForm="ngForm" class="form-horizontal">
+    <div class="box box-default">
+      <div class="box-body">
+        <div class="form-group">
+          <div class="col-sm-12">
+            <label>{{msgExcluirRegistro}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer clearfix">
+        <div class="pull-right">
+          <p-button icon="fa fa-trash" iconPos="left" label={{lbBtnSim}} pTooltip={{lbBtnSim}} tooltipPosition="top" class="btn-5" type="button" (click)="sim()"></p-button>
+          <p-button icon="fa fa-undo" iconPos="left" label={{lbBtnNao}} pTooltip={{lbBtnNao}} tooltipPosition="top"  type="button" (click)="nao()"></p-button>
+        </div>
+      </div>
+    </div>
+  </form>

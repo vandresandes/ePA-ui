@@ -1,3 +1,4 @@
+import { Message, ConfirmationService } from 'primeng/components/common/api';
 import { Component, OnInit } from '@angular/core';
 import { DocumentoService } from 'src/app/service/documento.service';
 import { Router } from '@angular/router';
@@ -8,7 +9,8 @@ import { AppConstants } from 'src/app/app-constants';
 @Component({
   selector: 'app-documento-list',
   templateUrl: './documento-list.component.html',
-  styleUrls: ['./documento-list.component.scss']
+  styleUrls: ['./documento-list.component.scss'],
+  providers: [ConfirmationService]
 })
 export class DocumentoListComponent implements OnInit {
 
@@ -16,6 +18,7 @@ export class DocumentoListComponent implements OnInit {
   listaPesquisa: any;
   titulo: string = "Documento";
   listaNomeDocumento: any;
+  msgs: Message[] = [];
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -24,6 +27,7 @@ export class DocumentoListComponent implements OnInit {
   constructor(
     private service: DocumentoService,
     private router: Router,
+    private confirmationService: ConfirmationService
     ) { }
 
   ngOnInit() {}
@@ -77,6 +81,21 @@ export class DocumentoListComponent implements OnInit {
   editar(id: number) {
     const link = ['/documento/editar', id];
     this.router.navigate(link);
+  }
+
+  confirmarExclusao(id: number) {
+    this.confirmationService.confirm({
+        message: AppConstants.MSG_EXCLUIR_REGISTRO,
+        header: 'Exclusão',
+        icon: 'pi pi-info-circle',
+        acceptLabel: AppConstants.BTN_EXCLUIR_REGISTRO_SIM,
+        rejectLabel: AppConstants.BTN_EXCLUIR_REGISTRO_NAO,
+        accept: () => {
+          this.excluir(id);
+          this.msgs = [{severity:'info', summary:'Confirmado', detail: AppConstants.MSG_REGISTRO_EXCLUIDO}];
+        },
+        reject: () => {}
+    });
   }
 
   excluir(id: number) {

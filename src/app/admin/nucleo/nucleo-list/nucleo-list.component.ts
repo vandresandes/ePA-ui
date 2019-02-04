@@ -1,6 +1,6 @@
+import { Message } from 'primeng/components/common/api';
 import { MateriaService } from './../../../service/materia.service';
 import { AppConstants } from './../../../app-constants';
-import { MessageService } from 'primeng/components/common/messageservice';
 import { Component, OnInit } from '@angular/core';
 import { NucleoService } from 'src/app/service/nucleo.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { PaginacaoDto } from 'src/app/dto/paginacao-dto';
   selector: 'app-nucleo-list',
   templateUrl: './nucleo-list.component.html',
   styleUrls: ['./nucleo-list.component.scss'],
-  providers: [ConfirmationService,MessageService]
+  providers: [ConfirmationService]
 })
 export class NucleoListComponent implements OnInit {
 
@@ -22,6 +22,7 @@ export class NucleoListComponent implements OnInit {
   titulo: string = "Núcleo";
   listaMateria: any;
   listaNomeNucleo: any;
+  msgs: Message[] = [];
 
   // p-table
   paginacao: PaginacaoDto = new PaginacaoDto();
@@ -32,7 +33,6 @@ export class NucleoListComponent implements OnInit {
     private service: NucleoService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService,
     private materiaService: MateriaService) { }
 
   ngOnInit() {}
@@ -101,16 +101,19 @@ export class NucleoListComponent implements OnInit {
 
   confirmarExclusao(id: number) {
     this.confirmationService.confirm({
-      message: 'Tem certeza que deseja excluir?',
-      header: 'Exclusão',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
-      accept: () => {
-        this.excluir(id);
-      }
+        message: AppConstants.MSG_EXCLUIR_REGISTRO,
+        header: 'Exclusão',
+        icon: 'pi pi-info-circle',
+        acceptLabel: AppConstants.BTN_EXCLUIR_REGISTRO_SIM,
+        rejectLabel: AppConstants.BTN_EXCLUIR_REGISTRO_NAO,
+        accept: () => {
+          this.excluir(id);
+          this.msgs = [{severity:'info', summary:'Confirmado', detail: AppConstants.MSG_REGISTRO_EXCLUIDO}];
+        },
+        reject: () => {}
     });
   }
+
 
   excluir(id: number) {
     this.service.deleteById(id).subscribe(
