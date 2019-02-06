@@ -81,7 +81,7 @@ export class TermoGeralService {
       params = params.append('idDocumento', String(idDocumento));
     }
     if (!AppUtil.isNull(idMateria)) {
-      params = params.append('idMateria', String(idMateria));
+      params = params.append('nucleo.materia.id', String(idMateria));
     }
     return params;
   }

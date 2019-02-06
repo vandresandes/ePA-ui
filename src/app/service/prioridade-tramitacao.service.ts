@@ -18,4 +18,12 @@ export class PrioridadeTramitacaoService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}`).pipe();
   }
 
+  buscarArquivo() {
+    const httpOptions = {
+      'responseType'  : 'arraybuffer' as 'json'
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/validar/buscarDocumento`, httpOptions).pipe(res=> res);
+  }
+
 }

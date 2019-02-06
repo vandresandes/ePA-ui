@@ -317,7 +317,8 @@ export class IngressoDeProcessosComponent implements OnInit {
         this.entity.termoGeral.id,
         this.entity.termoEspecifico.id,
         null,
-        this.entity.materia.id
+        this.entity.materia.id,
+        this.entity.origem.id
       ).subscribe(data => {
         this.listaChecklist = data
       },
