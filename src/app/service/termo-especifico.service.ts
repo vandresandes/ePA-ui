@@ -55,8 +55,8 @@ export class TermoEspecificoService {
     return params;
   }
 
-  filtrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idDocumento: number, idMateria: number) {
-    let parametros = this.criarParamsFitrar(idNucleo, idTipoProcesso, idTermoGeral, idDocumento, idMateria);
+  filtrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idDocumento: number, idMateria: number, idOrigem: number) {
+    let parametros = this.criarParamsFitrar(idNucleo, idTipoProcesso, idTermoGeral, idDocumento, idMateria, idOrigem);
 
     const httpOptions = {
       headers: new HttpHeaders({}),
@@ -66,7 +66,7 @@ export class TermoEspecificoService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/filtrar`, httpOptions).pipe();
   }
 
-  criarParamsFitrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idDocumento: number, idMateria: number): HttpParams {
+  criarParamsFitrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idDocumento: number, idMateria: number, idOrigem: number): HttpParams {
     var params = new HttpParams();
     if (!AppUtil.isNull(idNucleo)) {
       params = params.append('idNucleo', String(idNucleo));
@@ -85,6 +85,9 @@ export class TermoEspecificoService {
     }
     if (!AppUtil.isNull(idMateria)) {
       params = params.append('nucleo.materia.id', String(idMateria));
+    }
+    if (!AppUtil.isNull(idOrigem)) {
+      params = params.append('origem.id', String(idOrigem));
     }
     return params;
   }

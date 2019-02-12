@@ -29,7 +29,6 @@ export class IngressoDeProcessosComponent implements OnInit {
   entity: Processo = new Processo();
   msgs: Message[] = [];
 
-  listaTipoProcesso: any;
   listaTermoGeral: any;
   listaTermoEspecifico: any;
   listaDocumento: any;
@@ -221,7 +220,6 @@ export class IngressoDeProcessosComponent implements OnInit {
 
   onchangeDropOrigem() {
     this.limparDropMateria();
-    this.limparDropTipoProcesso();
     this.limparDropTermoGeral();
     this.limparDropTermoEspecifico();
     this.limparTableDocumento();
@@ -229,57 +227,18 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   onchangeDropMateria() {
-    this.limparDropTipoProcesso();
     this.limparDropTermoGeral();
     this.limparDropTermoEspecifico();
     this.limparTableDocumento();
 
-    /*
-    if (!AppUtil.isNull(this.entity.origem) && !AppUtil.isNull(this.entity.materia)) {
-      this.tipoProcessoService.filtrar(
+    if (!AppUtil.isNull(this.entity.materia)) {
+      this.termoGeralService.filtrar(
         null,
         null,
         null,
         null,
         this.entity.materia.id,
         this.entity.origem.id
-        ).subscribe(
-
-        data => {
-          this.listaTipoProcesso = data
-        },
-        error => console.log(error)
-      );
-    }
-    */
-
-    if (!AppUtil.isNull(this.entity.materia)) {
-      this.termoGeralService.filtrar(
-        null,
-        null,
-        null,
-        null,
-        this.entity.materia.id
-      ).subscribe(data => {
-        this.listaTermoGeral = data
-      },
-        error => console.log(error)
-      );
-    }
-  }
-
-  onchangeDropTipoProcesso() {
-    this.limparDropTermoGeral();
-    this.limparDropTermoEspecifico();
-    this.limparTableDocumento();
-
-    if (!AppUtil.isNull(this.entity.materia)) {
-      this.termoGeralService.filtrar(
-        null,
-        this.entity.tipoProcesso.id,
-        null,
-        null,
-        this.entity.materia.id
       ).subscribe(data => {
         this.listaTermoGeral = data
       },
@@ -298,7 +257,8 @@ export class IngressoDeProcessosComponent implements OnInit {
         null,
         this.entity.termoGeral.id,
         null,
-        this.entity.materia.id
+        this.entity.materia.id,
+        this.entity.origem.id
       ).subscribe(data => {
         this.listaTermoEspecifico = data
       },
@@ -346,11 +306,6 @@ export class IngressoDeProcessosComponent implements OnInit {
   showJustificativaSolicitadaUrgencia(): boolean {
     this.entity.justificativa = null;
     return this.solicitadaUrgenciaSelecionado === '1';
-  }
-
-  limparDropTipoProcesso() {
-    this.listaTipoProcesso = null;
-    this.entity.tipoProcesso = null;
   }
 
   limparDropTermoGeral() {
