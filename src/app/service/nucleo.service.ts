@@ -5,6 +5,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { PaginacaoDto } from '../dto/paginacao-dto';
 import { AppUtil } from '../app-util';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class NucleoService {
       params: parametros
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}`, httpOptions).pipe();
+    return this.httpClient.get<any>(`${environment.apiUrl}/${this.resource}`, httpOptions).pipe();
   }
 
   criarParamsBuscarPaginado(filtro: NucleoDto, paginacao: PaginacaoDto): HttpParams {

@@ -205,24 +205,17 @@
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
-              <tr *ngIf="item.condicao" styleClass="padding-bottom-60">
+              <tr *ngIf="item.condicao">
                 <td>
                   {{item.condicao}}
                   <div>
-                    <p-dropdown [options]="listaSimNao" [(ngModel)]="item.condicaoAceita" name="simNao" optionLabel="label"
-                      autoWidth="false" [style]="{'width':'50%'}" [disabled]="readonly" placeholder={{lbSelecione}} (onChange)="onchangeDropCondicao(item)">
-                  </p-dropdown>
-                  </div>
-                  <!--
-                  <div>
-                      <p-radioButton name="grupoCondicaoAceita" value="1" label="Sim" [(ngModel)]="item.condicaoAceita" inputId="item.condicaoAceita"></p-radioButton>
+                      <p-radioButton name={{item.id}} value="1" label="Sim" [(ngModel)]="item.condicaoAceita" inputId="item.condicaoAceita" (onClick)="onClickRaddioButtonCondicao(item)"></p-radioButton>
                       &nbsp;
-                      <p-radioButton name="grupoCondicaoAceita" value="0" label="Não" [(ngModel)]="item.condicaoAceita" inputId="solicitadaUrgenciaSelecionado"></p-radioButton>
+                      <p-radioButton name={{item.id}} value="0" label="Não" [(ngModel)]="item.condicaoAceita" inputId="item.condicaoAceita" (onClick)="onClickRaddioButtonCondicao(item)"></p-radioButton>
                   </div>
-                  -->
                 </td>
                 <td>
-                  <textarea *ngIf="item.condicaoAceita && item.condicaoAceita.id == 0" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2" placeholder="Justifique"></textarea>
+                  <textarea *ngIf="item.condicaoAceita && item.condicaoAceita == 0" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2" placeholder="Justifique"></textarea>
                 </td>
               </tr>
             </ng-template>
@@ -251,7 +244,7 @@
                 <td>{{item.documento.nome}}</td>
                 <td>{{item.obrigatorio | status}}</td>
                 <td>
-                  <input type="number" pInputText class="form-control" name="numeroDocumentoSEI" [(ngModel)]="item.numeroDocumentoSEI" maxlength="25" [disabled]="readonly" required />
+                  <input type="number" min="0" pInputText class="form-control" name="numeroDocumentoSEI" [(ngModel)]="item.numeroDocumentoSEI" maxlength="25" [disabled]="readonly" required />
                 </td>
               </tr>
             </ng-template>

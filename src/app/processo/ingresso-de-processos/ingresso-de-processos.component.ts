@@ -380,7 +380,8 @@ export class IngressoDeProcessosComponent implements OnInit {
     return valid;
   }
 
-  onchangeDropCondicao(item: any) {
-    item['obrigatorio'] = item['condicaoAceita']['id'] == 1;
+  onClickRaddioButtonCondicao(item: any) {
+    console.log(item);
+    item['obrigatorio'] = item['condicaoAceita'] == 1;
   }
 }

@@ -1,4 +1,3 @@
-import { OrgaoService } from './../service/orgao.service';
 import { AppUtil } from './../app-util';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -14,36 +13,30 @@ import { AppConstants } from '../app-constants';
 export class LoginComponent implements OnInit {
   msgLogin: string = "Login";
   loginForm: FormGroup;
-  loading = false;
   emailNulo = false;
   senhaNulo = false;
   returnUrl: string;
   home: string = "/listadeprocesso";
   errorsUsername: boolean;
   errorsPassword: boolean;
-  errorsOrgao: boolean;
-  listaOrgao: any;
   lbSelecione: string = AppConstants.SELECIONE;
 
   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
-      private authenticationService: AuthenticationService,
-      private orgaoService: OrgaoService
+      private authenticationService: AuthenticationService
   ) {
       // redirecionar para home se já estiver logado
       if (this.authenticationService.currentUserValue) {
           this.router.navigate([this.home]);
       }
-      this.findAllOrgao();
   }
 
   ngOnInit() {
       this.loginForm = this.formBuilder.group({
           username: ['', Validators.required],
-          password: ['', Validators.required],
-          orgao: ['', Validators.required]
+          password: ['', Validators.required]
       });
 
       // obter url de retorno dos parâmetros de rota ou padrão para home
@@ -56,29 +49,20 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.errorsUsername = this.f.username.errors && this.f.username.errors.required;
     this.errorsPassword = this.f.password.errors && this.f.password.errors.required;
-    this.errorsOrgao = this.f.orgao.errors && this.f.orgao.errors.required;
 
     // pare aqui se o formulário for inválido
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.loading = true;
-
+    let user: any;
     this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe(
       data => {
-        this.router.navigate([this.returnUrl])
+        this.router.navigate([this.returnUrl]),
+        user = data
       },
-      error => alert(error), () => console.log("login ok.")
+      error => {alert(error)}, () => console.log(`Login efetuado com sucesso para: ${JSON.stringify(user)}`)
       );
   }
 
-  findAllOrgao() {
-    this.orgaoService.findAll().subscribe(
-			data => {
-        this.listaOrgao = data
-			},
-			error => console.log(error)
-    );
-  }
 }

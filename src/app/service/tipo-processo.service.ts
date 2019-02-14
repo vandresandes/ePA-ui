@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { PaginacaoDto } from '../dto/paginacao-dto';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { PaginacaoDto } from '../dto/paginacao-dto';
 export class TipoProcessoService {
   resource: string = "tipoprocesso";
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) { }
 
   findAll() {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/all`).pipe();
@@ -42,7 +43,7 @@ export class TipoProcessoService {
       params: parametros
     };
 
-    return this.httpClient.get(`${environment.apiUrl}/${this.resource}`, httpOptions).pipe();
+    return this.httpClient.get<any>(`${environment.apiUrl}/${this.resource}`, httpOptions).pipe();
   }
 
   criarParamsBuscarPaginado(filtro: TipoProcessoDto, paginacao: PaginacaoDto): HttpParams {

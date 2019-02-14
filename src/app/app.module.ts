@@ -48,6 +48,9 @@ import { TermoGeralModule } from './admin/termo-geral/termo-geral.module';
 import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
 import { ListaDeProcessosComponent } from './processo/lista-de-processos/lista-de-processos.component';
 import { ConfirmarExclusaoComponent } from './dialog/confirmar-exclusao/confirmar-exclusao.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BasicAuthInterceptor } from './helpers/basic-auth-interceptor';
+import { ErrorInterceptor } from './helpers/error-interceptor';
 
 @NgModule({
   declarations: [
@@ -97,7 +100,9 @@ import { ConfirmarExclusaoComponent } from './dialog/confirmar-exclusao/confirma
   ],
   providers: [
     // Locale da aplicação
-    { provide: LOCALE_ID, useValue:'pt-BR' }
+    { provide: LOCALE_ID, useValue:'pt-BR' },
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
