@@ -8,11 +8,14 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="off">
         <div class="form-group has-feedback">
           <label for="username">Usuário</label>
-          <input id="username" type="text" formControlName="username" class="form-control" placeholder="email" required />
+          <input id="username" type="email" formControlName="username" class="form-control" placeholder="email" [email]="true" pInputText required />
           <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           <div *ngIf="errorsUsername" class="obrigatorio-login">
             <div>Usuário é obrigatório</div>
           </div>
+          <div *ngIf="f.username.errors && f.username.errors.email" class="obrigatorio-login">
+              <div>email inválido</div>
+            </div>
         </div>
         <div class="form-group has-feedback">
           <label for="password">Senha</label>
