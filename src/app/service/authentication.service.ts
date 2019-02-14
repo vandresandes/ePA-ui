@@ -6,6 +6,7 @@ import { User } from '../model/user';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { AccountCredentials } from '../model/account-credentials';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,6 @@ public get currentUserValue(): User {
 loginFake(username: string, password: string) {
   return this.http.get<any>(`${environment.apiUrlFake}/${this.resource}`)
   .pipe(map(user => {
-    console.log(user);
-
     if (username === user.username && password === user.password) {
       // login bem-sucedido se houver um token jwt na resposta
       if (user && user.token) {
@@ -45,25 +44,22 @@ loginFake(username: string, password: string) {
 }
 
 login(usuario: string, senha: string) {
-  let authdata: string = window.btoa(`${usuario}:${senha}`);
+  let accountCredentials: AccountCredentials = new AccountCredentials();
+  accountCredentials.usuario = usuario;
+  accountCredentials.senha = senha;
+  return this.http.post<any>(`${environment.apiUrl}/${this.resourceLogin}`, accountCredentials, { observe: 'response' })
+    .pipe(map(data => {
+      let token: string = data.headers.get("Authorization");
+      let user: User = data.body;
 
-  const httpOptions = {
-    headers: new HttpHeaders({
-      "Authorization" : `Basic ${authdata}`
-    }),
-  };
+      if (user && token) {
+        user.token = token;
+        // armazenar detalhes do usuário e token jwt no armazenamento local para manter o usuário logado entre as atualizações da página
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+      }
 
-  return this.http.get<any>(`${environment.apiUrl}/${this.resourceLogin}`, httpOptions)
-  .pipe(map(user => {
-    // http basic
-    if (user) {
-      // armazenar detalhes do usuário e token jwt no armazenamento local para manter o usuário logado entre as atualizações da página
-      user.authdata = authdata;
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      this.currentUserSubject.next(user);
       return user;
-    }
-
   }));
 }
 
@@ -72,4 +68,5 @@ logout() {
   localStorage.removeItem('currentUser');
   this.currentUserSubject.next(null);
 }
+
 }

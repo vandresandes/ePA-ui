@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication.service';
 import { AppConstants } from '../app-constants';
+import { User } from '../model';
 
 @Component({
   selector: 'app-login',
@@ -55,13 +56,11 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    let user: any;
     this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe(
       data => {
-        this.router.navigate([this.returnUrl]),
-        user = data
+        this.router.navigate([this.returnUrl]);
       },
-      error => {alert(error)}, () => console.log(`Login efetuado com sucesso para: ${JSON.stringify(user)}`)
+        error => {alert(error)}, () => console.log(`Login efetuado com sucesso!`)
       );
   }
 

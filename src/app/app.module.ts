@@ -1,3 +1,4 @@
+import { JwtInterceptor } from './helpers/jwt-interceptor';
 import { LoadingPageModule, MaterialBarModule } from 'angular-loading-page';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -101,7 +102,8 @@ import { ErrorInterceptor } from './helpers/error-interceptor';
   providers: [
     // Locale da aplicação
     { provide: LOCALE_ID, useValue:'pt-BR' },
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

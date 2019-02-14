@@ -19,8 +19,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           }
         }
 
-        const error = (err.error && err.error.message) || err.statusText;
-        return throwError("Usuário ou senha inválida!");
+        const error = (err['error'] && err['error']['error']) || (err.error && err.error.message) || err.statusText;
+        return throwError(error);
       }))
     }
 }
