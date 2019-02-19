@@ -240,11 +240,11 @@
             </div>
             <div class="col-sm-12 col-md-4 col-lg-3">
               <div>
-                <input type="number" min="0" pInputText class="form-control" name="numeroDocumentoSEI" [(ngModel)]="numeroDocumentoSEI" maxlength="25" [disabled]="readonly" required />
+                <input type="text" min="0" pInputText class="form-control" name="numeroDocumentoSEI" [(ngModel)]="numeroDocumentoSEI" maxlength="25" [disabled]="readonly" required />
               </div>
             </div>
             <div class="col-md-1" >
-              <p-button icon="fa fa-plus" pTooltip="Adicionar" tooltipPosition="top" (onClick)="adicionarNumeroDocSei()"></p-button>
+              <p-button icon="fa fa-plus" pTooltip="Adicionar" tooltipPosition="top" (onClick)="isValidAdicionarNumeroDocSei()"></p-button>
             </div>
           </div>
           <div class="form-group">

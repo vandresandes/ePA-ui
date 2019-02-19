@@ -18,7 +18,7 @@ import { ChecklistService } from 'src/app/service/checklist.service';
 import { EnumPrioridadeTramitacao, EnumSigiloSegredoJustica } from 'src/app/enums';
 import { AppUtil } from 'src/app/app-util';
 import { OrgaoService } from 'src/app/service/orgao.service';
-import { SelectItem } from 'primeng/components/common/selectitem';
+import { SeiService } from 'src/app/service/sei.service';
 
 @Component({
   selector: 'app-ingresso-de-processos',
@@ -91,7 +91,8 @@ export class IngressoDeProcessosComponent implements OnInit {
     private sigiloSegredoJusticaService: SigiloSegredoJusticaService,
     private checklistService: ChecklistService,
     private route: ActivatedRoute,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private seiService: SeiService
     ) {
     this.buscarTodosOrigem();
     this.buscarTodosMateria();
@@ -393,17 +394,15 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   adicionarNumeroDocSei() {
-    if (this.isValidAdicionarNumeroDocSei()) {
-      // adiciona a referência do número do documento no sei no objeto
-      this.checklistSelecionado.numeroDocumentoSEI = this.numeroDocumentoSEI;
-      // clona o objeto checklist
-      this.checklistSelecionado = {...this.checklistSelecionado};
-      // add na lista
-      this.listaChecklistComNumeroDocSei.push(this.checklistSelecionado);
-      // limpa os campos
-      this.checklistSelecionado = null;
-      this.numeroDocumentoSEI = null;
-    }
+    // adiciona a referência do número do documento no sei no objeto
+    this.checklistSelecionado.numeroDocumentoSEI = this.numeroDocumentoSEI;
+    // clona o objeto checklist
+    this.checklistSelecionado = {...this.checklistSelecionado};
+    // add na lista
+    this.listaChecklistComNumeroDocSei.push(this.checklistSelecionado);
+    // limpa os campos
+    this.checklistSelecionado = null;
+    this.numeroDocumentoSEI = null;
   }
 
   isValidAdicionarNumeroDocSei(): boolean {
@@ -426,7 +425,29 @@ export class IngressoDeProcessosComponent implements OnInit {
         }
       });
     }
-    return valid;
+
+    if (valid) {
+      this.isValidExisteDocumento();
+    } else {
+      return false;
+    }
+  }
+
+  isValidExisteDocumento() {
+    let valid: any;
+    this.seiService.existeDocumento(this.entity.numeroProcesso, this.numeroDocumentoSEI).subscribe(
+      data => {
+        valid = data
+      },
+      error => console.log(error),
+      () => {
+        if (valid) {
+          this.adicionarNumeroDocSei();
+        } else {
+          this.msgs.push({severity:'info', summary:"Atenção!", detail:"Número do documento no SEI não encontrado."});
+        }
+      }
+    );
   }
 
   confirmarExclusaoChecklist(item: any) {
