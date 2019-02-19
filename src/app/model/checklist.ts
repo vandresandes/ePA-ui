@@ -13,4 +13,5 @@ export class Checklist {
   documento: Documento;
   obrigatorio: boolean;
   prioridade: string;
+  numeroDocumentoSEI: string;
 }

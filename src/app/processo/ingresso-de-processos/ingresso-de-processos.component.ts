@@ -1,3 +1,5 @@
+import { ConfirmationService } from 'primeng/components/common/confirmationservice';
+import { Checklist } from './../../model/checklist';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DialogService } from 'primeng/components/dynamicdialog/dialogservice';
 import { Message } from 'primeng/components/common/message';
@@ -16,13 +18,14 @@ import { ChecklistService } from 'src/app/service/checklist.service';
 import { EnumPrioridadeTramitacao, EnumSigiloSegredoJustica } from 'src/app/enums';
 import { AppUtil } from 'src/app/app-util';
 import { OrgaoService } from 'src/app/service/orgao.service';
+import { SelectItem } from 'primeng/components/common/selectitem';
 
 @Component({
   selector: 'app-ingresso-de-processos',
   templateUrl: './ingresso-de-processos.component.html',
   styleUrls: ['./ingresso-de-processos.component.scss'],
   entryComponents: [InteressadoDialogComponent],
-  providers: [DialogService],
+  providers: [DialogService, ConfirmationService]
 })
 export class IngressoDeProcessosComponent implements OnInit {
 
@@ -33,6 +36,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   listaTermoEspecifico: any;
   listaDocumento: any;
   listaChecklist: any;
+  listaChecklistComNumeroDocSei: Checklist[] = [];
   uploadedFiles: any[] = [];
 
   listaNucleo: any;
@@ -45,6 +49,8 @@ export class IngressoDeProcessosComponent implements OnInit {
   listaSimNao: any;
   listaInteressado: Interessado[] = [];
   solicitadaUrgenciaSelecionado: any;
+  checklistSelecionado: Checklist;
+  numeroDocumentoSEI: string;
 
   lbProponente: string = "Proponente";
   lbSelecione: string = AppConstants.SELECIONE;
@@ -66,8 +72,9 @@ export class IngressoDeProcessosComponent implements OnInit {
   lbNome: string = "Nome";
   lbEmail: string = "E-mail";
   lbTelefone: string = "Telefone";
+  lbItem: string = "Item";
+  lbInformeONumeroDocumentoSei: string = "Informe o número do documento no SEI";
   msgNenhumResultadoEncontrado: string = AppConstants.NENHUM_RESULTADO_ENCONTRADO;
-
   msgNenhumRegistroAdicionado: string = AppConstants.NENHUM_REGISTRO_ADICIONADO;
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
   data: any;
@@ -83,7 +90,8 @@ export class IngressoDeProcessosComponent implements OnInit {
     private prioridadeTramitacaoService: PrioridadeTramitacaoService,
     private sigiloSegredoJusticaService: SigiloSegredoJusticaService,
     private checklistService: ChecklistService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private confirmationService: ConfirmationService
     ) {
     this.buscarTodosOrigem();
     this.buscarTodosMateria();
@@ -327,7 +335,6 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.listaChecklist = null;
   }
 
-
   salvar() {
     if (this.isValidSalvar()) {
       // service
@@ -384,4 +391,63 @@ export class IngressoDeProcessosComponent implements OnInit {
     console.log(item);
     item['obrigatorio'] = item['condicaoAceita'] == 1;
   }
+
+  adicionarNumeroDocSei() {
+    if (this.isValidAdicionarNumeroDocSei()) {
+      // adiciona a referência do número do documento no sei no objeto
+      this.checklistSelecionado.numeroDocumentoSEI = this.numeroDocumentoSEI;
+      // clona o objeto checklist
+      this.checklistSelecionado = {...this.checklistSelecionado};
+      // add na lista
+      this.listaChecklistComNumeroDocSei.push(this.checklistSelecionado);
+      // limpa os campos
+      this.checklistSelecionado = null;
+      this.numeroDocumentoSEI = null;
+    }
+  }
+
+  isValidAdicionarNumeroDocSei(): boolean {
+    let valid: boolean = true;
+    this.msgs = [];
+
+    if (AppUtil.isNull(this.checklistSelecionado)) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbItem});
+      valid = false;
+    }
+    if (AppUtil.isNull(this.numeroDocumentoSEI)) {
+      this.msgs.push({severity:'info', summary:this.msgObrigatorio, detail:this.lbInformeONumeroDocumentoSei});
+      valid = false;
+    }
+    if (valid) {
+      this.listaChecklistComNumeroDocSei.forEach(element => {
+        if ((element.id === this.checklistSelecionado.id) && element.numeroDocumentoSEI === this.numeroDocumentoSEI)  {
+          this.msgs.push({severity:'info', summary:"Atenção!", detail:"Item já adicionado com o mesmo número do documento no SEI"});
+          valid = false;
+        }
+      });
+    }
+    return valid;
+  }
+
+  confirmarExclusaoChecklist(item: any) {
+    console.log(item);
+
+    this.confirmationService.confirm({
+        message: AppConstants.MSG_EXCLUIR_REGISTRO,
+        header: 'Exclusão',
+        icon: 'pi pi-info-circle',
+        acceptLabel: AppConstants.BTN_EXCLUIR_REGISTRO_SIM,
+        rejectLabel: AppConstants.BTN_EXCLUIR_REGISTRO_NAO,
+        accept: () => {
+          this.excluirChecklistComNumeroDocSei(item);
+          this.msgs = [{severity:'info', summary:'Confirmado', detail: AppConstants.MSG_REGISTRO_EXCLUIDO}];
+        },
+        reject: () => {}
+    });
+  }
+
+  excluirChecklistComNumeroDocSei(item: any) {
+    this.listaChecklistComNumeroDocSei.splice(this.listaInteressado.indexOf(item), 1);
+  }
+
 }
