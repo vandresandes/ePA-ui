@@ -196,9 +196,6 @@ export class IngressoDeProcessosComponent implements OnInit {
     );
   }
 
-  /**
-   * Mocky
-   */
   carregarEntity() {
     this.route.params.forEach((params: Params) => {
       if (this.route.params['value']['id'] !== undefined) {
@@ -214,9 +211,6 @@ export class IngressoDeProcessosComponent implements OnInit {
     });
   }
 
-   /**
-   * Mocky
-   */
   findById(id: number, listaPesquisa: any) {
     for (var i = 0; i < listaPesquisa.length; i++) {
       let processo = listaPesquisa[i];

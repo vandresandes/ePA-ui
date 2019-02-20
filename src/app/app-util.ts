@@ -3,7 +3,7 @@ import { stringify } from '@angular/compiler/src/util';
 export class AppUtil {
 
   public static isNull(field: any): boolean {
-    return field === '' || field === null || field === undefined;
+    return field === '' || field === null || field === undefined || (field instanceof Array && field.length === 0);
   }
 
   public static convertNumberToString(field: number): string {

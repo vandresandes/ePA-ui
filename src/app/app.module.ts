@@ -20,6 +20,7 @@ import { IngressoDeProcessosComponent } from './processo/ingresso-de-processos/i
 import { PesquisaProcessoComponent } from './processo/pesquisa-processo/pesquisa-processo.component';
 
 // PRIMENG
+import { AccordionModule } from 'primeng/accordion';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -52,6 +53,8 @@ import { ConfirmarExclusaoComponent } from './dialog/confirmar-exclusao/confirma
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BasicAuthInterceptor } from './helpers/basic-auth-interceptor';
 import { ErrorInterceptor } from './helpers/error-interceptor';
+import { RestrictDirective } from './directive/restrict.directive';
+import { InformacoesNoSeiComponent } from './processo/informacoes-no-sei/informacoes-no-sei.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,9 @@ import { ErrorInterceptor } from './helpers/error-interceptor';
     IngressoDeProcessosComponent,
     PesquisaProcessoComponent,
     ListaDeProcessosComponent,
-    ConfirmarExclusaoComponent
+    ConfirmarExclusaoComponent,
+    RestrictDirective,
+    InformacoesNoSeiComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +82,7 @@ import { ErrorInterceptor } from './helpers/error-interceptor';
     TipoProcessoModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AccordionModule,
     ButtonModule,
     InputTextModule,
     MessageModule,
