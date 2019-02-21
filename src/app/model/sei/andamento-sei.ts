@@ -4,6 +4,6 @@ import { UsuarioSEI } from './usuario-sei';
 export class AndamentoSEI {
   descricao: string;
   dataHora: string;
-  unidadeVO: UnidadeSEI;
-  usuarioVO: UsuarioSEI;
+  unidade: UnidadeSEI;
+  usuario: UsuarioSEI;
 }

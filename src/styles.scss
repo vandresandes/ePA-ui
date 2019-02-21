@@ -23,7 +23,7 @@ p-button {
   margin-bottom: 20px;
 }
 
-// NAVBAR COM PRIMENG ##################################### INÍCIO
+// NAVBAR COM PRIMENG ##################################### IN�CIO
 
 .ui-menubar  {
   color: #ffffff !important;
@@ -67,3 +67,16 @@ body .ui-menubar .ui-menuitem.ui-menuitem-active > .ui-menuitem-link {
 }
 
 // NAVBAR COM PRIMENG ##################################### FIM
+
+.quebrarTexto {
+  word-wrap: break-word;
+}
+
+.form-control[disabled] {
+  background-color: white;
+}
+
+// DEIXANDO A OPACIDADE NORMAL NOS INPUT'S DO PRIMENG QUANDO ESTIVER DESABILITADO
+body input.ui-state-disabled, body input.ui-widget:disabled {
+  opacity: 1 !important;
+}
