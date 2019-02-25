@@ -16,10 +16,11 @@ export class RetornoConsultaProcedimentoSEI {
   andamentoGeracao: AndamentoSEI;
   andamentoConclusao: AndamentoSEI;
   ultimoAndamento: AndamentoSEI;
-  unidadesProcedimentoAberto: UnidadeProcedimentoAbertoSEI;
-  assuntos: AssuntoSEI;
+  unidadesProcedimentoAberto: UnidadeProcedimentoAbertoSEI[];
+  assuntos: AssuntoSEI[];
   interessados: InteressadoSEI;
   observacoes: ObservacaoSEI;
   procedimentosRelacionados: ProcedimentoResumidoSEI;
   procedimentosAnexados: ProcedimentoResumidoSEI;
+
 }

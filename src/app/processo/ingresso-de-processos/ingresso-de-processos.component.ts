@@ -19,6 +19,8 @@ import { EnumPrioridadeTramitacao, EnumSigiloSegredoJustica } from 'src/app/enum
 import { AppUtil } from 'src/app/app-util';
 import { OrgaoService } from 'src/app/service/orgao.service';
 import { SeiService } from 'src/app/service/sei.service';
+import { SelectItem } from 'primeng/components/common/api';
+import { RetornoConsultaProcedimentoSEI } from 'src/app/model/sei/retorno-consulta-procedimento-sei';
 
 @Component({
   selector: 'app-ingresso-de-processos',
@@ -30,7 +32,11 @@ import { SeiService } from 'src/app/service/sei.service';
 export class IngressoDeProcessosComponent implements OnInit {
 
   entity: Processo = new Processo();
+  retornoConsultaProcedimento: RetornoConsultaProcedimentoSEI;
   msgs: Message[] = [];
+  listaOrgaoTemplate: SelectItem[] = [];
+  listaChecklistTemplate: SelectItem[] = [];
+  orgaoSelecionado: any;
 
   listaTermoGeral: any;
   listaTermoEspecifico: any;
@@ -79,6 +85,8 @@ export class IngressoDeProcessosComponent implements OnInit {
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
   data: any;
 
+  retornoConsultaProcedimentoInput: RetornoConsultaProcedimentoSEI;
+
   constructor(
     private service: ProcessoService,
     public dialogService: DialogService,
@@ -94,6 +102,7 @@ export class IngressoDeProcessosComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private seiService: SeiService
     ) {
+    this.carregarParams();
     this.buscarTodosOrigem();
     this.buscarTodosMateria();
     this.buscarTodosPrioridadeTramitacao();
@@ -101,13 +110,42 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.buscarTodosMotivoSigiloSegredoJustica();
     this.buscarSemPrioridadeTramitacao();
     this.buscarSemSigilo();
-    this.carregarEntity();
     this.listaSimNao = [{id: 1, label: "Sim"}, {id: 0, label: "Não"}];
+
+    this.retornoConsultaProcedimentoInput = new RetornoConsultaProcedimentoSEI();
+    this.retornoConsultaProcedimentoInput.dataAutuacao = "01/01/1900";
   }
 
   ngOnInit() {
     this.entity.solicitadaUrgencia = false;
     this.solicitadaUrgenciaSelecionado = "0";
+  }
+
+  carregarParams() {
+    this.route.params.forEach((params: Params) => {
+      let protocoloProcedimento = this.route.params['value']['protocoloProcedimento'];
+      this.entity.numeroProcesso = protocoloProcedimento;
+      this.consultarProtocolo(protocoloProcedimento);
+    });
+  }
+
+  consultarProtocolo(protocoloProcedimento: string) {
+    let retorno: any;
+    this.seiService.consultarProtocolo(protocoloProcedimento).subscribe(
+      data => {
+        retorno = data,
+        this.retornoConsultaProcedimento = retorno,
+        this.verificarUnidadesAbertas()
+      },
+      error => console.log(error)
+    );
+  }
+
+  verificarUnidadesAbertas() {
+    let numeroProcessos = this.retornoConsultaProcedimento.unidadesProcedimentoAberto ? this.retornoConsultaProcedimento.unidadesProcedimentoAberto.length : 0;
+    if (numeroProcessos > 1) {
+      this.msgs.push({severity:'info', summary:"Atenção!", detail:`Esse processo está aberto em ${numeroProcessos} unidades. Para o ingresso na PGE é necessário que ele seja fechado nas demais unidades.`});
+    }
   }
 
   showInteressado() {
@@ -159,7 +197,10 @@ export class IngressoDeProcessosComponent implements OnInit {
   buscarTodosOrigem() {
     this.orgaoService.findAll().subscribe(
 			data => {
-        this.listaOrgao = data
+        this.listaOrgao = data,
+        this.listaOrgao.forEach(element => {
+          this.listaOrgaoTemplate.push({label: `${element['nome']} - ${element['descricao']} `, value: element});
+        });
 			},
 			error => console.log(error)
     );
@@ -194,31 +235,6 @@ export class IngressoDeProcessosComponent implements OnInit {
 			},
 			error => console.log(error)
     );
-  }
-
-  carregarEntity() {
-    this.route.params.forEach((params: Params) => {
-      if (this.route.params['value']['id'] !== undefined) {
-        const id = this.route.params['value']['id'];
-
-        this.service.findAll().subscribe(
-          data => {
-            this.findById(id, data)
-          },
-          error => console.log(error)
-        );
-      }
-    });
-  }
-
-  findById(id: number, listaPesquisa: any) {
-    for (var i = 0; i < listaPesquisa.length; i++) {
-      let processo = listaPesquisa[i];
-			if (id == processo['id']) {
-        this.entity.id = processo['id'];
-        this.entity.numeroProcesso = processo['numeroProcesso'];
-			}
-		}
   }
 
   onchangeDropOrigem() {
@@ -283,11 +299,18 @@ export class IngressoDeProcessosComponent implements OnInit {
         this.entity.materia.id,
         this.entity.origem.id
       ).subscribe(data => {
-        this.listaChecklist = data
+        this.listaChecklist = data,
+        this.listaChecklist.forEach(element => {
+          this.listaChecklistTemplate.push({label: `${element['documento']['nome']} - ${this.obterStatus(element)}`, value: element});
+        });
       },
         error => console.log(error)
       );
     }
+  }
+
+  obterStatus(element: any): string {
+    return element['obrigatorio'] ? 'Obrigatório' : 'Complementar';
   }
 
   showPrioridadeTramitacao(): boolean {

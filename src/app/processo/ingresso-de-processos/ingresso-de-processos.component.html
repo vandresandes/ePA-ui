@@ -5,14 +5,14 @@
       <p-messages [(value)]="msgs"></p-messages>
       <p-tabView>
         <p-tabPanel header="Informações no SEI">
-          <app-informacoes-no-sei></app-informacoes-no-sei>
+          <app-informacoes-no-sei [retornoConsultaProcedimento]="retornoConsultaProcedimento"></app-informacoes-no-sei>
         </p-tabPanel>
         <p-tabPanel header="Informações para a PGE">
           <div class="form-group">
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4 col-lg-3">
               <label>{{lbNProcessoNaOrigem}}:</label>
               <div>
-                <span class="form-control">{{entity.numeroProcesso}}</span>
+                <input type="text" pInputText class="form-control input-disabled-pge" value="{{entity?.numeroProcesso}}" [disabled]="true" />
               </div>
             </div>
           </div>
@@ -27,8 +27,13 @@
                 <div class="col-sm-12">
                   <label>{{lbOrgao}} <span class="obrigatorio">*</span></label>
                   <div>
-                    <p-dropdown [options]="listaOrgao" [(ngModel)]="entity.orgao" name="orgao" optionLabel="nomeDescricao"
-                      [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado">
+                    <p-dropdown [filter]="true" autoWidth="false" [options]="listaOrgaoTemplate" [(ngModel)]="entity.orgao" [style]="{'width':'100%'}" name="orgaoSelecionado" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado">
+                      <ng-template let-item pTemplate="selectedItem">
+                          <span style="vertical-align:middle">{{item.label}}</span>
+                      </ng-template>
+                      <ng-template let-orgao pTemplate="item">
+                          <span style="vertical-align:middle">{{orgao.label}}</span>
+                      </ng-template>
                     </p-dropdown>
                   </div>
                 </div>
@@ -237,8 +242,13 @@
             <label class="col-sm-12 col-lg-8">{{lbItem}} <span class="obrigatorio">*</span></label>
             <label class="col-sm-12 col-lg-4">{{lbInformeONumeroDocumentoSei}} <span class="obrigatorio">*</span></label>
             <div class="col-sm-12 col-lg-8">
-              <p-dropdown [options]="listaChecklist" [(ngModel)]="checklistSelecionado" name="documento" optionLabel="documento.nome"
-                [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado">
+              <p-dropdown [filter]="true" autoWidth="false" [options]="listaChecklistTemplate" [(ngModel)]="checklistSelecionado" [style]="{'width':'100%'}" name="documento" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado">
+                <ng-template let-item pTemplate="selectedItem">
+                    <span style="vertical-align:middle">{{item.label}}</span>
+                </ng-template>
+                <ng-template let-orgao pTemplate="item">
+                    <span style="vertical-align:middle">{{orgao.label}}</span>
+                </ng-template>
               </p-dropdown>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-3">

@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'ingressoprocesso', component: IngressoDeProcessosComponent,
     data: { title: 'Ingresso de Processo' }
   },
-  { path: 'ingressoprocesso/:id', component: IngressoDeProcessosComponent,
+  { path: 'ingressoprocesso/:protocoloProcedimento', component: IngressoDeProcessosComponent,
     data: { title: 'Ingresso de Processo' }
   },
   { path: 'pesquisaprocesso', component: PesquisaProcessoComponent,

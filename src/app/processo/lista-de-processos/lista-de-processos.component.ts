@@ -1,3 +1,4 @@
+import { SeiService } from 'src/app/service/sei.service';
 import { AppUtil } from './../../app-util';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -15,7 +16,8 @@ export class ListaDeProcessosComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private service: ProcessoService
+    private service: ProcessoService,
+    private seiService: SeiService
   ) {
     this.pesquisar();
   }
@@ -33,12 +35,18 @@ export class ListaDeProcessosComponent implements OnInit {
   }
 
   continuar() {
+    if (this.isValidContinuar()) {
+      const link = ['/ingressoprocesso', this.itemSelecionado.protocoloProcedimento];
+      this.router.navigate(link);
+    }
+  }
+
+  isValidContinuar(): boolean {
     if (AppUtil.isNull(this.itemSelecionado)) {
-      return;
+      return false;
     }
 
-    const link = ['/ingressoprocesso', this.itemSelecionado.id];
-    this.router.navigate(link);
+    return true;
   }
 
 }

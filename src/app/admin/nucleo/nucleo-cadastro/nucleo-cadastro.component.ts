@@ -77,7 +77,6 @@ export class NucleoCadastroComponent implements OnInit {
 
   salvar() {
     if (this.isValidSalvar()) {
-      let status: number;
       this.service.save(this.entity).subscribe(
         data => {
           this.verificarCadastro(data)

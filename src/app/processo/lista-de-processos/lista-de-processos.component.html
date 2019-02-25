@@ -1,6 +1,7 @@
 <form autocomplete="off" #listaProcessosForm="ngForm" class="form-horizontal">
   <div class="box box-primary" style="box-shadow: 0 0px 0px 0px;">
     <div class="box-body col-sm-12 col-md-8" style="margin-top: 20px;">
+      <p-messages [(value)]="msgs"></p-messages>
       <p-table [value]="lista" selectionMode="single" [(selection)]="itemSelecionado" [responsive]="true" [autoLayout]="true">
         <ng-template pTemplate="header">
           <tr>
@@ -14,7 +15,7 @@
               <p-tableRadioButton [value]="item"></p-tableRadioButton>
             </td>
             <td>
-              {{item.numeroProcesso}}
+              {{item.protocoloProcedimento}}
             </td>
           </tr>
         </ng-template>

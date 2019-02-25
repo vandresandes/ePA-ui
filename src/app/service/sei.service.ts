@@ -35,6 +35,17 @@ export class SeiService {
     return this.httpClient.get(`${environment.apiUrl}/${this.resource}/existeProtocolo`, httpOptions).pipe(res=> res);
   }
 
+  contarProcessoAbertoEmOutrasUnidades(protocoloProcedimento: string) {
+    let parametros = this.criarParams(protocoloProcedimento, null);
+
+    const httpOptions = {
+      headers: new HttpHeaders({}),
+      params: parametros
+    };
+
+    return this.httpClient.get(`${environment.apiUrl}/${this.resource}/contarProcessoAbertoEmOutrasUnidades`, httpOptions).pipe(res=> res);
+  }
+
   consultarProtocolo(protocoloProcedimento: string) {
     let parametros = this.criarParams(protocoloProcedimento, null);
 

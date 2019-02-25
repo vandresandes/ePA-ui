@@ -1,27 +1,27 @@
-<div *ngIf="retornoConsultaProcedimento">
+<div>
   <div class="form-group">
     <div class="col-sm-12 col-md-4 col-lg-3">
       <label>{{lbNProcessoNaOrigem}}:</label>
       <div>
-        <input type="text" pInputText class="form-control input-disabled-pge" value="{{retornoConsultaProcedimento.procedimentoFormatado}}" [disabled]="true" />
+        <input type="text" pInputText class="form-control input-disabled-pge" value="{{retornoConsultaProcedimento?.procedimentoFormatado}}" [disabled]="true" />
       </div>
     </div>
     <div class="col-sm-12 col-md-5 col-lg-4">
       <label>Tipo:</label>
       <div>
-        <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.tipoProcedimento.nome}}" [disabled]="true" />
+        <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.tipoProcedimento?.nome}}" [disabled]="true" />
       </div>
     </div>
     <div class="col-sm-12 col-md-3 col-lg-2">
       <label>Data de Geração:</label>
       <div>
-        <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.dataAutuacao}}" [disabled]="true" />
+        <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.dataAutuacao}}" [disabled]="true" />
       </div>
     </div>
     <div class="col-sm-12 col-md-4 col-lg-3">
       <label>Especificação:</label>
       <div>
-        <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.especificacao}}" [disabled]="true" />
+        <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.especificacao}}" [disabled]="true" />
       </div>
     </div>
   </div>
@@ -29,196 +29,225 @@
     <div class="col-sm-12">
       <label>Link para acesso:</label>
       <div>
-        <a href={{retornoConsultaProcedimento.linkAcesso}} target="_blank">
-          Acesso Externo com Acompanhamento Integral do Processo
-        </a>
+        <a href={{retornoConsultaProcedimento?.linkAcesso}} target="_blank">Acesso Externo com Acompanhamento Integral do Processo</a>
       </div>
     </div>
   </div>
 
   <div class="panel panel-default">
-      <div class="box-header with-border">
-        <h4 class="box-title">
-          Assuntos
-        </h4>
-      </div>
-      <div class="panel-body">
-        <p-table [value]="retornoConsultaProcedimento.assuntos" [responsive]="true" [autoLayout]="true">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Descrição</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-item>
-            <tr>
-              <td>{{item.descricao}}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td [attr.colspan]="1">
-                {{msgNenhumResultadoEncontrado}}
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
+    <div class="box-header with-border">
+      <h4 class="box-title">
+        Assuntos
+      </h4>
     </div>
-
-    <div class="panel panel-default">
-        <div class="box-header with-border">
-          <h4 class="box-title">
-            Unidades com o processo em aberto
-          </h4>
-        </div>
-        <div class="panel-body">
-          <p-table [value]="retornoConsultaProcedimento.unidadesProcedimentoAberto" [responsive]="true" [autoLayout]="true">
-            <ng-template pTemplate="header">
-              <tr>
-                <th class="col-sm-6">Unidade</th>
-                <th class="col-sm-6">Usuário</th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-              <tr>
-                <td>{{item.unidade.sigla}} | {{item.unidade.descricao}}</td>
-                <td>{{item.usuarioAtribuicao.nome}} | {{item.usuarioAtribuicao.sigla}}</td>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-              <tr>
-                <td [attr.colspan]="2">
-                  {{msgNenhumResultadoEncontrado}}
-                </td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </div>
-      </div>
-
-    <div class="panel panel-default">
-      <div class="box-header with-border">
-        <h4 class="box-title">
-          Interessados
-        </h4>
-      </div>
-      <div class="panel-body">
-        <p-table [value]="retornoConsultaProcedimento.interessados" [responsive]="true" [autoLayout]="true">
-          <ng-template pTemplate="header">
-            <tr>
-              <th class="col-sm-6">Sigla</th>
-              <th class="col-sm-6">Nome</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-item>
-            <tr>
-              <td>{{item.sigla}}</td>
-              <td>{{item.nome}}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td [attr.colspan]="2">
-                {{msgNenhumResultadoEncontrado}}
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
+    <div class="panel-body">
+      <p-table [value]="retornoConsultaProcedimento?.assuntos" [responsive]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Descrição</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.descricao}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="1">
+              {{msgNenhumResultadoEncontrado}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
+  </div>
 
-    <div class="panel panel-default">
-      <div class="box-header with-border">
-        <h4 class="box-title">
-          Observações
-        </h4>
-      </div>
-      <div class="panel-body">
-        <p-table [value]="retornoConsultaProcedimento.observacoes" [responsive]="true" [autoLayout]="true">
-          <ng-template pTemplate="header">
-            <tr>
-              <th class="col-sm-6">Unidade</th>
-              <th class="col-sm-6">Descricao</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-item>
-            <tr>
-              <td>{{item.unidade.sigla}} | {{item.unidade.descricao}}</td>
-              <td>{{item.descricao}}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td [attr.colspan]="2">
-                {{msgNenhumResultadoEncontrado}}
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
+  <div class="panel panel-default">
+    <div class="box-header with-border">
+      <h4 class="box-title">
+        Unidades com o processo em aberto
+      </h4>
     </div>
-
-    <div class="panel panel-default">
-      <div class="box-header with-border">
-        <h4 class="box-title">
-          Procedimentos Relacionados
-        </h4>
-      </div>
-      <div class="panel-body">
-        <p-table [value]="retornoConsultaProcedimento.procedimentosRelacionados" [responsive]="true" [autoLayout]="true">
-          <ng-template pTemplate="header">
-            <tr>
-              <th class="col-sm-6">Número do Processo no SEI</th>
-              <th class="col-sm-6">Tipo</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-item>
-            <tr>
-              <td>{{item.procedimentoFormatado}}</td>
-              <td>{{item.tipoProcedimento.nome}}</td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <tr>
-              <td [attr.colspan]="2">
-                {{msgNenhumResultadoEncontrado}}
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
+    <div class="panel-body">
+      <p-table [value]="retornoConsultaProcedimento?.unidadesProcedimentoAberto" [responsive]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-sm-6">Unidade</th>
+            <th class="col-sm-6">Usuário</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.unidade.sigla}} | {{item.unidade.descricao}}</td>
+            <td>{{item.usuarioAtribuicao?.nome}} {{item.usuarioAtribuicao ? '|' : null}} {{item.usuarioAtribuicao?.sigla}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="2">
+              {{msgNenhumResultadoEncontrado}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
+  </div>
 
-      <div class="panel panel-default">
-        <div class="box-header with-border">
-          <h4 class="box-title">
-            Procedimentos Anexados
-          </h4>
-        </div>
-        <div class="panel-body">
-          <p-table [value]="retornoConsultaProcedimento.procedimentosAnexados" [responsive]="true" [autoLayout]="true" [style]="testando">
-            <ng-template pTemplate="header">
-              <tr>
-                <th class="col-sm-6">Número do Processo no SEI</th>
-                <th class="col-sm-6">Tipo</th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-              <tr>
-                <td>{{item.procedimentoFormatado}}</td>
-                <td>{{item.tipoProcedimento.nome}}</td>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-              <tr>
-                <td [attr.colspan]="2">
-                  {{msgNenhumResultadoEncontrado}}
-                </td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </div>
-      </div>
+  <div class="panel panel-default">
+    <div class="box-header with-border">
+      <h4 class="box-title">
+        Interessados
+      </h4>
+    </div>
+    <div class="panel-body">
+      <p-table [value]="retornoConsultaProcedimento?.interessados" [responsive]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-sm-6">Nome</th>
+            <th class="col-sm-6">Sigla</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.nome}}</td>
+            <td>{{item.sigla}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="2">
+              {{msgNenhumResultadoEncontrado}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="box-header with-border">
+      <h4 class="box-title">
+        Observações
+      </h4>
+    </div>
+    <div class="panel-body">
+      <p-table [value]="retornoConsultaProcedimento?.observacoes" [responsive]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-sm-6">Unidade</th>
+            <th class="col-sm-6">Descricao</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.unidade?.sigla}} {{item.unidade ? '|' : null}} {{item.unidade?.descricao}}</td>
+            <td>{{item.descricao}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="2">
+              {{msgNenhumResultadoEncontrado}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="box-header with-border">
+      <h4 class="box-title">
+        Procedimentos Relacionados
+      </h4>
+    </div>
+    <div class="panel-body">
+      <p-table [value]="retornoConsultaProcedimento?.procedimentosRelacionados" [responsive]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-sm-6">Número do Processo no SEI</th>
+            <th class="col-sm-6">Tipo</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.procedimentoFormatado}}</td>
+            <td>{{item.tipoProcedimento.nome}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="2">
+              {{msgNenhumResultadoEncontrado}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="box-header with-border">
+      <h4 class="box-title">
+        Documentos
+      </h4>
+    </div>
+    <div class="panel-body">
+      <p-table [value]="retornoConsultaProcedimento?.procedimentosRelacionados" [responsive]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-sm-6">Número do Processo no SEI</th>
+            <th class="col-sm-6">Tipo</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.procedimentoFormatado}}</td>
+            <td>{{item.tipoProcedimento.nome}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="2">
+              {{msgNenhumResultadoEncontrado}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="box-header with-border">
+      <h4 class="box-title">
+        Procedimentos Anexados
+      </h4>
+    </div>
+    <div class="panel-body">
+      <p-table [value]="retornoConsultaProcedimento?.procedimentosAnexados" [responsive]="true" [autoLayout]="true" [style]="testando">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-sm-6">Número do Processo no SEI</th>
+            <th class="col-sm-6">Tipo</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.procedimentoFormatado}}</td>
+            <td>{{item.tipoProcedimento.nome}}</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="2">
+              {{msgNenhumResultadoEncontrado}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
 
   <div class="panel panel-default">
     <div class="box-header with-border">
@@ -228,25 +257,25 @@
     </div>
     <div class="panel-body">
       <div class="form-group">
-        <div class="col-sm-12 col-md-2">
+        <div class="col-sm-12 col-md-3 col-lg-2">
           <label>Data/Hora:</label>
           <div>
-            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.andamentoGeracao ? retornoConsultaProcedimento.andamentoGeracao.dataHora : null}}" [disabled]="true" />
+            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.andamentoGeracao?.dataHora}}" [disabled]="true" />
           </div>
         </div>
-        <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12 col-md-12 col-lg-3">
           <label>Descrição:</label>
           <div>
-            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.andamentoGeracao ? retornoConsultaProcedimento.andamentoGeracao.descricao : null}}" [disabled]="true" />
+            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.andamentoGeracao?.descricao}}" [disabled]="true" />
           </div>
         </div>
-        <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12 col-md-6 col-lg-3">
           <label>Unidade:</label>
           <div>
             <input type="text" pInputText class="form-control" value="{{getUnidadeGeracaoAndamento()}}" [disabled]="true" />
           </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-6 col-lg-4">
           <label>Usuário:</label>
           <div>
             <input type="text" pInputText class="form-control" value="{{getUsuarioGeracaoAndamento()}}" [disabled]="true" />
@@ -264,25 +293,25 @@
     </div>
     <div class="panel-body">
       <div class="form-group">
-        <div class="col-sm-12 col-md-2">
+        <div class="col-sm-12 col-md-3 col-lg-2">
           <label>Data/Hora:</label>
           <div>
-            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.ultimoAndamento ? retornoConsultaProcedimento.ultimoAndamento.dataHora : null}}" [disabled]="true" />
+            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.ultimoAndamento?.dataHora}}" [disabled]="true" />
           </div>
         </div>
-        <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12 col-md-12 col-lg-3">
           <label>Descrição:</label>
           <div>
-            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.ultimoAndamento ? retornoConsultaProcedimento.ultimoAndamento.descricao : null}}" [disabled]="true" />
+            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.ultimoAndamento?.descricao}}" [disabled]="true" />
           </div>
         </div>
-        <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12 col-md-6 col-lg-3">
           <label>Unidade:</label>
           <div>
             <input type="text" pInputText class="form-control" value="{{getUnidadeUltimoAndamento()}}" [disabled]="true" />
           </div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-6 col-lg-4">
           <label>Usuário:</label>
           <div>
             <input type="text" pInputText class="form-control" value="{{getUsuarioUltimoAndamento()}}" [disabled]="true" />
@@ -293,40 +322,39 @@
   </div>
 
   <div class="panel panel-default">
-      <div class="box-header with-border">
-        <h4 class="box-title">
-          Andamento conclusão
-        </h4>
-      </div>
-      <div class="panel-body">
-        <div class="form-group">
-          <div class="col-sm-12 col-md-2">
-            <label>Data/Hora:</label>
-            <div>
-              <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.andamentoConclusao ? retornoConsultaProcedimento.andamentoConclusao.dataHora : null}}" [disabled]="true" />
-            </div>
+    <div class="box-header with-border">
+      <h4 class="box-title">
+        Andamento conclusão
+      </h4>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <div class="col-sm-12 col-md-3 col-lg-2">
+          <label>Data/Hora:</label>
+          <div>
+            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.andamentoConclusao?.dataHora}}" [disabled]="true" />
           </div>
-          <div class="col-sm-12 col-md-3">
-            <label>Descrição:</label>
-            <div>
-              <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento.andamentoConclusao ? retornoConsultaProcedimento.andamentoConclusao.descricao : null}}" [disabled]="true" />
-            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-3">
+          <label>Descrição:</label>
+          <div>
+            <input type="text" pInputText class="form-control" value="{{retornoConsultaProcedimento?.andamentoConclusao?.descricao}}" [disabled]="true" />
           </div>
-          <div class="col-sm-12 col-md-3">
-            <label>Unidade:</label>
-            <div>
-              <input type="text" pInputText class="form-control" value="{{getUnidadeConclusaoAndamento()}}" [disabled]="true" />
-            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+          <label>Unidade:</label>
+          <div>
+            <input type="text" pInputText class="form-control" value="{{getUnidadeConclusaoAndamento()}}" [disabled]="true" />
           </div>
-          <div class="col-sm-12 col-md-4">
-            <label>Usuário:</label>
-            <div>
-              <input type="text" pInputText class="form-control" value="{{getUsuarioConclusaoAndamento()}}" [disabled]="true" />
-            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <label>Usuário:</label>
+          <div>
+            <input type="text" pInputText class="form-control" value="{{getUsuarioConclusaoAndamento()}}" [disabled]="true" />
           </div>
         </div>
       </div>
     </div>
-
+  </div>
 
 </div>
