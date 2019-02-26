@@ -87,7 +87,7 @@ export class TermoEspecificoService {
       params = params.append('nucleo.materia.id', String(idMateria));
     }
     if (!AppUtil.isNull(idOrigem)) {
-      params = params.append('origem.id', String(idOrigem));
+      params = params.append('nucleo.materia.origem.id', String(idOrigem));
     }
     return params;
   }

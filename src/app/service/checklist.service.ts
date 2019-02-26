@@ -104,6 +104,9 @@ export class ChecklistService {
     if (!AppUtil.isNull(idOrigem)) {
       params = params.append('origem.id', String(idOrigem));
     }
+    if (!AppUtil.isNull(idOrigem)) {
+      params = params.append('nucleo.materia.origem.id', String(idOrigem));
+    }
     return params;
   }
 
