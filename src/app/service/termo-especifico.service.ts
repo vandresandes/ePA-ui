@@ -69,19 +69,16 @@ export class TermoEspecificoService {
   criarParamsFitrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idDocumento: number, idMateria: number, idOrigem: number): HttpParams {
     var params = new HttpParams();
     if (!AppUtil.isNull(idNucleo)) {
-      params = params.append('idNucleo', String(idNucleo));
+      params = params.append('nucleo.id', String(idNucleo));
     }
     if (!AppUtil.isNull(idTipoProcesso)) {
-      params = params.append('idTipoProcesso', String(idTipoProcesso));
+      params = params.append('tipoProcesso.id', String(idTipoProcesso));
     }
     if (!AppUtil.isNull(idTermoGeral)) {
-      params = params.append('idTermoGeral', String(idTermoGeral));
+      params = params.append('termoGeral.id', String(idTermoGeral));
     }
     if (!AppUtil.isNull(idDocumento)) {
-      params = params.append('idDocumento', String(idDocumento));
-    }
-    if (!AppUtil.isNull(idMateria)) {
-      params = params.append('idMateria', String(idMateria));
+      params = params.append('documento.id', String(idDocumento));
     }
     if (!AppUtil.isNull(idMateria)) {
       params = params.append('nucleo.materia.id', String(idMateria));

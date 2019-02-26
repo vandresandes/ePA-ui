@@ -367,8 +367,6 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   enviar() {
-    console.log("enviar");
-
     if (this.isValidSalvar()) {
       // service
     }
@@ -406,7 +404,6 @@ export class IngressoDeProcessosComponent implements OnInit {
   }
 
   onClickRaddioButtonCondicao(item: any) {
-    console.log(item);
     item['obrigatorio'] = item['condicaoAceita'] == 1;
   }
 

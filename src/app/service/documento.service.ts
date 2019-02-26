@@ -69,19 +69,19 @@ export class DocumentoService {
   criarParamsFitrar(idNucleo: number, idTipoProcesso: number, idTermoGeral: number, idTermoEspecifico: number, idMateria: number): HttpParams {
     var params = new HttpParams();
     if (!AppUtil.isNull(idNucleo)) {
-      params = params.append('idNucleo', String(idNucleo));
+      params = params.append('nucleo.id', String(idNucleo));
     }
     if (!AppUtil.isNull(idTipoProcesso)) {
-      params = params.append('idTipoProcesso', String(idTipoProcesso));
+      params = params.append('tipoProcesso.id', String(idTipoProcesso));
     }
     if (!AppUtil.isNull(idTermoGeral)) {
-      params = params.append('idTermoGeral', String(idTermoGeral));
+      params = params.append('termoGeral.id', String(idTermoGeral));
     }
     if (!AppUtil.isNull(idTermoEspecifico)) {
-      params = params.append('idTermoEspecifico', String(idTermoEspecifico));
+      params = params.append('termoEspecifico.id', String(idTermoEspecifico));
     }
     if (!AppUtil.isNull(idMateria)) {
-      params = params.append('idMateria', String(idMateria));
+      params = params.append('nucleo.materia.id', String(idMateria));
     }
     return params;
   }
