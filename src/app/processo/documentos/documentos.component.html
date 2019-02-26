@@ -1,0 +1,56 @@
+<form autocomplete="off" #documentosForm="ngForm" class="form-horizontal">
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+  <div class="form-group">
+    <label class="col-sm-12 col-lg-8">{{lbItem}} <span class="obrigatorio">*</span></label>
+    <label class="col-sm-12 col-lg-4">{{lbInformeONumeroDocumentoSei}} <span class="obrigatorio">*</span></label>
+    <div class="col-sm-12 col-lg-8">
+      <p-dropdown [filter]="true" autoWidth="false" [options]="listaChecklistTemplate" [(ngModel)]="checklistSelecionado" [style]="{'width':'100%'}" name="documento" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado">
+        <ng-template let-item pTemplate="selectedItem">
+            <span style="vertical-align:middle">{{item.label}}</span>
+        </ng-template>
+        <ng-template let-orgao pTemplate="item">
+            <span style="vertical-align:middle">{{orgao.label}}</span>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-3">
+      <div>
+        <input type="text" restrict min="0" pInputText class="form-control" name="numeroDocumentoSEI" [(ngModel)]="numeroDocumentoSEI" maxlength="25" [disabled]="readonly" />
+      </div>
+    </div>
+    <div class="col-md-1" >
+      <p-button icon="fa fa-plus" pTooltip="Adicionar" tooltipPosition="top" (onClick)="isValidAdicionarNumeroDocSei()"></p-button>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <p-table [value]="listaChecklistComNumeroDocSei" [responsive]="true" [autoLayout]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-sm-8">Documento</th>
+            <th class="col-sm-1">Exigência</th>
+            <th class="col-sm-2">Número do documento no SEI</th>
+            <th class="col-sm-1"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+          <tr>
+            <td>{{item.documento.nome}}</td>
+            <td>{{item.obrigatorio | status}}</td>
+            <td>{{item.numeroDocumentoSEI}}</td>
+            <td>
+              <button type="button" (click)="confirmarExclusaoChecklist(item)" pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td [attr.colspan]="4">
+              {{msgNenhumRegistroAdicionado}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</form>

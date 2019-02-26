@@ -1,0 +1,196 @@
+<div class="form-group">
+    <div class="col-sm-12 col-md-4 col-lg-3">
+      <label>Nº do processo origem (SEI):</label>
+      <div>
+        <input type="text" pInputText class="form-control input-disabled-pge" value="{{retornoConsultaProcedimento?.procedimentoFormatado}}" [disabled]="true" />
+      </div>
+    </div>
+</div>
+<div class="panel panel-default">
+  <div class="box-header with-border">
+    <h4 class="box-title">
+      Proponente
+    </h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-group">
+      <div class="col-sm-12">
+        <label>{{lbOrgao}} <span class="obrigatorio">*</span></label>
+        <div>
+          <p-dropdown [filter]="true" autoWidth="false" [options]="listaOrgaoTemplate" [(ngModel)]="entity.orgao" [style]="{'width':'100%'}" name="orgaoSelecionado" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado">
+            <ng-template let-item pTemplate="selectedItem">
+                <span style="vertical-align:middle">{{item.label}}</span>
+            </ng-template>
+            <ng-template let-orgao pTemplate="item">
+                <span style="vertical-align:middle">{{orgao.label}}</span>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-12 col-md-6">
+        <label>{{lbNome}} <span class="obrigatorio">*</span></label>
+        <div>
+          <input nucleoForm="entity.nome" type="text" pInputText class="form-control" name="nomeProponente" [(ngModel)]="entity.nomeProponente" maxlength="100" [disabled]="readonly" required />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-3">
+        <label>{{lbEmail}} <span class="obrigatorio">*</span></label>
+        <div>
+          <input nucleoForm="entity.email" type="email" [email]="true" pInputText class="form-control" name="emailProponente" #emailProponente="ngModel"
+            [(ngModel)]="entity.emailProponente" maxlength="100" [disabled]="readonly" required />
+        </div>
+        <div *ngIf="emailProponente.value && !emailProponente.valid && false" class="obrigatorio-login">
+          <div>E-mail inválido</div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-3">
+        <label>{{lbTelefone}} <span class="obrigatorio">*</span></label>
+        <div>
+          <input nucleoForm="entity.telefone" type="text" pInputText class="form-control" name="telefoneProponente" [(ngModel)]="entity.telefoneProponente" maxlength="100" [disabled]="readonly" required />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <label>{{lbObjeto}}:</label>
+    <div>
+      <textarea pInputTextarea [(ngModel)]="entity.objeto" name="objeto" class="form-control" rows="4"></textarea>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <label>Origem: <span class="obrigatorio">*</span></label>
+    <div>
+      <p-dropdown [options]="listaOrgao" [(ngModel)]="entity.origem" name="origem" optionLabel="nomeDescricao" (onChange)="onchangeDropOrigem()"
+        [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <label>{{lbMateria}}: <span class="obrigatorio">*</span></label>
+    <div>
+      <p-dropdown [options]="listaMateria" [(ngModel)]="entity.materia" name="materia" optionLabel="nome" (onChange)="onchangeDropMateria()"
+        [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="entity.origem == undefined || entity.origem == null" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <label>Assunto: <span class="obrigatorio">*</span></label>
+    <div>
+      <p-dropdown [options]="listaTermoGeral" [(ngModel)]="entity.termoGeral" name="termoGeral" optionLabel="nome" (onChange)="onchangeDropAssunto()"
+        [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="!listaTermoGeral" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <label>Subassunto: <span class="obrigatorio">*</span></label>
+    <div>
+      <p-dropdown [options]="listaTermoEspecifico" [(ngModel)]="entity.termoEspecifico" name="termoEspecifico" optionLabel="nome" (onChange)="onchangeDropSubAssunto()"
+        [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="!listaTermoEspecifico" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12 col-md-4">
+    <label>{{lbPrioridadeTramitacao}}: <span class="obrigatorio">*</span></label>
+    <div>
+      <p-dropdown [options]="listaPrioridadeTramitacao" [(ngModel)]="entity.prioridadeTramitacao" name="prioridadeTramitacao" optionLabel="descricao"
+        [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-8" *ngIf="showPrioridadeTramitacao()">
+    <label>Documento comprobatório: <span class="obrigatorio">*</span></label>
+    <div>
+      <!-- <input type="file" class="form-control"> -->
+      <p-fileUpload name="documentoComprobatorio" chooseLabel="Selecione o documento" [showUploadButton]="false" [showCancelButton]="false" [style]="{'width':'100%'}"></p-fileUpload>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12 col-md-4">
+    <label>{{lbSigiloOuSegredoDeJustica}}: <span class="obrigatorio">*</span></label>
+    <div>
+      <p-dropdown [options]="listaSigiloSegredoJustica" [(ngModel)]="entity.sigiloSegredoJustica" name="sigiloSegredoJustica" optionLabel="descricao" (onchange)="onchangeDropSigiloSegredoJustica()"
+        [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-8" *ngIf="showMotivoSigiloOuSegredoJustica()">
+    <label>Motivo do sigilo/segredo de justiça: <span class="obrigatorio">*</span></label>
+    <div>
+      <p-dropdown [options]="listaMotivoSigiloSegredoJustica" [(ngModel)]="entity.motivoSigiloSegredoJustica" name="motivoSigiloSegredoJustica" optionLabel="nome"
+        [filter]="true" autoWidth="false" [style]="{'width':'100%'}" [disabled]="readonly" placeholder={{lbSelecione}} [emptyFilterMessage]="msgNenhumResultadoEncontrado"></p-dropdown>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12 col-md-4">
+    <label>{{lbSolicitadaUrgencia}} <span class="obrigatorio">*</span></label>
+    <div>
+      <p-radioButton name="gruposolicitadaurgencia" value="1" label="Sim" [(ngModel)]="solicitadaUrgenciaSelecionado" inputId="solicitadaUrgenciaSelecionado"></p-radioButton>
+      &nbsp;
+      <p-radioButton name="gruposolicitadaurgencia" value="0" label="Não" [(ngModel)]="solicitadaUrgenciaSelecionado" inputId="solicitadaUrgenciaSelecionado"></p-radioButton>
+    </div>
+  </div>
+  <div class="col-sm-12 col-md-8" *ngIf="showJustificativaSolicitadaUrgencia()">
+    <label>Justificativa: <span class="obrigatorio">*</span></label>
+    <div>
+      <textarea pInputTextarea [(ngModel)]="entity.justificativa" name="justificativa" class="form-control" rows="4"></textarea>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-sm-12">
+    <label>{{lbObservacoes}}:</label>
+    <div>
+      <textarea pInputTextarea [(ngModel)]="entity.observacoes" name="observacoes" class="form-control" rows="4"></textarea>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="box-header with-border">
+    <h4 class="box-title">
+      {{lbInteressados}}
+    </h4>
+    <div class="pull-right">
+      <button type="button" (click)="showInteressado()" pButton icon="fa fa-plus" pTooltip="Adicionar" tooltipPosition="top"></button>
+    </div>
+  </div>
+  <div class="panel-body">
+    <p-table [value]="listaInteressado" [responsive]="true" [autoLayout]="true">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="col-sm-3">Órgão</th>
+          <th class="col-sm-3">Nome</th>
+          <th class="col-sm-3">E-mail</th>
+          <th class="col-sm-2">Telefone</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr>
+          <td>{{item.orgao.nome}}</td>
+          <td>{{item.nome}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.telefone}}</td>
+          <!-- <td>
+            <p-button icon="fa fa-trash" iconPos="left" pTooltip="Excluir" tooltipPosition="top" (click)="excluirInteressado(item)"></p-button>
+          </td> -->
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td [attr.colspan]="4">
+            {{msgNenhumRegistroAdicionado}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

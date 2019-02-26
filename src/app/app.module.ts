@@ -55,6 +55,9 @@ import { BasicAuthInterceptor } from './helpers/basic-auth-interceptor';
 import { ErrorInterceptor } from './helpers/error-interceptor';
 import { RestrictDirective } from './directive/restrict.directive';
 import { InformacoesNoSeiComponent } from './processo/informacoes-no-sei/informacoes-no-sei.component';
+import { InformacoesParaAPgeComponent } from './processo/informacoes-para-a-pge/informacoes-para-a-pge.component';
+import { EsclarecimentosComponent } from './processo/esclarecimentos/esclarecimentos.component';
+import { DocumentosComponent } from './processo/documentos/documentos.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,10 @@ import { InformacoesNoSeiComponent } from './processo/informacoes-no-sei/informa
     ListaDeProcessosComponent,
     ConfirmarExclusaoComponent,
     RestrictDirective,
-    InformacoesNoSeiComponent
+    InformacoesNoSeiComponent,
+    InformacoesParaAPgeComponent,
+    EsclarecimentosComponent,
+    DocumentosComponent
   ],
   imports: [
     BrowserModule,
