@@ -104,17 +104,29 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.msgs = event;
   }
 
-  disabledAbaEsclarecimentos(): boolean {
+  desabilitarAbaEsclarecimentos(): boolean {
     return AppUtil.isNull(this.listaChecklist);
   }
 
-  disabledAbaDocumentos(): boolean {
-    return !this.isValidAbaEsclarecimento;
+  desabilitarAbaDocumentos(): boolean {
+    return AppUtil.isNull(this.listaChecklist) || (this.contemCondicaoNalistaChecklist() && !this.isValidAbaEsclarecimento);
   }
 
   setValidAbaEsclarecimento(event: boolean) {
     this.isValidAbaEsclarecimento = event;
     this.listaChecklistComNumeroDocSei = [];
+  }
+
+  contemCondicaoNalistaChecklist(): boolean {
+    let contem: boolean = false;
+    if (this.listaChecklist) {
+      this.listaChecklist.forEach(element => {
+        if (element['condicao']) {
+          contem = true;
+        }
+      });
+    }
+    return contem;
   }
 
   salvar() {
