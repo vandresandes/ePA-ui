@@ -24,6 +24,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   entity: Processo = new Processo();
   retornoConsultaProcedimento: RetornoConsultaProcedimentoSEI;
   orgaoSelecionado: any;
+  isValidAbaEsclarecimento: boolean = false;
 
   listaChecklist: any;
   uploadedFiles: any[] = [];
@@ -92,6 +93,7 @@ export class IngressoDeProcessosComponent implements OnInit {
   popularListaChecklist(event: any) {
     this.listaChecklist = event;
     this.listaChecklistComNumeroDocSei = [];
+    this.isValidAbaEsclarecimento = false;
   }
 
   popularListaChecklistTemplate(event: any) {
@@ -102,8 +104,17 @@ export class IngressoDeProcessosComponent implements OnInit {
     this.msgs = event;
   }
 
-  isEmptyListaChecklist(): boolean {
+  disabledAbaEsclarecimentos(): boolean {
     return AppUtil.isNull(this.listaChecklist);
+  }
+
+  disabledAbaDocumentos(): boolean {
+    return !this.isValidAbaEsclarecimento;
+  }
+
+  setValidAbaEsclarecimento(event: boolean) {
+    this.isValidAbaEsclarecimento = event;
+    this.listaChecklistComNumeroDocSei = [];
   }
 
   salvar() {

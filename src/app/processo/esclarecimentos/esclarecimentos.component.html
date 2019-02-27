@@ -16,7 +16,8 @@
         </div>
       </td>
       <td>
-        <textarea *ngIf="item.condicaoAceita && item.condicaoAceita == 0" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2" placeholder="Justifique"></textarea>
+        <textarea *ngIf="item.condicaoAceita && item.condicaoAceita == 0" pInputTextarea [(ngModel)]="item.esclarecimento" name="esclarecimento" class="form-control" rows="2" placeholder="Justifique"
+          (keyup)="onChangeTextareaEsclarecimento(item)"></textarea>
       </td>
     </tr>
   </ng-template>

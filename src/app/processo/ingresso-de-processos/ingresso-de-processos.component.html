@@ -16,15 +16,17 @@
               (outputListaChecklistTemplate)="popularListaChecklistTemplate($event)">
           </app-informacoes-para-a-pge>
         </p-tabPanel>
-        <p-tabPanel header="Esclarecimentos" [disabled]="isEmptyListaChecklist()">
+        <p-tabPanel header="Esclarecimentos" [disabled]="disabledAbaEsclarecimentos()">
           <app-esclarecimentos
-              [listaChecklist]="listaChecklist">
+              [listaChecklist]="listaChecklist"
+              (outputIsValid)="setValidAbaEsclarecimento($event)">
           </app-esclarecimentos>
         </p-tabPanel>
-        <p-tabPanel header="Documentos" [disabled]="isEmptyListaChecklist()">
+        <p-tabPanel header="Documentos" [disabled]="disabledAbaDocumentos()">
           <app-documentos
               [listaChecklistTemplate]="listaChecklistTemplate"
               [retornoConsultaProcedimento]="retornoConsultaProcedimento"
+              [listaChecklistComNumeroDocSei] = "listaChecklistComNumeroDocSei"
               (outputMsgs)="popularMsgs($event)">
           </app-documentos>
         </p-tabPanel>

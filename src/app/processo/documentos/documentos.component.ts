@@ -17,7 +17,6 @@ export class DocumentosComponent implements OnInit {
 
   checklistSelecionado: Checklist;
   numeroDocumentoSEI: string;
-  listaChecklistComNumeroDocSei: Checklist[] = [];
   msgs: Message[] = [];
 
   lbItem: string = "Item";
@@ -26,16 +25,17 @@ export class DocumentosComponent implements OnInit {
   msgNenhumRegistroAdicionado: string = AppConstants.NENHUM_REGISTRO_ADICIONADO;
   msgObrigatorio: string = AppConstants.CAMPO_OBRIGATORIO;
 
+  @Input() listaChecklistComNumeroDocSei: Checklist[] = [];
   @Input() retornoConsultaProcedimento: RetornoConsultaProcedimentoSEI;
   @Input() listaChecklistTemplate: SelectItem[] = [];
-  @Output() outputMsgs =  new EventEmitter();
+  @Output() outputMsgs = new EventEmitter();
 
   constructor(
     private seiService: SeiService,
     private confirmationService: ConfirmationService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   isValidAdicionarNumeroDocSei(): boolean {
     let valid: boolean = true;
