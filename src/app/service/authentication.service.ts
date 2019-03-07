@@ -6,7 +6,6 @@ import { User } from '../model/user';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { AccountCredentials } from '../model/account-credentials';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +13,7 @@ import { AccountCredentials } from '../model/account-credentials';
 export class AuthenticationService {
   resource: string = "usuario.json";
   resourceLogin: string = "login";
+  resourceOauthToken: string = "oauth/token";
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
@@ -44,12 +44,20 @@ loginFake(username: string, password: string) {
 }
 
 login(usuario: string, senha: string) {
-  let accountCredentials: AccountCredentials = new AccountCredentials();
-  accountCredentials.usuario = usuario;
-  accountCredentials.senha = senha;
-  return this.http.post<any>(`${environment.apiUrl}/${this.resourceLogin}`, accountCredentials, { observe: 'response' })
-    .pipe(map(data => {
-      let token: string = data.headers.get("Authorization");
+  let formData = new FormData();
+  formData.append("grant_type", "password");
+  formData.append("username", usuario);
+  formData.append("password", senha);
+
+  return this.http.post<any>(`${environment.apiUrl}/${this.resourceOauthToken}`, formData,
+  {
+    headers: new HttpHeaders({
+      'Authorization': 'Basic YW5ndWxhcjpzZW5oYVRlbXA='
+    }),
+    observe: 'response'
+
+  }).pipe(map(data => {
+      let token: string = data['body']["access_token"];
       let user: User = data.body;
 
       if (user && token) {

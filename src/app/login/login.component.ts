@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
       data => {
         this.router.navigate([this.returnUrl]);
       },
-        error => {alert(error)}, () => console.log(`Login efetuado com sucesso!`)
+        error => {alert(error); console.log(error)}, () => console.log(`Login efetuado com sucesso!`)
       );
   }
 
