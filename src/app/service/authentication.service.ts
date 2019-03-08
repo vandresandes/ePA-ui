@@ -11,9 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  resource: string = "usuario.json";
-  resourceLogin: string = "login";
-  resourceOauthToken: string = "oauth/token";
+  resource: string = "oauth/token";
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
@@ -27,20 +25,8 @@ public get currentUserValue(): User {
   return this.currentUserSubject.value;
 }
 
-loginFake(username: string, password: string) {
-  return this.http.get<any>(`${environment.apiUrlFake}/${this.resource}`)
-  .pipe(map(user => {
-    if (username === user.username && password === user.password) {
-      // login bem-sucedido se houver um token jwt na resposta
-      if (user && user.token) {
-        // armazenar detalhes do usuário e token jwt no armazenamento local para manter o usuário logado entre as atualizações da página
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-      }
-      return user;
-    }
-    throw 'Usuário ou Senha inválida!';
-  }));
+private getURL(): string {
+  return `${environment.apiUrl}/${this.resource}`;
 }
 
 login(usuario: string, senha: string) {
@@ -49,16 +35,46 @@ login(usuario: string, senha: string) {
   formData.append("username", usuario);
   formData.append("password", senha);
 
-  return this.http.post<any>(`${environment.apiUrl}/${this.resourceOauthToken}`, formData,
+  return this.http.post<any>(this.getURL(), formData,
   {
     headers: new HttpHeaders({
       'Authorization': 'Basic YW5ndWxhcjpzZW5oYVRlbXA='
     }),
+    withCredentials: true,
     observe: 'response'
 
   }).pipe(map(data => {
       let token: string = data['body']["access_token"];
       let user: User = data.body;
+
+      if (user && token) {
+        user.token = token;
+        // armazenar detalhes do usuário e token jwt no armazenamento local para manter o usuário logado entre as atualizações da página
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+      }
+
+      return user;
+  }));
+}
+
+obterNovoAccessToken(): Observable<User> {
+  let formData = new FormData();
+  formData.append("grant_type", "refresh_token");
+
+  return this.http.post<any>(this.getURL(), formData,
+  {
+    headers: new HttpHeaders({
+      'Authorization': 'Basic YW5ndWxhcjpzZW5oYVRlbXA='
+    }),
+    withCredentials: true,
+    observe: 'response'
+
+  }).pipe(map(data => {
+      let token: string = data['body']["access_token"];
+      let user: User = data.body;
+
+      console.log("Novo access token criado.");
 
       if (user && token) {
         user.token = token;
