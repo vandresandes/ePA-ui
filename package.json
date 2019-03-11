@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
+    "@auth0/angular-jwt": "^2.1.0",
     "angular-admin-lte": "^1.2.7",
     "angular-loading-bar": "^0.9.0",
     "angular-loading-page": "^0.6.0",

@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule }    from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -51,7 +52,6 @@ import { TipoProcessoModule } from './admin/tipo-processo/tipo-processo.module';
 import { ListaDeProcessosComponent } from './processo/lista-de-processos/lista-de-processos.component';
 import { ConfirmarExclusaoComponent } from './dialog/confirmar-exclusao/confirmar-exclusao.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BasicAuthInterceptor } from './helpers/basic-auth-interceptor';
 import { ErrorInterceptor } from './helpers/error-interceptor';
 import { RestrictDirective } from './directive/restrict.directive';
 import { InformacoesNoSeiComponent } from './processo/informacoes-no-sei/informacoes-no-sei.component';
@@ -109,7 +109,14 @@ import { DocumentosComponent } from './processo/documentos/documentos.component'
     FormsModule,
     InputTextareaModule,
     LayoutModule.forRoot(epaUiConf),
-    LoadingPageModule, MaterialBarModule
+    LoadingPageModule, MaterialBarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return null;
+        }
+      }
+    })
   ],
   providers: [
     // Locale da aplicação
